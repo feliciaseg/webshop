@@ -4,23 +4,27 @@ import Grid from "../components/Grid";
 import { products } from "./products";
 import ProductCard from "../components/ProductCard";
 
-// interface Props {
-// }
-
-// interface State{
-
-// }
+interface Props {
+  imageUrl: string;
+  id: string;
+  name: string;
+  price: number;
+}
+interface ProductList {
+  function: (prop: Props) => JSX.Element;
+  productProps: Props[];
+}
 
 export default function StartPage() {
-  const productList: any = {
-    function: "",
-    list: [],
+  console.log(typeof ProductCard);
+  const productList: ProductList = {
+    function: ProductCard,
+    productProps: [],
   };
 
   function mapProducts() {
-    productList.function = ProductCard;
     products.map((product) => {
-      productList.list.push({
+      productList.productProps.push({
         imageUrl: product.imageUrl,
         id: product.id,
         name: product.name,
