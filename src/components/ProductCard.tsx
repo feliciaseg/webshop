@@ -1,1 +1,72 @@
-export {}
+import { CSSProperties } from "@material-ui/styles";
+import AddCircle from "@material-ui/icons/AddCircle";
+import { addProductToCart } from "../helper";
+
+interface Props {
+  imageUrl: string;
+  id: string;
+  name: string;
+  price: number;
+}
+
+export default function productCard(props: Props) {
+  return (
+    <div style={productContainer}>
+      <div style={imageContainer}>
+        <img
+          style={productImage}
+          src="https://assets.ellosgroup.com/i/ellos/b?$eg$&$emr$&$ep$&$ed$&n=ell_1520526_De_01&mw=750&rw=750&qlt=80"
+        ></img>
+        <AddCircle style={addIcon} onClick={() => addProductToCart(props)} />
+      </div>
+      <div style={productDescription}>
+        <h2 style={productName}>Fondi golvlampa</h2>
+        <p style={productPrice}>949 kr</p>
+      </div>
+    </div>
+  );
+}
+
+const productContainer: CSSProperties = {
+  width: "100%",
+  height: "18rem",
+};
+
+const imageContainer: CSSProperties = {
+  position: "relative",
+  width: "100%",
+  height: "75%",
+};
+
+const productImage: CSSProperties = {
+  width: "100%",
+  height: "100%",
+  objectFit: "cover",
+  objectPosition: "center",
+};
+
+const addIcon: CSSProperties = {
+  position: "absolute",
+  right: "1rem",
+  bottom: "1rem",
+  color: "#ffff",
+  fontSize: "2rem",
+  filter: "drop-shadow(0px 0px 3px rgba(0,0,0,0.4))",
+  cursor: "pointer",
+};
+
+const productDescription: CSSProperties = {
+  padding: "1rem 0",
+};
+
+const productName: CSSProperties = {
+  margin: 0,
+  fontSize: "1.2rem",
+  fontWeight: 400,
+};
+
+const productPrice: CSSProperties = {
+  marginTop: "0.5rem",
+  fontSize: "0.9rem",
+  fontWeight: 700,
+};
