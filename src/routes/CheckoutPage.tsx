@@ -1,11 +1,11 @@
 
-interface Props {
+// interface Props {
 
-}
+// }
 
-interface State{
+// interface State{
 
-}
+// }
 
 export default function CheckoutPage() {
 
