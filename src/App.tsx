@@ -8,7 +8,6 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Router>
-        <Header/>
         <ViewContainer />
       </Router>
     </ThemeProvider>
