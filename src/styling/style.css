@@ -1,15 +1,17 @@
-
 .footerDiv {
-    height: 10.3rem;
-    
+  height: 10.3rem;
 }
 
+.MuiButton-root {
+  margin: 1.8rem 6.25rem 0 0;
+}
 
 @media only screen and (max-width: 440px) {
-    .footerDiv {
-        height: 7rem;
-        
-        
-    }
-}
+  .footerDiv {
+    height: 7rem;
+  }
 
+  .MuiButton-root {
+    margin: 1.1rem 1.6rem 0 0;
+  }
+}
