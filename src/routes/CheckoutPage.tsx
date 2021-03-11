@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Footer from "../components/Footer";
 
 // interface Props {
 // }
@@ -9,5 +10,9 @@ import { Link } from "react-router-dom";
 // }
 
 export default function CheckoutPage() {
-  return <Link to={{ pathname: "/" }}>Gå till startPage</Link>;
+  return (
+    <>
+  <Link to={{ pathname: "/" }}>Gå till startPage</Link>
+  <Footer/>
+  </>);
 }
