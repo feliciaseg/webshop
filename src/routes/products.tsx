@@ -52,4 +52,49 @@ export const products: Product[] = [
     description:
       "Duk i vävd, ekologisk bomull med melerad färg och slubeffekt, vilket innebär att tyget har en lätt struktur. Fransar på 4 sidor.",
   },
+  {
+    imageUrl:
+      "https://assets.ellosgroup.com/i/ellos/b?$eg$&$emr$&$ep$&$ed$&n=ell_1517504-01_Fm_M0020684&mw=750&rw=750&qlt=80",
+    id: "1517504-01",
+    name: "Soffbord Miss",
+    price: 4499,
+    description:
+      "Nätt, lättplacerat soffbord med två skivor av härdat glas och stomme av metall. Stl 120x60 cm. Höjd 45 cm. Höjd mellan bordsskivorna 35 cm.",
+  },
+  {
+    imageUrl:
+      "https://assets.ellosgroup.com/i/ellos/b?$eg$&$emr$&$ep$&$ed$&n=ell_1016771_Fm_M0015541&mw=750&rw=750&qlt=80",
+    id: "1016771",
+    name: "Hallförvaring Denver",
+    price: 2999,
+    description:
+      "Hallförvaring med skohylla, hatthylla och 5 krokar. Av oljad ek. Höjd 170 cm, djup 34 cm, bredd 80 cm. Höjd från golvet till första hyllan 13 cm. Levereras omonterad. FSC-certifierad produkt, vilket innebär att den består av trä som är avverkat från ett ansvarsfullt skogsbruk som tar hänsyn till människor och miljö.",
+  },
+  {
+    imageUrl:
+      "https://assets.ellosgroup.com/i/ellos/b?$eg$&$emr$&$ep$&$ed$&n=ell_1626019-01_Fm_M0037092&mw=750&rw=750&qlt=80",
+    id: "1626019-01",
+    name: "Stol Today",
+    price: 2899,
+    description:
+      "Två stolar av björk med rygg och förstärkt sits av rotting. Höjd 89 cm, bredd 44,5 cm, djup 56 cm. Sittdjup 42 cm, Sitthöjd 46,5 cm. Monterade. Vikt 10 kg.",
+  },
+  {
+    imageUrl:
+      "https://assets.ellosgroup.com/i/ellos/b?$eg$&$emr$&$ep$&$ed$&n=ell_1041092-01_Fm_M0018889&mw=750&rw=750&qlt=80",
+    id: "1041092-01",
+    name: "Konsollhylla Konsoll",
+    price: 999,
+    description:
+      "Konsollhylla av målad björk. Tre hyllplan. Höjd 90 cm. Bredd 80 cm. Djup 22,5 cm. Mellanrum mellan varje hyllplan 26 cm. Max vikt per hyllplan 6 kg. Levereras omonterad.",
+  },
+  {
+    imageUrl:
+      "https://assets.ellosgroup.com/i/ellos/b?$eg$&$emr$&$ep$&$ed$&n=ell_1618933-01_Fm_M0044973&mw=750&rw=750&qlt=80",
+    id: "1618933-01",
+    name: "Fåtölj Golina",
+    price: 3299,
+    description:
+      "Fåtölj i rotting med sittdyna. Sittdynan har avtagbar klädsel i canvas och knytband. Bredd 85 cm, höjd 75 cm, djup 72 cm. Sitthöjd 41 cm, sittdjup 64 cm.",
+  },
 ];
