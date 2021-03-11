@@ -1,13 +1,15 @@
-
-
-import { BrowserRouter as Router } from 'react-router-dom';
-import ViewContainer from './routes/ViewContainer';
+import { ThemeProvider } from "@material-ui/core/styles";
+import { theme } from "./styling/colorTheme";
+import { BrowserRouter as Router } from "react-router-dom";
+import ViewContainer from "./routes/ViewContainer";
 
 function App() {
   return (
-    <Router>
-    <ViewContainer/>
-    </Router>
+    <ThemeProvider theme={theme}>
+      <Router>
+        <ViewContainer />
+      </Router>
+    </ThemeProvider>
   );
 }
 
