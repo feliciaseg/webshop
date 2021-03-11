@@ -1,10 +1,15 @@
 
 .footerDiv {
     height: 10.3rem;
-    /* 7rem på mobile */
     
 }
 
 
-
+@media only screen and (max-width: 440px) {
+    .footerDiv {
+        height: 7rem;
+        
+        
+    }
+}
 
