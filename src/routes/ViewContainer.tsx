@@ -12,6 +12,7 @@ export default function ViewContainer() {
     <Route exact path = "/product" component={ProductPage}/>
     <Route exact path = "/checkout" component={CheckoutPage}/>
     <Route exact path = "/admin" component={AdminPage}/>
+    <h2> Page not found </h2>
     </Switch>
     )
 }
