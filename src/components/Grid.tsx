@@ -1,28 +1,22 @@
+import React from "react";
 import Grid from "@material-ui/core/Grid";
-import ProductCard from "./ProductCard";
 
-function Main() {
+interface Props {
+  products: any;
+}
+
+function GridContainer(props: Props) {
   return (
     <div>
       <Grid container spacing={3}>
-        <Grid item sm={6} md={3} xl={2}>
-          <ProductCard id="" name="" imageUrl="" price={0} />
-        </Grid>
-        <Grid item sm={6} md={3} xl={2}>
-          <ProductCard id="" name="" imageUrl="" price={0} />
-        </Grid>
-        <Grid item sm={6} md={3} xl={2}>
-          <ProductCard id="" name="" imageUrl="" price={0} />
-        </Grid>
-        <Grid item sm={6} md={3} xl={2}>
-          <ProductCard id="" name="" imageUrl="" price={0} />
-        </Grid>
-        <Grid item sm={6} md={3} xl={2}>
-          <ProductCard id="" name="" imageUrl="" price={0} />
-        </Grid>
+        {props.products.list.map((productProps: any) => (
+          <Grid item sm={6} md={3} xl={2}>
+            {React.createElement(props.products.function, productProps)}
+          </Grid>
+        ))}
       </Grid>
     </div>
   );
 }
 
-export default Main;
+export default GridContainer;
