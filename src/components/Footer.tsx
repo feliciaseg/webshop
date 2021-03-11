@@ -19,11 +19,12 @@ const buttonStyle: CSSProperties = {
 
 const boxStyle: CSSProperties = {
   width: "100%",
-  position: "fixed",
+  position: "static",
   bottom: 0,
   display: "flex",
   justifyContent: "flex-end",
   backgroundColor: theme.palette.primary.main,
+
 };
 
 export default function Footer() {

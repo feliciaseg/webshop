@@ -36,11 +36,6 @@ export default function StartPage() {
   }
 
   mapProducts();
-
-
-export default function StartPage() {
-
-
   return (
     <>
     <Box style={{ display: "flex", flexDirection: "column", }}>

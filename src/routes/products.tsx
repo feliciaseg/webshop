@@ -132,7 +132,6 @@ export const products: Product[] = [
       description:
         "Fåtölj i rotting med sittdyna. Sittdynan har avtagbar klädsel i canvas och knytband. Bredd 85 cm, höjd 75 cm, djup 72 cm. Sitthöjd 41 cm, sittdjup 64 cm.",
     },
-=======
   {
     imageUrl:
       "https://assets.ellosgroup.com/i/ellos/b?$eg$&$emr$&$ep$&$ed$&n=ell_1520526_De_01&mw=750&rw=750&qlt=80",
