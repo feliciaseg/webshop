@@ -9,19 +9,16 @@ interface Props {
   price: number;
 }
 
-export default function productCard(props: Props) {
+export default function ProductCard(props: Props) {
   return (
     <div style={productContainer}>
       <div style={imageContainer}>
-        <img
-          style={productImage}
-          src="https://assets.ellosgroup.com/i/ellos/b?$eg$&$emr$&$ep$&$ed$&n=ell_1520526_De_01&mw=750&rw=750&qlt=80"
-        ></img>
+        <img style={productImage} src={props.imageUrl}></img>
         <AddCircle style={addIcon} onClick={() => addProductToCart(props)} />
       </div>
       <div style={productDescription}>
-        <h2 style={productName}>Fondi golvlampa</h2>
-        <p style={productPrice}>949 kr</p>
+        <h2 style={productName}>{props.name}</h2>
+        <p style={productPrice}>{props.price}&nbsp;kr</p>
       </div>
     </div>
   );
