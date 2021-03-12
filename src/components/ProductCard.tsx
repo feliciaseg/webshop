@@ -1,6 +1,7 @@
 import { CSSProperties } from "@material-ui/styles";
 import AddCircle from "@material-ui/icons/AddCircle";
 import { addProductToCart } from "../helper";
+import { Link } from "react-router-dom";
 
 interface Props {
   imageUrl: string;
@@ -11,16 +12,18 @@ interface Props {
 
 export default function ProductCard(props: Props) {
   return (
-    <div style={productContainer}>
-      <div style={imageContainer}>
-        <img style={productImage} src={props.imageUrl}></img>
-        <AddCircle style={addIcon} onClick={() => addProductToCart(props)} />
+    <Link to={`/products/${props.id}`}>
+      <div style={productContainer}>
+        <div style={imageContainer}>
+          <img style={productImage} src={props.imageUrl} alt={props.name}></img>
+          <AddCircle style={addIcon} onClick={() => addProductToCart(props)} />
+        </div>
+        <div style={productDescription}>
+          <h2 style={productName}>{props.name}</h2>
+          <p style={productPrice}>{props.price}&nbsp;kr</p>
+        </div>
       </div>
-      <div style={productDescription}>
-        <h2 style={productName}>{props.name}</h2>
-        <p style={productPrice}>{props.price}&nbsp;kr</p>
-      </div>
-    </div>
+    </Link>
   );
 }
 
