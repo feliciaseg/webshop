@@ -15,7 +15,8 @@ interface Props {
 export default function ProductCard(props: Props) {
   const [modal, showModal] = useState(false);
 
-  const handleClick = () => {
+  const handleClick = (e: any) => {
+    e.preventDefault();
     showModal(true);
     addProductToCart(props);
     setTimeout(() => {
@@ -25,19 +26,26 @@ export default function ProductCard(props: Props) {
 
   return (
     <>
-  {modal && <SmallModal />}
-    <Link to={`/products/${props.id}`}>
-      <div style={productContainer}>
-        <div style={imageContainer}>
-          <img style={productImage} src={props.imageUrl} alt={props.name}></img>
-          <AddCircle style={addIcon} onClick={handleClick} />
+      {modal && <SmallModal />}
+      <Link
+        style={{ color: "inherit", textDecoration: "none" }}
+        to={`/products/${props.id}`}
+      >
+        <div style={productContainer}>
+          <div style={imageContainer}>
+            <img
+              style={productImage}
+              src={props.imageUrl}
+              alt={props.name}
+            ></img>
+            <AddCircle style={addIcon} onClick={(e) => handleClick(e)} />
+          </div>
+          <div style={productDescription}>
+            <h2 style={productName}>{props.name}</h2>
+            <p style={productPrice}>{props.price}&nbsp;kr</p>
+          </div>
         </div>
-        <div style={productDescription}>
-          <h2 style={productName}>{props.name}</h2>
-          <p style={productPrice}>{props.price}&nbsp;kr</p>
-        </div>
-      </div>
-    </Link>
+      </Link>
     </>
   );
 }
