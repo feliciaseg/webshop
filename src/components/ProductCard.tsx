@@ -16,7 +16,8 @@ export default function ProductCard(props: Props) {
   const cart = useContext(CartContext);
   const [modal, showModal] = useState(false);
 
-  const handleClick = () => {
+  const handleClick = (e: any) => {
+    e.preventDefault();
     showModal(true);
     cart.addToCart(props);
     setTimeout(() => {
@@ -27,7 +28,10 @@ export default function ProductCard(props: Props) {
   return (
     <>
       {modal && <SmallModal />}
-      <Link to={`/products/${props.id}`}>
+      <Link
+        style={{ color: "inherit", textDecoration: "none" }}
+        to={`/products/${props.id}`}
+      >
         <div style={productContainer}>
           <div style={imageContainer}>
             <img
@@ -35,7 +39,7 @@ export default function ProductCard(props: Props) {
               src={props.imageUrl}
               alt={props.name}
             ></img>
-            <AddCircle style={addIcon} onClick={handleClick} />
+            <AddCircle style={addIcon} onClick={(e) => handleClick(e)} />
           </div>
           <div style={productDescription}>
             <h2 style={productName}>{props.name}</h2>
