@@ -29,7 +29,7 @@ export default function ProductCard(props: Props) {
 
 const productContainer: CSSProperties = {
   width: "100%",
-  height: "18rem",
+  height: "23rem",
 };
 
 const imageContainer: CSSProperties = {
