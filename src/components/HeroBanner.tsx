@@ -15,7 +15,7 @@ export default function HeroBanner() {
 
 const heroDiv: CSSProperties = {
     height: '20rem',
-    marginTop: '-10rem',
+    marginTop: '-7rem',
   
 }
 
