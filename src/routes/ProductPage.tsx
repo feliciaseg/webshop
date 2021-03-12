@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, RouteComponentProps } from "react-router-dom";
 import { products } from "./products";
+import React from "react";
+import Header from "../components/Header";
 
 interface Product {
   imageUrl: string;
@@ -34,5 +36,10 @@ export default function ProductPage(props: Props) {
     });
   }, []);
 
-  return <Link to={{ pathname: "/checkout" }}>Gå till checkoutpage</Link>;
+  return (
+    <>
+    <Header type={"white"}/>
+  <Link to={{ pathname: "/checkout" }}>Gå till checkoutpage</Link>
+  </>
+  );
 }
