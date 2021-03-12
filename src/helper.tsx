@@ -1,3 +1,5 @@
+
+
 interface Product {
   imageUrl: string;
   id: string;
@@ -9,3 +11,4 @@ export function addProductToCart(product: Product) {
   /* Save products to localstorage */
   console.log(product);
 }
+

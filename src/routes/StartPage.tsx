@@ -1,9 +1,10 @@
-import { Box } from "@material-ui/core";
+
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 import Grid from "../components/Grid";
 import { products } from "./products";
 import ProductCard from "../components/ProductCard";
+import React from "react";
 
 
 interface Props {
@@ -36,16 +37,15 @@ export default function StartPage() {
   }
 
   mapProducts();
+
   return (
     <>
-    <Box style={{ display: "flex", flexDirection: "column", }}>
       <Link to={{ pathname: "/product" }}>Gå till productPage</Link>
       <Link to={{ pathname: "/admin" }}>Gå till AdminPage</Link>
       <div style={{ width: "100%", padding: "4rem" }}>
         <Grid products={productList} />
       </div>
-    </Box>
-    <Footer/>
+      <Footer />
     </>
   );
 }

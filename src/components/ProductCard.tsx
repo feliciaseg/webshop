@@ -1,6 +1,8 @@
 import { CSSProperties } from "@material-ui/styles";
 import AddCircle from "@material-ui/icons/AddCircle";
 import { addProductToCart } from "../helper";
+import React, { useState } from "react";
+import SmallModal from "./SmallModal";
 
 interface Props {
   imageUrl: string;
@@ -10,17 +12,30 @@ interface Props {
 }
 
 export default function ProductCard(props: Props) {
+  const [modal, showModal] = useState(false);
+
+  const handleClick = () => {
+    showModal(true);
+    addProductToCart(props);
+    setTimeout(() => {
+      showModal(false);
+    }, 750);
+  };
+
   return (
-    <div style={productContainer}>
-      <div style={imageContainer}>
-        <img style={productImage} src={props.imageUrl}></img>
-        <AddCircle style={addIcon} onClick={() => addProductToCart(props)} />
+    <>
+      {modal && <SmallModal />}
+      <div style={productContainer}>
+        <div style={imageContainer}>
+          <img style={productImage} src={props.imageUrl}></img>
+          <AddCircle style={addIcon} onClick={handleClick} />
+        </div>
+        <div style={productDescription}>
+          <h2 style={productName}>{props.name}</h2>
+          <p style={productPrice}>{props.price}&nbsp;kr</p>
+        </div>
       </div>
-      <div style={productDescription}>
-        <h2 style={productName}>{props.name}</h2>
-        <p style={productPrice}>{props.price}&nbsp;kr</p>
-      </div>
-    </div>
+    </>
   );
 }
 

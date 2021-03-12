@@ -2,8 +2,16 @@
   height: 10.3rem;
 }
 
-.MuiButton-root {
+.footerButton {
   margin: 1.8rem 6.25rem 0 0;
+}
+
+/* Product-added modal */
+.smallModal {
+  filter: drop-shadow(0 4px 4px grey);
+  width: 35rem;
+  height: 4.2rem;
+  font-size: 1.2rem;
 }
 
 @media only screen and (max-width: 440px) {
@@ -11,7 +19,13 @@
     height: 7rem;
   }
 
-  .MuiButton-root {
+  .footerButton {
     margin: 1.1rem 1.6rem 0 0;
+  }
+
+  .smallModal {
+    width: 16.8rem;
+    height: 3.4rem;
+    font-size: 0.8rem;
   }
 }
