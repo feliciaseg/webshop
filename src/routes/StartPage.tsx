@@ -1,5 +1,5 @@
 import { Box } from "@material-ui/core";
-import Header from '../components/Header';
+import Header from "../components/Header";
 import { Link } from "react-router-dom";
 import Grid from "../components/Grid";
 import { products } from "./products";
@@ -42,14 +42,13 @@ export default function StartPage() {
 
   return (
     <>
-    <Header type={"transparent"}/>
-    <Box style={{ display: "flex", flexDirection: "column" }}>
-      <Link to={{ pathname: "/product" }}>Gå till productPage</Link>
-      <Link to={{ pathname: "/admin" }}>Gå till AdminPage</Link>
-      <div style={{ width: "100%", padding: "4rem" }}>
-        <Grid products={productList} />
-      </div>
-    </Box>
-
+      <Header type={"transparent"} />
+      <Box style={{ display: "flex", flexDirection: "column" }}>
+        <Link to={{ pathname: "/admin" }}>Gå till AdminPage</Link>
+        <div style={{ width: "100%", padding: "3.5rem" }}>
+          <Grid products={productList} />
+        </div>
+      </Box>
+    </>
   );
 }
