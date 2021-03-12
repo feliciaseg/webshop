@@ -1,10 +1,12 @@
+import { Button } from "@material-ui/core";
+import React from "react";
+import Footer from "../components/Footer";
 import { useEffect, useState } from "react";
 import { RouteComponentProps, Link } from "react-router-dom";
 import { products } from "./products";
 import { addProductToCart } from "../helper";
 import Header from "../components/Header";
 import { CSSProperties } from "@material-ui/styles";
-import { Button } from "@material-ui/core";
 import ArrowBack from "@material-ui/icons/ArrowBack";
 
 interface Product {
@@ -74,6 +76,7 @@ export default function ProductPage(props: Props) {
           <p style={productDescription}>{product?.description}</p>
         </div>
       </div>
+      <Footer/>
     </>
   );
 }

@@ -1,6 +1,8 @@
 import { CSSProperties } from "@material-ui/styles";
 import AddCircle from "@material-ui/icons/AddCircle";
 import { addProductToCart } from "../helper";
+import React, { useState } from "react";
+import SmallModal from "./SmallModal";
 import { Link } from "react-router-dom";
 
 interface Props {
@@ -11,12 +13,24 @@ interface Props {
 }
 
 export default function ProductCard(props: Props) {
+  const [modal, showModal] = useState(false);
+
+  const handleClick = () => {
+    showModal(true);
+    addProductToCart(props);
+    setTimeout(() => {
+      showModal(false);
+    }, 750);
+  };
+
   return (
+    <>
+  {modal && <SmallModal />}
     <Link to={`/products/${props.id}`}>
       <div style={productContainer}>
         <div style={imageContainer}>
           <img style={productImage} src={props.imageUrl} alt={props.name}></img>
-          <AddCircle style={addIcon} onClick={() => addProductToCart(props)} />
+          <AddCircle style={addIcon} onClick={handleClick} />
         </div>
         <div style={productDescription}>
           <h2 style={productName}>{props.name}</h2>
@@ -24,6 +38,7 @@ export default function ProductCard(props: Props) {
         </div>
       </div>
     </Link>
+    </>
   );
 }
 
