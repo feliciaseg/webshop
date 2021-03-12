@@ -1,9 +1,7 @@
 import { CSSProperties } from "@material-ui/styles"
 
-
 export default function HeroBanner() {
    
-
     return (
     <div style={heroDiv}>
         <img 
@@ -12,7 +10,6 @@ export default function HeroBanner() {
         alt=""
         ></img>
      </div>
- 
     )
 }
 
@@ -20,12 +17,10 @@ const heroDiv: CSSProperties = {
     height: '20rem',
     marginTop: '-10rem',
   
-
 }
 
 const imgStyle: CSSProperties = {
     objectFit: 'cover',
     width: '100%',
-    height: '100%',
-    
+    height: '100%',    
 }
