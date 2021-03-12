@@ -4,7 +4,9 @@ import { Link } from "react-router-dom";
 import Grid from "../components/Grid";
 import { products } from "./products";
 import ProductCard from "../components/ProductCard";
+import HeroBanner from "../components/HeroBanner";
 import { useEffect, useState } from "react";
+
 
 interface Props {
   imageUrl: string;
@@ -42,7 +44,9 @@ export default function StartPage() {
 
   return (
     <>
+
       <Header type={"transparent"} />
+       <HeroBanner />
       <Box style={{ display: "flex", flexDirection: "column" }}>
         <Link to={{ pathname: "/admin" }}>Gå till AdminPage</Link>
         <div style={{ width: "100%", padding: "3.5rem" }}>
@@ -50,5 +54,6 @@ export default function StartPage() {
         </div>
       </Box>
     </>
+
   );
 }
