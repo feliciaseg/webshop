@@ -9,19 +9,18 @@ interface ProductProps {
 }
 interface Props {
   products: {
-    function: (prop: ProductProps) => JSX.Element;
+    component: (prop: ProductProps) => JSX.Element;
     productProps: ProductProps[];
   };
 }
 
 function GridContainer(props: Props) {
-  console.log(props);
   return (
     <div>
       <Grid container spacing={3}>
         {props.products.productProps.map((productProp: any) => (
-          <Grid item sm={6} md={3} xl={2}>
-            {React.createElement(props.products.function, productProp)}
+          <Grid item sm={6} md={3} xl={2} key={productProp.id}>
+            {React.createElement(props.products.component, productProp)}
           </Grid>
         ))}
       </Grid>
