@@ -3,6 +3,7 @@ import AddCircle from "@material-ui/icons/AddCircle";
 import { addProductToCart } from "../helper";
 import React, { useState } from "react";
 import SmallModal from "./SmallModal";
+import { Link } from "react-router-dom";
 
 interface Props {
   imageUrl: string;
@@ -24,10 +25,11 @@ export default function ProductCard(props: Props) {
 
   return (
     <>
-      {modal && <SmallModal />}
+  {modal && <SmallModal />}
+    <Link to={`/products/${props.id}`}>
       <div style={productContainer}>
         <div style={imageContainer}>
-          <img style={productImage} src={props.imageUrl}></img>
+          <img style={productImage} src={props.imageUrl} alt={props.name}></img>
           <AddCircle style={addIcon} onClick={handleClick} />
         </div>
         <div style={productDescription}>
@@ -35,13 +37,14 @@ export default function ProductCard(props: Props) {
           <p style={productPrice}>{props.price}&nbsp;kr</p>
         </div>
       </div>
+    </Link>
     </>
   );
 }
 
 const productContainer: CSSProperties = {
   width: "100%",
-  height: "18rem",
+  height: "23rem",
 };
 
 const imageContainer: CSSProperties = {

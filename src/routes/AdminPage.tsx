@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Header from "../components/Header";
 
 // interface Props {
 // }
@@ -9,5 +10,10 @@ import { Link } from "react-router-dom";
 // }
 
 export default function AdminPage() {
-  return <Link to={{ pathname: "/" }}>Gå till startPage</Link>;
+  return (
+    <>
+  <Header type={"white"}/>
+  <Link to={{ pathname: "/" }}>Gå till startPage</Link>
+  </>
+  );
 }

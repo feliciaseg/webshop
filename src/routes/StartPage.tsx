@@ -1,11 +1,11 @@
-
+import { Box } from "@material-ui/core";
+import Header from "../components/Header";
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 import Grid from "../components/Grid";
 import { products } from "./products";
 import ProductCard from "../components/ProductCard";
-import React from "react";
-
+import { useEffect, useState } from "react";
 
 interface Props {
   imageUrl: string;
@@ -14,37 +14,42 @@ interface Props {
   price: number;
 }
 interface ProductList {
-  function: (prop: Props) => JSX.Element;
+  component: (props: Props) => JSX.Element;
   productProps: Props[];
 }
 
 export default function StartPage() {
-  console.log(typeof ProductCard);
-  const productList: ProductList = {
-    function: ProductCard,
+  const [productList, setProductList] = useState<ProductList>({
+    component: ProductCard,
     productProps: [],
-  };
+  });
 
-  function mapProducts() {
+  useEffect(() => {
     products.map((product) => {
-      productList.productProps.push({
-        imageUrl: product.imageUrl,
-        id: product.id,
-        name: product.name,
-        price: product.price,
-      });
+      setProductList((productList: ProductList) => ({
+        ...productList,
+        productProps: [
+          ...productList.productProps,
+          {
+            imageUrl: product.imageUrl,
+            id: product.id,
+            name: product.name,
+            price: product.price,
+          },
+        ],
+      }));
     });
-  }
-
-  mapProducts();
+  }, []);
 
   return (
     <>
-      <Link to={{ pathname: "/product" }}>Gå till productPage</Link>
-      <Link to={{ pathname: "/admin" }}>Gå till AdminPage</Link>
-      <div style={{ width: "100%", padding: "4rem" }}>
-        <Grid products={productList} />
-      </div>
+      <Header type={"transparent"} />
+      <Box style={{ display: "flex", flexDirection: "column" }}>
+        <Link to={{ pathname: "/admin" }}>Gå till AdminPage</Link>
+        <div style={{ width: "100%", padding: "3.5rem" }}>
+          <Grid products={productList} />
+        </div>
+      </Box>
       <Footer />
     </>
   );

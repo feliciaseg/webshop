@@ -184,7 +184,7 @@ export const products: Product[] = [
     name: "Kuddfodral Elvira",
     price: 199,
     description:
-      "Kuddfodral i mjuk viskossammet med fin lyster. Dragkedja av metall i botten. Stl 50x50 cm.Produkten är certifierad enligt STANDARD 100 by OEKO-TEX®. Certifieringen garanterar att produkten är testad och fri från ämnen som kan vara skadliga för hälsan och miljön.",
+      "Kuddfodral i mjuk viskossammet med fin lyster. Dragkedja av metall i botten. Stl 50x50 cm. Produkten är certifierad enligt STANDARD 100 by OEKO-TEX®. Certifieringen garanterar att produkten är testad och fri från ämnen som kan vara skadliga för hälsan och miljön.",
   },
   {
     imageUrl:
@@ -211,7 +211,7 @@ export const products: Product[] = [
     name: "Badrumsmatta Gerda",
     price: 199,
     description:
-      "Randvävd badrumsmatta i bomull med tofsar på kortsidorna. 50x70cm.",
+      "Randvävd badrumsmatta i bomull med tofsar på kortsidorna. Hemma samarbetar med Better Cotton Initiative för att förbättra bomullsodlingen globalt. BCI är en global ideell organisation som utbildar bomullsodlare i metoder för mer hållbar bomullsodling och arbetar för en mer effektiv användning av vatten och minskad användning av bekämpningsmedel. BCI tillför förbättrade sociala, ekonomiska och miljömässiga villkor för bomullsbönderna. När du köper den här produkten stödjer du, tillsammans med Hemma, ansvarsfullt odlad bomull. Det betyder inte att produkten är tillverkad av fysiskt spårbar Better Cotton.",
   },
   {
     imageUrl:
