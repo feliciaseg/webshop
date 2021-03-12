@@ -1,5 +1,3 @@
-
-
 interface Product {
   imageUrl: string;
   id: string;
@@ -7,8 +5,8 @@ interface Product {
   price: number;
 }
 
-export function addProductToCart(product: Product) {
-  /* Save products to localstorage */
-  console.log(product);
+/* Saves products to localstorage */
+export function saveCartToLocalStorage(product: Product) {
+  const cart: Product[] = JSON.parse(localStorage.getItem("cart") || "[]");
+  localStorage.setItem("cart", JSON.stringify([...cart, product]));
 }
-
