@@ -6,13 +6,13 @@ import ProductPage from "./ProductPage";
 import StartPage from "./StartPage";
 
 export default function ViewContainer() {
-    return (
+  return (
     <Switch>
-    <Route exact path = "/" component={StartPage}/>
-    <Route exact path = "/product" component={ProductPage}/>
-    <Route exact path = "/checkout" component={CheckoutPage}/>
-    <Route exact path = "/admin" component={AdminPage}/>
-    <h2> Page not found </h2>
+      <Route exact path="/" component={StartPage} />
+      <Route exact path="/products/:id" component={ProductPage} />
+      <Route exact path="/checkout" component={CheckoutPage} />
+      <Route exact path="/admin" component={AdminPage} />
+      <h2> Page not found </h2>
     </Switch>
-    )
+  );
 }
