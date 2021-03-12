@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Grid from "../components/Grid";
 import { products } from "./products";
 import ProductCard from "../components/ProductCard";
+import HeroBanner from "../components/HeroBanner";
 
 interface Props {
   imageUrl: string;
@@ -39,6 +40,7 @@ export default function StartPage() {
   return (
     <>
     <Header type={"transparent"}/>
+    <HeroBanner />
     <Box style={{ display: "flex", flexDirection: "column" }}>
       <Link to={{ pathname: "/product" }}>Gå till productPage</Link>
       <Link to={{ pathname: "/admin" }}>Gå till AdminPage</Link>
@@ -46,6 +48,7 @@ export default function StartPage() {
         <Grid products={productList} />
       </div>
     </Box>
+    </>
 
   );
 }
