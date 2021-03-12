@@ -1,9 +1,9 @@
 import { CSSProperties } from "@material-ui/styles";
 import AddCircle from "@material-ui/icons/AddCircle";
-import { addProductToCart } from "../helper";
-import React, { useState } from "react";
+import { useState, useContext } from "react";
 import SmallModal from "./SmallModal";
 import { Link } from "react-router-dom";
+import { CartContext } from "../contexts/CartContext";
 
 interface Props {
   imageUrl: string;
@@ -13,12 +13,13 @@ interface Props {
 }
 
 export default function ProductCard(props: Props) {
+  const cart = useContext(CartContext);
   const [modal, showModal] = useState(false);
 
   const handleClick = (e: any) => {
     e.preventDefault();
     showModal(true);
-    addProductToCart(props);
+    cart.addToCart(props);
     setTimeout(() => {
       showModal(false);
     }, 750);

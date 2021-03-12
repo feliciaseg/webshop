@@ -1,13 +1,12 @@
 import { Button } from "@material-ui/core";
-import React from "react";
 import Footer from "../components/Footer";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { RouteComponentProps, Link } from "react-router-dom";
 import { products } from "./products";
-import { addProductToCart } from "../helper";
 import Header from "../components/Header";
 import { CSSProperties } from "@material-ui/styles";
 import ArrowBack from "@material-ui/icons/ArrowBack";
+import { CartContext } from "../contexts/CartContext";
 
 interface Product {
   imageUrl: string;
@@ -24,6 +23,8 @@ interface Id {
 interface Props extends RouteComponentProps<Id> {}
 
 export default function ProductPage(props: Props) {
+  const cart = useContext(CartContext);
+
   const [product, setProduct] = useState<Product>();
 
   useEffect(() => {
@@ -69,14 +70,16 @@ export default function ProductPage(props: Props) {
             variant="contained"
             color="primary"
             style={addToCartButton}
-            onClick={() => addProductToCart}
+            onClick={() => {
+              cart.addToCart(product!);
+            }}
           >
             Lägg i varukorgen
           </Button>
           <p style={productDescription}>{product?.description}</p>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 }
