@@ -8,7 +8,8 @@ export default function CheckoutPage() {
   return (
     <>
     <Header type= "white"/>
-    <Box style = {{display: "flex", justifyContent:"center"}}>
+    <Box style = {{display: "flex", alignItems:"center", flexDirection: "column"}}>
+      <p>Betalning</p>
   <PaymentForm/>
   </Box>
   <Footer/>
