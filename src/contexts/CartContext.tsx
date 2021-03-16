@@ -24,7 +24,7 @@ export const CartContext = createContext<ContextState>({
 
 export default class CartProvider extends Component<{}, CartState> {
   state: CartState = {
-    cart: [],
+    cart: JSON.parse(localStorage.getItem("cart") || "[]"),
   };
 
   addProductToCart = (product: Product) => {
@@ -33,7 +33,6 @@ export default class CartProvider extends Component<{}, CartState> {
   };
 
   render() {
-    console.log(this.state.cart);
     return (
       <CartContext.Provider
         value={{

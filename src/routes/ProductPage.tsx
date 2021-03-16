@@ -7,6 +7,7 @@ import Header from "../components/Header";
 import { CSSProperties } from "@material-ui/styles";
 import ArrowBack from "@material-ui/icons/ArrowBack";
 import { CartContext } from "../contexts/CartContext";
+import SmallModal from "../components/SmallModal";
 
 interface Product {
   imageUrl: string;
@@ -24,8 +25,17 @@ interface Props extends RouteComponentProps<Id> {}
 
 export default function ProductPage(props: Props) {
   const cart = useContext(CartContext);
-
   const [product, setProduct] = useState<Product>();
+  const [modal, showModal] = useState(false);
+
+  const handleClick = (e: any) => {
+    e.preventDefault();
+    showModal(true);
+    cart.addToCart(product!);
+    setTimeout(() => {
+      showModal(false);
+    }, 1000);
+  };
 
   useEffect(() => {
     products.map((item) => {
@@ -44,6 +54,7 @@ export default function ProductPage(props: Props) {
 
   return (
     <>
+      {modal && <SmallModal />}
       <Header type={"white"} />
       <div style={productContainer}>
         <div style={imageContainer}>
@@ -70,9 +81,7 @@ export default function ProductPage(props: Props) {
             variant="contained"
             color="primary"
             style={addToCartButton}
-            onClick={() => {
-              cart.addToCart(product!);
-            }}
+            onClick={handleClick}
           >
             Lägg i varukorgen
           </Button>
