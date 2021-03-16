@@ -6,7 +6,6 @@
   margin: 1.8rem 6.25rem 0 0;
 }
 
-
 /* Product-added modal */
 .smallModal {
   filter: drop-shadow(0 4px 4px grey);
@@ -18,7 +17,7 @@
 /* PAYMENT FORM */
 .paymentBox {
   width: 41rem;
-  height: 20.8rem;
+  height: 25rem;
 }
 
 .inputPayment {
@@ -26,9 +25,21 @@
   height: 2rem;
 }
 
+.inputSmallPayment {
+  height: 2rem;
+}
+
+.cardInputs {
+  flex-direction: row;
+}
+
 .pInput {
   font-size: 1rem;
-  margin: 2rem 0 0.3rem 3rem
+  margin: 2.2rem 0 0.3rem 3rem;
+}
+
+.deliveryBox {
+  width: 41rem;
 }
 
 @media only screen and (max-width: 440px) {
@@ -50,19 +61,32 @@
   /* PAYMENT FORM */
   .paymentBox {
     width: 17rem;
-    height: 20rem;
+    height: 26rem;
     font-size: 0.8rem;
   }
 
   .inputPayment {
     width: 12.3rem;
-    height: 2rem;
-    margin-bottom: 1.7rem;
-  }
-  
-  .pInput {
-    font-size: 1rem;
-    margin: 1rem 0 0rem 3rem
+    margin-bottom: 1rem;
   }
 
+  .pInput {
+    font-size: 1rem;
+    margin: 1rem 0 0rem 3rem;
+  }
+
+  .cardInputs {
+    flex-direction: column;
+  }
+
+  .inputSmallPayment {
+    height: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .deliveryBox {
+    width: 17rem;
+    height: 20rem;
+    font-size: 0.8rem;
+  }
 }

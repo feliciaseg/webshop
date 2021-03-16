@@ -9,15 +9,14 @@ import { DateTime } from "luxon";
 import React, { CSSProperties } from "react";
 import { theme } from "../styling/colorTheme";
 
-export default function PaymentForm() {
+export default function DeliveryForm() {
   const dt = DateTime.now();
-
   const postnordDelivery = dt.plus({ days: 1 }).toLocaleString(DateTime.DATE_FULL);
   const instaboxDelivery = dt.plus({ days: 2 }).toLocaleString(DateTime.DATE_FULL);
   const homeDelivery = dt.plus({ days: 3 }).toLocaleString(DateTime.DATE_FULL);
 
   return (
-    <Box className={"paymentBox"} style={box}>
+    <Box className={"deliveryBox"} style={box}>
       <FormControl component="fieldset">
         <RadioGroup aria-label="gender" name="gender1">
           <div>
@@ -37,7 +36,6 @@ export default function PaymentForm() {
               className={"radioButtonPayment"}
               value="instabox"
               control={<Radio style={{ color: theme.palette.primary.main }} />}
-              
               label={
                 <p style={p}>
                   Instabox 39kr <br /> Levereras {instaboxDelivery}
@@ -64,7 +62,6 @@ export default function PaymentForm() {
   );
 }
 
-
 const box: CSSProperties = {
   display: "flex",
   flexDirection: "column",
@@ -74,5 +71,5 @@ const box: CSSProperties = {
 
 const p: CSSProperties = {
   fontFamily: "Roboto",
-  marginLeft:"2.5rem"
+  marginLeft: "2.5rem",
 };
