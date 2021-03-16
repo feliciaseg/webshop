@@ -27,8 +27,6 @@ export default function Header(props: Props) {
     backgroundGradient = "";
   }
 
-  console.log(cart.cart);
-
   return (
     <div
       style={{
