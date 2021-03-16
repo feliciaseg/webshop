@@ -1,6 +1,5 @@
 import { Box } from "@material-ui/core";
 import Header from "../components/Header";
-import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 import Grid from "../components/Grid";
 import { products } from "./products";
