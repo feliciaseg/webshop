@@ -3,6 +3,7 @@ import { theme } from "./styling/colorTheme";
 import { BrowserRouter as Router } from "react-router-dom";
 import ViewContainer from "./routes/ViewContainer";
 import CartProvider from "./contexts/CartContext";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   return (
@@ -10,7 +11,9 @@ function App() {
       <ThemeProvider theme={theme}>
         <StylesProvider injectFirst>
           <Router>
-            <ViewContainer />
+            <ScrollToTop>
+              <ViewContainer />
+            </ScrollToTop>
           </Router>
         </StylesProvider>
       </ThemeProvider>
