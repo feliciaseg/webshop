@@ -1,18 +1,20 @@
 import { 
     FormControl,
     TextField,
-    Box 
+    Box,
 } from "@material-ui/core";
 import { CSSProperties } from "@material-ui/styles";
 import { theme } from '../styling/colorTheme';
 
 export default  function UserForm () {
+ 
     return (
         <Box className={"userBox"} style={box}>
             <FormControl>
                 <TextField
                 style={textField}
-                id="Name"
+                id="name"
+                autoComplete="name"
                 placeholder="Namn"
                 variant="outlined"
                 className={"userInput"}
@@ -20,7 +22,8 @@ export default  function UserForm () {
                 />
                 <TextField
                 style={textField}
-                id="Adress"
+                id="adress"
+                autoComplete="address"
                 placeholder="Adress"
                 variant="outlined"
                 className={"userInput"}
@@ -28,7 +31,8 @@ export default  function UserForm () {
                 />
                 <TextField
                 style={textField}
-                id="Mail"
+                id="email"
+                autoComplete="email"
                 placeholder="Mail"
                 variant="outlined"
                 className={"userInput"}
@@ -37,7 +41,8 @@ export default  function UserForm () {
                 />
                 <TextField
                 style={textField}
-                id="Telefonnummer"
+                id="tel"
+                autoComplete="tel"
                 placeholder="Telefonnummer"
                 variant="outlined"
                 className={"userInput"}
