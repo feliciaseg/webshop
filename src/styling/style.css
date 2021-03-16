@@ -1,3 +1,11 @@
+.productContainer {
+  flex-direction: row;
+}
+
+.productSubContainer {
+  width: 50%;
+}
+
 .footerDiv {
   height: 10.3rem;
 }
@@ -35,6 +43,7 @@
 
 .pInput {
   font-size: 1rem;
+
   margin: 2.2rem 0 0.3rem 3rem;
 }
 
@@ -51,8 +60,20 @@
 .userInput {
   width: 34.3rem;
   height: 2rem;
+
 }
 
+/* TABLET SMALL */
+@media only screen and (max-width: 768px) {
+  .productContainer {
+    flex-direction: column;
+  }
+  .productSubContainer {
+    width: 100%;
+  }
+}
+
+/* MOBILE */
 @media only screen and (max-width: 440px) {
   .footerDiv {
     height: 7rem;
@@ -97,6 +118,7 @@
     margin: 1rem 0 0rem 3rem;
   }
 
+
   .cardInputs {
     flex-direction: column;
   }
@@ -111,4 +133,5 @@
     height: 20rem;
     font-size: 0.8rem;
   }
+
 }

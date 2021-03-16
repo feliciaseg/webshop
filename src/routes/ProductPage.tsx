@@ -56,8 +56,8 @@ export default function ProductPage(props: Props) {
     <>
       {modal && <SmallModal />}
       <Header type={"white"} />
-      <div style={productContainer}>
-        <div style={imageContainer}>
+      <div className="productContainer" style={productContainer}>
+        <div className="productSubContainer" style={imageContainer}>
           <Link to="/">
             <Button
               variant="contained"
@@ -74,7 +74,7 @@ export default function ProductPage(props: Props) {
             alt={product?.name}
           ></img>
         </div>
-        <div style={infoContainer}>
+        <div className="productSubContainer" style={infoContainer}>
           <h2 style={productName}>{product?.name}</h2>
           <p style={productPrice}>{product?.price}&nbsp;kr</p>
           <Button
@@ -95,13 +95,13 @@ export default function ProductPage(props: Props) {
 
 const productContainer: CSSProperties = {
   display: "flex",
-  flexDirection: "row",
-  height: "calc(100% - 7rem)",
+  flex: 1,
+  minHeight: "calc(100vh - 7rem)",
 };
 
 const imageContainer: CSSProperties = {
-  width: "50%",
-  height: "100%",
+  position: "relative",
+  minHeight: "30rem",
 };
 
 const goBackButton: CSSProperties = {
@@ -111,6 +111,7 @@ const goBackButton: CSSProperties = {
 };
 
 const productImage: CSSProperties = {
+  position: "absolute",
   width: "100%",
   height: "100%",
   objectFit: "cover",
@@ -120,7 +121,6 @@ const productImage: CSSProperties = {
 const infoContainer: CSSProperties = {
   display: "flex",
   flexDirection: "column",
-  width: "50%",
   padding: "4rem 3.5rem",
 };
 
