@@ -35,15 +35,15 @@ export default function OrderConfirmationModal(props: Props) {
                 backgroundColor: theme.palette.secondary.main,
               }}
             >
-              <p>{item.name}</p>
-              <p>{item.number}</p>
-              <p>{item.totalPrice}</p>
+              <p style={section}>{item.name}</p>
+              <p style={section}>{item.number}</p>
+              <p style={section}>{item.totalPrice}</p>
             </div>
           ) : (
             <div style={{ ...productSection, backgroundColor: "#ffff" }}>
-              <p>{item.name}</p>
-              <p>{item.number}</p>
-              <p>{item.totalPrice}</p>
+              <p style={section}>{item.name}</p>
+              <p style={section}>{item.number}</p>
+              <p style={section}>{item.totalPrice}</p>
             </div>
           )
         )}
@@ -67,9 +67,9 @@ const modalContainer: CSSProperties = {
   position: "fixed",
   display: "flex",
   flexDirection: "column",
-  top: "calc(50% + 3.5rem)",
+  top: "50%",
   left: "50%",
-  width: "90%",
+  width: "85%",
   maxWidth: "40rem",
   minHeight: "30rem",
   transform: "translate(-50%, -50%)",
@@ -96,11 +96,15 @@ const productList: CSSProperties = {
 
 const productSection: CSSProperties = {
   display: "flex",
-  padding: "0 1rem",
+  padding: "0 0.5rem",
   flexDirection: "row",
   alignItems: "center",
   justifyContent: "space-between",
   fontSize: "0.8rem",
+};
+
+const section: CSSProperties = {
+  padding: "0 0.5rem",
 };
 
 const summaryContainer: CSSProperties = {
