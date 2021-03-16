@@ -4,10 +4,12 @@ import DeliveryForm from "../components/DeliveryForm";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import PaymentForm from "../components/PaymentForm";
+import UserForm from "../components/UserForm";
 
 export default function CheckoutPage() {
   return (
     <>
+
       <Header type="white" />
       <Box
         style={{
@@ -17,6 +19,8 @@ export default function CheckoutPage() {
           flexDirection: "column",
         }}
       >
+         <p>Dina Uppgifter</p>
+        <UserForm/>
         <p>Betalning</p>
         <PaymentForm />
         <p>Leveransmetod</p>
@@ -24,5 +28,6 @@ export default function CheckoutPage() {
       </Box>
       <Footer />
     </>
+
   );
 }
