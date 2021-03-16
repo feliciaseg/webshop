@@ -6,7 +6,7 @@ import {
   Radio,
   TextField,
 } from "@material-ui/core";
-import React, { CSSProperties } from "react";
+import React, { CSSProperties, useState } from "react";
 import { theme } from "../styling/colorTheme";
 import "../styling/style.css";
 
@@ -40,7 +40,13 @@ const p: CSSProperties = {
   fontFamily: "Roboto",
 };
 
+const errorText: CSSProperties = {
+  fontFamily: "Roboto",
+  color: "red"
+};
+
 export default function PaymentForm() {
+
   return (
     <Box className={"paymentBox"} style={box}>
       <FormControl component="fieldset">
@@ -57,10 +63,11 @@ export default function PaymentForm() {
             <TextField
               style={textField}
               id="swish"
-              helperText="Telefonnummer"
+              helperText= "Telefonnummer"
               variant="outlined"
-              required
+              required 
               className={"inputPayment"}
+              
             />
           </div>
           <p className={"pInput"} style={p}>
@@ -76,22 +83,22 @@ export default function PaymentForm() {
             <TextField
               style={textField}
               id="kort"
-              helperText="Kortnummer"
+              helperText= "Kortnummber"
               variant="outlined"
               className={"inputPayment"}
             />
             <div className= {"cardInputs"} style = {cardInputs}>
             <TextField
               style={textField2}
-              id="cvc"
-              helperText="CVV-nummer"
+              id="cvv"
+              helperText= "CVVnummer"
               variant="outlined"
               className = {"inputSmallPayment"}
             />
             <TextField
               style={textField2}
               id="date"
-              helperText="Utgångsdatum"
+              helperText= "Giltighetstid"
               variant="outlined"
               className = {"inputSmallPayment"}
               placeholder = {"MM/YY"}
