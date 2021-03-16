@@ -2,7 +2,6 @@ import React, {  CSSProperties } from "react";
 import { theme } from "../styling/colorTheme";
 import CheckIcon from "@material-ui/icons/Check";
 import "../styling/style.css";
-import ReactDOM from "react-dom";
 import { Box } from "@material-ui/core";
 
 const boxStyle: CSSProperties = {
