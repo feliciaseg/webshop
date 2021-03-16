@@ -1,18 +1,17 @@
+import { Box } from "@material-ui/core";
 import React from "react";
-import { Link } from "react-router-dom";
+
 import Footer from "../components/Footer";
-
-// interface Props {
-// }
-
-// interface State{
-
-// }
-
+import Header from "../components/Header";
+import PaymentForm from "../components/PaymentForm";
 export default function CheckoutPage() {
   return (
     <>
-  <Link to={{ pathname: "/" }}>Gå till startPage</Link>
+    <Header type= "white"/>
+    <Box style = {{display: "flex", alignItems:"center", flexDirection: "column"}}>
+      <p>Betalning</p>
+  <PaymentForm/>
+  </Box>
   <Footer/>
   </>);
 }
