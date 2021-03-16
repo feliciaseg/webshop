@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-import UserForms from "../components/UserForms";
+// import UserForms from "../components/UserForms";
 
 
 // interface Props {
@@ -16,7 +16,7 @@ export default function CheckoutPage() {
   return (
     <>
    <Header type="white"/> 
-  <UserForms/>
+  {/* <UserForms/> */}
   <Link to={{ pathname: "/" }}>Gå till startPage</Link>
   <Footer/>
   </>
