@@ -13,6 +13,7 @@ export default function Header(props: Props) {
   let bgColor: string;
   let textColor: string;
   let backgroundGradient: string;
+  let shadow: string;
 
   const cart = useContext(CartContext);
 
@@ -21,10 +22,12 @@ export default function Header(props: Props) {
     textColor = theme.palette.secondary.main;
     backgroundGradient =
       "linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 100%)";
+    shadow = "";
   } else {
     bgColor = "white";
     textColor = theme.palette.primary.main;
     backgroundGradient = "";
+    shadow = "0px 2px 5px 0px rgba(0,0,0,0.1)";
   }
 
   return (
@@ -33,6 +36,7 @@ export default function Header(props: Props) {
         ...headerStyling,
         backgroundColor: bgColor,
         background: backgroundGradient,
+        boxShadow: shadow,
       }}
     >
       <Link style={{ textDecoration: "none" }} to={{ pathname: "/" }}>
