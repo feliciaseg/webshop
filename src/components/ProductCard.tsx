@@ -22,7 +22,7 @@ export default function ProductCard(props: Props) {
     cart.addToCart(props);
     setTimeout(() => {
       showModal(false);
-    }, 750);
+    }, 1000);
   };
 
   return (
