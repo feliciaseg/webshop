@@ -31,6 +31,17 @@
   margin: 2rem 0 0.3rem 3rem
 }
 
+/* USERFORM */
+.userBox {
+  width: 40rem;
+  height: 20.8rem;
+}
+
+.userInput {
+  width: 34.3rem;
+  height: 2rem;
+}
+
 @media only screen and (max-width: 440px) {
   .footerDiv {
     height: 7rem;
@@ -46,6 +57,17 @@
     height: 3.4rem;
     font-size: 0.8rem;
   }
+  /* UserForm */
+  .userBox {
+    width: 15rem;
+    height: 20rem;
+    font-size: 0.7rem;
+  }
+
+  .userInput {
+    width: 14rem;
+    height: 2rem;
+  }
 
   /* PAYMENT FORM */
   .paymentBox {
@@ -54,7 +76,7 @@
     font-size: 0.8rem;
   }
 
-  .inputPayment {
+  .inputPayment  {
     width: 12.3rem;
     height: 2rem;
     margin-bottom: 1.7rem;
