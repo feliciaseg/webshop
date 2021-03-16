@@ -2,37 +2,32 @@ import Cancel from "@material-ui/icons/Cancel";
 import { CSSProperties } from "@material-ui/styles";
 import { theme } from "../styling/colorTheme";
 import { Button } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 interface Product {
   name: string;
-  price: number;
+  totalPrice: number;
   number: number;
   imageUrl?: string;
   id?: string;
   description?: string;
 }
 
-interface Order {
+interface Props {
   ordernumber: string;
   products: Product[];
   totalCost: number;
 }
 
-interface Props {
-  order: Order;
-  closeModal: () => void;
-}
-
 export default function OrderConfirmationModal(props: Props) {
   return (
     <div style={modalContainer}>
-      <Cancel style={closeIcon} onClick={props.closeModal} />
       <p style={confirmationGreeting}>Tack för ditt köp!</p>
       <p style={ordernumber}>
-        Ordernummer: <b>{props.order.ordernumber}</b>
+        Ordernummer: <b>{props.ordernumber}</b>
       </p>
       <div style={productList}>
-        {props.order.products.map((item: Product, index: number) =>
+        {props.products.map((item: Product, index: number) =>
           index % 2 === 0 ? (
             <div
               style={{
@@ -42,13 +37,13 @@ export default function OrderConfirmationModal(props: Props) {
             >
               <p>{item.name}</p>
               <p>{item.number}</p>
-              <p>{item.price}</p>
+              <p>{item.totalPrice}</p>
             </div>
           ) : (
             <div style={{ ...productSection, backgroundColor: "#ffff" }}>
               <p>{item.name}</p>
               <p>{item.number}</p>
-              <p>{item.price}</p>
+              <p>{item.totalPrice}</p>
             </div>
           )
         )}
@@ -56,12 +51,14 @@ export default function OrderConfirmationModal(props: Props) {
       <div style={summaryContainer}>
         <p>Total kostnad:</p>
         <p>
-          <b>{props.order.totalCost} kr</b>
+          <b>{props.totalCost} kr</b>
         </p>
       </div>
-      <Button variant="contained" color="primary" style={confirmationButton}>
-        Ok
-      </Button>
+      <Link to={"/"}>
+        <Button variant="contained" color="primary" style={confirmationButton}>
+          Ok
+        </Button>
+      </Link>
     </div>
   );
 }
@@ -79,12 +76,6 @@ const modalContainer: CSSProperties = {
   padding: "2rem",
   backgroundColor: "#ffff",
   boxShadow: "0px 2px 5px 0px rgba(0,0,0,0.3)",
-};
-
-const closeIcon: CSSProperties = {
-  position: "absolute",
-  top: "1rem",
-  right: "1rem",
 };
 
 const confirmationGreeting: CSSProperties = {
