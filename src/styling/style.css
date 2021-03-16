@@ -1,3 +1,11 @@
+.productContainer {
+  flex-direction: row;
+}
+
+.productSubContainer {
+  width: 50%;
+}
+
 .footerDiv {
   height: 10.3rem;
 }
@@ -5,7 +13,6 @@
 .footerButton {
   margin: 1.8rem 6.25rem 0 0;
 }
-
 
 /* Product-added modal */
 .smallModal {
@@ -28,9 +35,20 @@
 
 .pInput {
   font-size: 1rem;
-  margin: 2rem 0 0.3rem 3rem
+  margin: 2rem 0 0.3rem 3rem;
 }
 
+/* TABLET SMALL */
+@media only screen and (max-width: 768px) {
+  .productContainer {
+    flex-direction: column;
+  }
+  .productSubContainer {
+    width: 100%;
+  }
+}
+
+/* MOBILE */
 @media only screen and (max-width: 440px) {
   .footerDiv {
     height: 7rem;
@@ -59,10 +77,9 @@
     height: 2rem;
     margin-bottom: 1.7rem;
   }
-  
+
   .pInput {
     font-size: 1rem;
-    margin: 1rem 0 0rem 3rem
+    margin: 1rem 0 0rem 3rem;
   }
-
 }
