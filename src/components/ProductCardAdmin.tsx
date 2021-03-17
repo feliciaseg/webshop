@@ -3,6 +3,7 @@ import { CSSProperties } from "@material-ui/styles";
 import Delete from "@material-ui/icons/Delete";
 import Edit from "@material-ui/icons/Edit";
 import { ModalContext } from "../contexts/ModalContext";
+import { ProductContext } from "../contexts/ProductContext";
 
 interface Props {
   imageUrl: string;
@@ -13,13 +14,17 @@ interface Props {
 
 export default function ProductCardAdmin(props: Props) {
   const modal = useContext(ModalContext);
+  const products = useContext(ProductContext);
 
   return (
     <>
       <div style={productContainer}>
         <div style={imageContainer}>
           <img style={productImage} src={props.imageUrl} alt={props.name}></img>
-          <Delete style={deleteIcon} />
+          <Delete
+            style={deleteIcon}
+            onClick={() => products.removeProduct(props)}
+          />
           <Edit
             style={editIcon}
             onClick={() => (

@@ -1,12 +1,12 @@
 import Header from "../components/Header";
-import { products } from "./products";
 import ProductCardAdmin from "../components/ProductCardAdmin";
 import Grid from "../components/Grid";
-import { useEffect, useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Button } from "@material-ui/core";
 import { CSSProperties } from "@material-ui/styles";
 import AdminModal from "../components/AdminModal";
 import { ModalContext } from "../contexts/ModalContext";
+import { ProductContext } from "../contexts/ProductContext";
 
 interface Props {
   imageUrl: string;
@@ -20,29 +20,17 @@ interface ProductList {
 }
 
 export default function AdminPage() {
-  const [productList, setProductList] = useState<ProductList>({
-    component: ProductCardAdmin,
-    productProps: [],
-  });
-
+  const list = useContext(ProductContext);
   const modal = useContext(ModalContext);
 
+  const [productList, setProductList] = useState<ProductList>({
+    component: ProductCardAdmin,
+    productProps: list.productList,
+  });
+
   useEffect(() => {
-    products.map((product) => {
-      setProductList((productList: ProductList) => ({
-        ...productList,
-        productProps: [
-          ...productList.productProps,
-          {
-            imageUrl: product.imageUrl,
-            id: product.id,
-            name: product.name,
-            price: product.price,
-          },
-        ],
-      }));
-    });
-  }, []);
+    setProductList({ ...productList, productProps: list.productList });
+  }, [list.productList]);
 
   return (
     <>
