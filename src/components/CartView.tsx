@@ -1,7 +1,4 @@
-import { Box } from "@material-ui/core";
-import { LensOutlined } from "@material-ui/icons";
-import { KeyObject } from "crypto";
-import { Key } from "node:readline";
+
 import { useContext } from "react";
 import { CartContext } from "../contexts/CartContext";
 import CartCard from "./CartCard";
@@ -28,12 +25,9 @@ export default function CartView() {
   let newAddedProducts: Array<ProductViewArray> = [];
   let uniqueNames: any = {};
 
-  
-
   /** Loops through the current cart and checks for multiple occurances of the same product.
    * Creates a new array but with a new property ''times'' which shows the number of occurances.  */
   for (let i = 0; i < addedProducts.length; i++) {
-    
     if (!uniqueNames[addedProducts[i].name]) {
       newAddedProducts.push(addedProducts[i]);
     }
@@ -42,9 +36,11 @@ export default function CartView() {
       console.log(uniqueNames)
   }
   for (let j = 0; j < newAddedProducts.length; j++) {
-    newAddedProducts[j].times = uniqueNames[newAddedProducts[j].name];
+     newAddedProducts[j].times = uniqueNames[newAddedProducts[j].name];
   }
-
+  
+  // Object.assign(newAddedProducts[j], { times:  uniqueNames[newAddedProducts[j].name] });
+  
   const handleClick = () => {
     console.log(
       "Den här console loggen ligger i CartView, och är till för att ta bort produkten...."
