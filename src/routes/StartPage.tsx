@@ -2,10 +2,10 @@ import { Box } from "@material-ui/core";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Grid from "../components/Grid";
-import { products } from "./products";
+import { ProductContext } from "../contexts/ProductContext";
 import ProductCard from "../components/ProductCard";
 import HeroBanner from "../components/HeroBanner";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 
 interface Props {
   imageUrl: string;
@@ -19,27 +19,15 @@ interface ProductList {
 }
 
 export default function StartPage() {
+  const list = useContext(ProductContext);
   const [productList, setProductList] = useState<ProductList>({
     component: ProductCard,
-    productProps: [],
+    productProps: list.productList,
   });
 
   useEffect(() => {
-    products.map((product) => {
-      setProductList((productList: ProductList) => ({
-        ...productList,
-        productProps: [
-          ...productList.productProps,
-          {
-            imageUrl: product.imageUrl,
-            id: product.id,
-            name: product.name,
-            price: product.price,
-          },
-        ],
-      }));
-    });
-  }, []);
+    setProductList({ ...productList, productProps: list.productList });
+  }, [list.productList]);
 
   return (
     <>
