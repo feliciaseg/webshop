@@ -3,13 +3,79 @@ import { CSSProperties } from "@material-ui/styles";
 import { theme } from "../styling/colorTheme";
 import { useContext } from "react";
 import { ModalContext } from "../contexts/ModalContext";
+import { Button, TextField } from "@material-ui/core";
 
 export default function AdminModal() {
   const modal = useContext(ModalContext);
   return (
     <div style={modalContainer}>
       <Cancel style={cancelIcon} onClick={() => modal.setModalIsOpen(false)} />
-      {modal.modalType === "add" ? "Lägg till produkt" : "Ändra produkt"}
+      {modal.modalType === "add" ? (
+        <form autoComplete="off">
+          <TextField
+            id="name"
+            label="Produktnamn"
+            margin="normal"
+            variant="outlined"
+            fullWidth
+            InputLabelProps={{
+              margin: "dense",
+              variant: "outlined",
+            }}
+          />
+          <TextField
+            id="id"
+            label="Produkt-ID"
+            margin="normal"
+            variant="outlined"
+            fullWidth
+            InputLabelProps={{
+              margin: "dense",
+              variant: "outlined",
+            }}
+          />
+          <TextField
+            id="url"
+            label="Bild-url"
+            margin="normal"
+            variant="outlined"
+            fullWidth
+            InputLabelProps={{
+              margin: "dense",
+              variant: "outlined",
+            }}
+          />
+          <TextField
+            id="price"
+            label="Pris"
+            margin="normal"
+            variant="outlined"
+            fullWidth
+            InputLabelProps={{
+              margin: "dense",
+              variant: "outlined",
+            }}
+          />
+          <TextField
+            id="description"
+            label="Beskrivning"
+            multiline
+            rows="4"
+            margin="normal"
+            variant="outlined"
+            fullWidth
+            InputLabelProps={{
+              margin: "dense",
+              variant: "outlined",
+            }}
+          />
+          <Button variant="contained" color="primary" style={createButton}>
+            Lägg till produkt
+          </Button>
+        </form>
+      ) : (
+        "Ändra produkt"
+      )}
     </div>
   );
 }
@@ -33,4 +99,11 @@ const modalContainer: CSSProperties = {
 const cancelIcon: CSSProperties = {
   alignSelf: "flex-end",
   color: theme.palette.primary.main,
+};
+
+const createButton: CSSProperties = {
+  width: "100%",
+  fontWeight: 600,
+  borderRadius: 0,
+  marginTop: "0.5rem",
 };
