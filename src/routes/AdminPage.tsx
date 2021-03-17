@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import { products } from "./products";
-import ProductCard from "../components/ProductCard";
+import ProductCardAdmin from "../components/ProductCardAdmin";
 import Grid from "../components/Grid";
 import { useEffect, useState } from "react";
 
@@ -19,7 +19,7 @@ interface ProductList {
 
 export default function AdminPage() {
   const [productList, setProductList] = useState<ProductList>({
-    component: ProductCard,
+    component: ProductCardAdmin,
     productProps: [],
   });
 
