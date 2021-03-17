@@ -2,9 +2,11 @@ import Header from "../components/Header";
 import { products } from "./products";
 import ProductCardAdmin from "../components/ProductCardAdmin";
 import Grid from "../components/Grid";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Button } from "@material-ui/core";
 import { CSSProperties } from "@material-ui/styles";
+import AdminModal from "../components/AdminModal";
+import { ModalContext } from "../contexts/ModalContext";
 
 interface Props {
   imageUrl: string;
@@ -22,6 +24,8 @@ export default function AdminPage() {
     component: ProductCardAdmin,
     productProps: [],
   });
+
+  const modal = useContext(ModalContext);
 
   useEffect(() => {
     products.map((product) => {
@@ -44,7 +48,13 @@ export default function AdminPage() {
     <>
       <Header type={"white"} />
       <div style={adminContainer}>
-        <Button style={addButton} variant="contained" color="primary">
+        {modal.modalIsOpen && <AdminModal />}
+        <Button
+          onClick={() => modal.setModalIsOpen(true)}
+          style={addButton}
+          variant="contained"
+          color="primary"
+        >
           Lägg till produkt
         </Button>
         <Grid products={productList} />

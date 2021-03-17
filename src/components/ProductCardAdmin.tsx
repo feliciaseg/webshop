@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { CSSProperties } from "@material-ui/styles";
 import Delete from "@material-ui/icons/Delete";
 import Edit from "@material-ui/icons/Edit";
-import AdminModal from "./AdminModal";
+import { ModalContext } from "../contexts/ModalContext";
 
 interface Props {
   imageUrl: string;
@@ -12,20 +12,15 @@ interface Props {
 }
 
 export default function ProductCardAdmin(props: Props) {
-  const handleClick = (e: any) => {
-    e.preventDefault();
-    showModal(true);
-  };
-  const [modal, showModal] = useState(false);
+  const modal = useContext(ModalContext);
 
   return (
     <>
-      {modal && <AdminModal closeModal={() => showModal(false)} />}
       <div style={productContainer}>
         <div style={imageContainer}>
           <img style={productImage} src={props.imageUrl} alt={props.name}></img>
-          <Delete style={deleteIcon} onClick={(e) => handleClick(e)} />
-          <Edit style={editIcon} onClick={(e) => handleClick(e)} />
+          <Delete style={deleteIcon} />
+          <Edit style={editIcon} onClick={() => modal.setModalIsOpen(true)} />
         </div>
         <div style={productDescription}>
           <h2 style={productName}>{props.name}</h2>

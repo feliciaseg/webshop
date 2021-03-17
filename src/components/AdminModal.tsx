@@ -1,15 +1,14 @@
 import Cancel from "@material-ui/icons/Cancel";
 import { CSSProperties } from "@material-ui/styles";
 import { theme } from "../styling/colorTheme";
+import { useContext } from "react";
+import { ModalContext } from "../contexts/ModalContext";
 
-interface Props {
-  closeModal: () => void;
-}
-
-export default function OrderConfirmationModal(props: Props) {
+export default function OrderConfirmationModal() {
+  const modal = useContext(ModalContext);
   return (
     <div style={modalContainer}>
-      <Cancel style={cancelIcon} onClick={props.closeModal} />
+      <Cancel style={cancelIcon} onClick={() => modal.setModalIsOpen(false)} />
     </div>
   );
 }
