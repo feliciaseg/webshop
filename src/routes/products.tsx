@@ -20,7 +20,7 @@ export const products: Product[] = [
     imageUrl:
       "https://assets.ellosgroup.com/i/ellos/b?$eg$&$emr$&$ep$&$ed$&n=ell_1536808-01_Fm_M0022614&mw=750&rw=750&qlt=80",
     id: "1536808-01-0",
-    name: " Golvlampa Zac",
+    name: "Golvlampa Zac",
     price: 1799,
     description:
       "Golvlampa i pulverlackad metall med hängande kupa i transparent glas, diameter 18 cm. Höjden/positionen på kupan kan justeras genom att dra sladden upp eller ned.",

@@ -3,11 +3,18 @@ import React from "react";
 import DeliveryForm from "../components/DeliveryForm";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-import KundKorgProduct from "../components/KundKorgProduct";
 import PaymentForm from "../components/PaymentForm";
 import UserForm from "../components/UserForm";
+import CartCard from "../components/CartCard";
+import CartView from "../components/CartView";
+
+
+
 
 export default function CheckoutPage() {
+
+
+
   return (
     <>
 
@@ -20,7 +27,8 @@ export default function CheckoutPage() {
           flexDirection: "column",
         }}
       >
-        <KundKorgProduct/>
+       
+        <CartView/>
          <p>Dina Uppgifter</p>
         <UserForm/>
         <p>Betalning</p>
