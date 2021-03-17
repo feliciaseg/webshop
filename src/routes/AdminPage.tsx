@@ -50,7 +50,9 @@ export default function AdminPage() {
       <div style={adminContainer}>
         {modal.modalIsOpen && <AdminModal />}
         <Button
-          onClick={() => modal.setModalIsOpen(true)}
+          onClick={() => (
+            modal.setModalIsOpen(true), modal.setModalType("add")
+          )}
           style={addButton}
           variant="contained"
           color="primary"

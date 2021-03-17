@@ -4,11 +4,12 @@ import { theme } from "../styling/colorTheme";
 import { useContext } from "react";
 import { ModalContext } from "../contexts/ModalContext";
 
-export default function OrderConfirmationModal() {
+export default function AdminModal() {
   const modal = useContext(ModalContext);
   return (
     <div style={modalContainer}>
       <Cancel style={cancelIcon} onClick={() => modal.setModalIsOpen(false)} />
+      {modal.modalType === "add" ? "Lägg till produkt" : "Ändra produkt"}
     </div>
   );
 }

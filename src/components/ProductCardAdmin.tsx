@@ -20,7 +20,12 @@ export default function ProductCardAdmin(props: Props) {
         <div style={imageContainer}>
           <img style={productImage} src={props.imageUrl} alt={props.name}></img>
           <Delete style={deleteIcon} />
-          <Edit style={editIcon} onClick={() => modal.setModalIsOpen(true)} />
+          <Edit
+            style={editIcon}
+            onClick={() => (
+              modal.setModalIsOpen(true), modal.setModalType("edit")
+            )}
+          />
         </div>
         <div style={productDescription}>
           <h2 style={productName}>{props.name}</h2>
