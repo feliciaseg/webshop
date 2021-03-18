@@ -2,13 +2,13 @@ import { Button } from "@material-ui/core";
 import Footer from "../components/Footer";
 import { useEffect, useState, useContext } from "react";
 import { RouteComponentProps, Link } from "react-router-dom";
-import { products } from "./products";
 import Header from "../components/Header";
 import { CSSProperties } from "@material-ui/styles";
 import ArrowBack from "@material-ui/icons/ArrowBack";
 import { CartContext } from "../contexts/CartContext";
 import SmallModal from "../components/SmallModal";
 import { Product } from "../products";
+import { ProductContext } from "../contexts/ProductContext";
 
 interface Id {
   id: string;
@@ -17,6 +17,7 @@ interface Id {
 interface Props extends RouteComponentProps<Id> {}
 
 export default function ProductPage(props: Props) {
+  const products = useContext(ProductContext);
   const cart = useContext(CartContext);
   const [product, setProduct] = useState<Product>();
   const [modal, showModal] = useState(false);
@@ -31,7 +32,7 @@ export default function ProductPage(props: Props) {
   };
 
   useEffect(() => {
-    products.map((item) => {
+    products.productList.map((item: Product) => {
       if (item.id === props.match.params.id) {
         setProduct({
           imageUrl: item.imageUrl,
