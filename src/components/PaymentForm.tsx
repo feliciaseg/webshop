@@ -6,7 +6,7 @@ import {
   Radio,
   TextField,
 } from "@material-ui/core";
-import React, { CSSProperties, useState } from "react";
+import React, { CSSProperties } from "react";
 import { theme } from "../styling/colorTheme";
 import "../styling/style.css";
 
@@ -33,16 +33,10 @@ const box: CSSProperties = {
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "flex-start",
-  //height: "25rem"
 };
 
 const p: CSSProperties = {
   fontFamily: "Roboto",
-};
-
-const errorText: CSSProperties = {
-  fontFamily: "Roboto",
-  color: "red"
 };
 
 export default function PaymentForm() {
