@@ -2,11 +2,12 @@ import { Box } from "@material-ui/core";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Grid from "../components/Grid";
-import { ProductContext } from "../contexts/ProductContext";
 import ProductCard from "../components/ProductCard";
 import HeroBanner from "../components/HeroBanner";
 import { useEffect, useState, useContext } from "react";
+import { ProductContext } from "../contexts/ProductContext";
 import { Product } from "../products";
+
 
 interface ProductList {
   component: (props: Product) => JSX.Element;
