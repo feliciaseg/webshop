@@ -7,6 +7,7 @@ interface Product {
   name: string;
   price: number;
   description?: string;
+  quantity?: number;
 }
 
 interface CartState {

@@ -2,7 +2,6 @@ import { Box, FormControl, Input, MenuItem, Select } from "@material-ui/core";
 import { CSSProperties } from "@material-ui/styles";
 import React, { useState } from "react";
 import DeleteIcon from "@material-ui/icons/Delete";
-import { isUndefined } from "node:util";
 
 const box: CSSProperties = {
   display: "flex",

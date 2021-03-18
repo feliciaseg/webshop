@@ -13,7 +13,7 @@ import CartView from "../components/CartView";
 
 export default function CheckoutPage() {
 
-
+//Lägg leveransmetod även i Context och användhär
 
   return (
     <>

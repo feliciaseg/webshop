@@ -10,6 +10,7 @@ interface Props {
   id: string;
   name: string;
   price: number;
+  quantity?: number;
 }
 
 export default function ProductCard(props: Props) {

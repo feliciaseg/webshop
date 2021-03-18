@@ -12,6 +12,7 @@ interface Props {
   id: string;
   name: string;
   price: number;
+ 
 }
 interface ProductList {
   component: (props: Props) => JSX.Element;
