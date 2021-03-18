@@ -1,9 +1,8 @@
 import { products, Product } from "./products";
 
 /* Saves products to localstorage */
-export function saveCartToLocalStorage(product: Product) {
-  const cart: Product[] = JSON.parse(localStorage.getItem("cart") || "[]");
-  localStorage.setItem("cart", JSON.stringify([...cart, product]));
+export function saveCartToLocalStorage(cart: Product[]) {
+  localStorage.setItem("cart", JSON.stringify([...cart]));
 }
 
 /* Saves products to localstorage */
