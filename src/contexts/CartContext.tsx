@@ -29,8 +29,18 @@ export default class CartProvider extends Component<{}, CartState> {
   };
 
   addProductToCart = (product: Product) => {
-    this.setState({ cart: [...this.state.cart, product] });
-    saveCartToLocalStorage(product);
+    // if (this.state.cart.some(p => p.id === product.id)){
+    //   //öka quantity. 
+    // } else {
+    //   this.setState({ cart: [...this.state.cart, product] });
+    //   saveCartToLocalStorage(product);
+    //   //spara som ny produkt (och öka quantity med 1)
+    // }
+
+      this.setState({ cart: [...this.state.cart, product] });
+      saveCartToLocalStorage(product);
+    
+  
   };
 
   render() {
