@@ -5,7 +5,7 @@ import { ProductContext } from "../contexts/ProductContext";
 import { ModalContext } from "../contexts/ModalContext";
 import { Product } from "../products";
 
-export default function EditModalContent() {
+export default function AddModalContent() {
   const products = useContext(ProductContext);
   const modal = useContext(ModalContext);
 

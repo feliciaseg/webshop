@@ -3,7 +3,7 @@ import { CSSProperties } from "@material-ui/styles";
 import { theme } from "../styling/colorTheme";
 import { useContext } from "react";
 import { ModalContext } from "../contexts/ModalContext";
-import EditModalContent from "./EditModalContent";
+import AddModalContent from "./AddModalContent";
 
 export default function AdminModal() {
   const modal = useContext(ModalContext);
@@ -14,7 +14,7 @@ export default function AdminModal() {
           style={cancelIcon}
           onClick={() => modal.setModalIsOpen(false)}
         />
-        {modal.modalType === "add" ? <EditModalContent /> : "Ändra produkt"}
+        {modal.modalType === "add" ? <AddModalContent /> : "Ändra produkt"}
       </div>
     </div>
   );
