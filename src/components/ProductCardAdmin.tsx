@@ -22,7 +22,9 @@ export default function ProductCardAdmin(props: Product) {
           <Edit
             style={editIcon}
             onClick={() => (
-              modal.setModalIsOpen(true), modal.setModalType("edit")
+              modal.setModalIsOpen(true),
+              modal.setModalType("edit"),
+              modal.setEditProduct(props)
             )}
           />
         </div>
