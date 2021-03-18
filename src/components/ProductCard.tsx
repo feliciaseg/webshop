@@ -4,15 +4,9 @@ import { useState, useContext } from "react";
 import SmallModal from "./SmallModal";
 import { Link } from "react-router-dom";
 import { CartContext } from "../contexts/CartContext";
+import { Product } from "../products";
 
-interface Props {
-  imageUrl: string;
-  id: string;
-  name: string;
-  price: number;
-}
-
-export default function ProductCard(props: Props) {
+export default function ProductCard(props: Product) {
   const cart = useContext(CartContext);
   const [modal, showModal] = useState(false);
 

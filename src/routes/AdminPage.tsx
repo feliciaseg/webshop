@@ -7,16 +7,10 @@ import { CSSProperties } from "@material-ui/styles";
 import AdminModal from "../components/AdminModal";
 import { ModalContext } from "../contexts/ModalContext";
 import { ProductContext } from "../contexts/ProductContext";
-
-interface Props {
-  imageUrl: string;
-  id: string;
-  name: string;
-  price: number;
-}
+import { Product } from "../products";
 interface ProductList {
-  component: (props: Props) => JSX.Element;
-  productProps: Props[];
+  component: (props: Product) => JSX.Element;
+  productProps: Product[];
 }
 
 export default function AdminPage() {

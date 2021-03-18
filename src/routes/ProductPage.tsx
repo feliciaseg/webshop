@@ -8,14 +8,7 @@ import { CSSProperties } from "@material-ui/styles";
 import ArrowBack from "@material-ui/icons/ArrowBack";
 import { CartContext } from "../contexts/CartContext";
 import SmallModal from "../components/SmallModal";
-
-interface Product {
-  imageUrl: string;
-  id: string;
-  name: string;
-  price: number;
-  description: string;
-}
+import { Product } from "../products";
 
 interface Id {
   id: string;
