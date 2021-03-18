@@ -23,16 +23,22 @@ export default class CartProvider extends Component<{}, CartState> {
   };
 
   addProductToCart = (product: Product) => {
-    // if (this.state.cart.some(p => p.id === product.id)){
-    //   //öka quantity.
-    // } else {
-    //   this.setState({ cart: [...this.state.cart, product] });
-    //   saveCartToLocalStorage(product);
-    //   //spara som ny produkt (och öka quantity med 1)
-    // }
-
-    this.setState({ cart: [...this.state.cart, product] });
-    saveCartToLocalStorage(product);
+    if (this.state.cart.find((item) => item.id === product.id)) {
+      const targetIndex: number = this.state.cart.findIndex(
+        (item) => item.id === product.id
+      );
+      let updatedCart = [...this.state.cart];
+      if (!updatedCart[targetIndex].quantity) {
+        updatedCart[targetIndex].quantity = 2;
+      } else {
+        updatedCart[targetIndex].quantity! += 1;
+      }
+      saveCartToLocalStorage(updatedCart);
+    } else {
+      this.setState({ cart: [...this.state.cart, product] });
+      const updatedCart = [...this.state.cart, product];
+      saveCartToLocalStorage(updatedCart);
+    }
   };
 
   removeProductfromCart = (product: Product) => {
