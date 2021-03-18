@@ -9,12 +9,14 @@ interface ContextState extends ListState {
   productList: Product[] | [];
   addProduct: (product: Product) => void;
   removeProduct: (product: Product) => void;
+  editProduct: (product: Product) => void;
 }
 
 export const ProductContext = createContext<ContextState>({
   productList: JSON.parse(localStorage.getItem("products") || "[]"),
   addProduct: () => {},
   removeProduct: () => {},
+  editProduct: () => {},
 });
 
 export default class ProductProvider extends Component<{}, ListState> {
@@ -35,6 +37,15 @@ export default class ProductProvider extends Component<{}, ListState> {
     saveProductListToLocalStorage(updatedList);
   };
 
+  editProduct = (product: Product) => {
+    const targetIndex: number = this.state.productList.findIndex(
+      (item) => item.id === product.id
+    );
+    let updatedList = [...this.state.productList];
+    updatedList[targetIndex] = product;
+    this.setState({ productList: [...updatedList] });
+  };
+
   render() {
     return (
       <ProductContext.Provider
@@ -42,6 +53,7 @@ export default class ProductProvider extends Component<{}, ListState> {
           productList: this.state.productList,
           addProduct: this.addProduct,
           removeProduct: this.removeProduct,
+          editProduct: this.editProduct,
         }}
       >
         {this.props.children}
