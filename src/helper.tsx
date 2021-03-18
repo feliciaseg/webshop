@@ -1,10 +1,4 @@
-import { products } from "./routes/products";
-interface Product {
-  imageUrl: string;
-  id: string;
-  name: string;
-  price: number;
-}
+import { products, Product } from "./products";
 
 /* Saves products to localstorage */
 export function saveCartToLocalStorage(product: Product) {

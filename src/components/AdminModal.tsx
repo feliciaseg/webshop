@@ -3,13 +3,19 @@ import { CSSProperties } from "@material-ui/styles";
 import { theme } from "../styling/colorTheme";
 import { useContext } from "react";
 import { ModalContext } from "../contexts/ModalContext";
+import AddModalContent from "./AddModalContent";
 
 export default function AdminModal() {
   const modal = useContext(ModalContext);
   return (
-    <div style={modalContainer}>
-      <Cancel style={cancelIcon} onClick={() => modal.setModalIsOpen(false)} />
-      {modal.modalType === "add" ? "Lägg till produkt" : "Ändra produkt"}
+    <div style={darkUnderlay}>
+      <div style={modalContainer}>
+        <Cancel
+          style={cancelIcon}
+          onClick={() => modal.setModalIsOpen(false)}
+        />
+        {modal.modalType === "add" ? <AddModalContent /> : "Ändra produkt"}
+      </div>
     </div>
   );
 }
@@ -33,4 +39,14 @@ const modalContainer: CSSProperties = {
 const cancelIcon: CSSProperties = {
   alignSelf: "flex-end",
   color: theme.palette.primary.main,
+};
+
+const darkUnderlay: CSSProperties = {
+  position: "fixed",
+  top: 0,
+  right: 0,
+  left: 0,
+  bottom: 0,
+  backgroundColor: "rgba(0,0,0,0.5)",
+  zIndex: 90,
 };

@@ -6,16 +6,10 @@ import { ProductContext } from "../contexts/ProductContext";
 import ProductCard from "../components/ProductCard";
 import HeroBanner from "../components/HeroBanner";
 import { useEffect, useState, useContext } from "react";
-
-interface Props {
-  imageUrl: string;
-  id: string;
-  name: string;
-  price: number;
-}
+import { Product } from "../products";
 interface ProductList {
-  component: (props: Props) => JSX.Element;
-  productProps: Props[];
+  component: (props: Product) => JSX.Element;
+  productProps: Product[];
 }
 
 export default function StartPage() {
