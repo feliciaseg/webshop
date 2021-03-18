@@ -44,6 +44,7 @@ export default class ProductProvider extends Component<{}, ListState> {
     let updatedList = [...this.state.productList];
     updatedList[targetIndex] = product;
     this.setState({ productList: [...updatedList] });
+    saveProductListToLocalStorage(updatedList);
   };
 
   render() {
