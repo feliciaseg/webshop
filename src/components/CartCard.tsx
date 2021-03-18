@@ -32,7 +32,7 @@ interface Props {
   name: string;
   price: number;
   numberOfProducts?: number | undefined;
-  onClick: React.MouseEventHandler;
+  onClick: React.MouseEventHandler<SVGSVGElement>;
 }
 
 export default function CartCard(props: Props) {
@@ -62,7 +62,6 @@ export default function CartCard(props: Props) {
       <div className={"flex-direction"}>
         <p>{shortenName(props.name)}</p>
         <Input
-          
           type="number"
           defaultValue={defaultValue}
           inputProps={{ min: 0 }}
