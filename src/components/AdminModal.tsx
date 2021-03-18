@@ -4,6 +4,7 @@ import { theme } from "../styling/colorTheme";
 import { useContext } from "react";
 import { ModalContext } from "../contexts/ModalContext";
 import AddModalContent from "./AddModalContent";
+import EditModalContent from "./EditModalContent";
 
 export default function AdminModal() {
   const modal = useContext(ModalContext);
@@ -14,7 +15,7 @@ export default function AdminModal() {
           style={cancelIcon}
           onClick={() => modal.setModalIsOpen(false)}
         />
-        {modal.modalType === "add" ? <AddModalContent /> : "Ändra produkt"}
+        {modal.modalType === "add" ? <AddModalContent /> : <EditModalContent />}
       </div>
     </div>
   );
