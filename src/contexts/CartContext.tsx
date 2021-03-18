@@ -1,14 +1,6 @@
 import { Component, createContext } from "react";
 import { saveCartToLocalStorage } from "../helper";
-
-interface Product {
-  imageUrl: string;
-  id: string;
-  name: string;
-  price: number;
-  description?: string;
-  quantity?: number;
-}
+import { Product } from "../products";
 
 interface CartState {
   cart: Product[];

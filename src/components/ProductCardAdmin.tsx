@@ -4,15 +4,9 @@ import Delete from "@material-ui/icons/Delete";
 import Edit from "@material-ui/icons/Edit";
 import { ModalContext } from "../contexts/ModalContext";
 import { ProductContext } from "../contexts/ProductContext";
+import { Product } from "../products";
 
-interface Props {
-  imageUrl: string;
-  id: string;
-  name: string;
-  price: number;
-}
-
-export default function ProductCardAdmin(props: Props) {
+export default function ProductCardAdmin(props: Product) {
   const modal = useContext(ModalContext);
   const products = useContext(ProductContext);
 
