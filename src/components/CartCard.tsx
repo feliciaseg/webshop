@@ -1,6 +1,6 @@
-import { Box, FormControl, Input, MenuItem, Select } from "@material-ui/core";
+import { Box, Input} from "@material-ui/core";
 import { CSSProperties } from "@material-ui/styles";
-import React, { useState } from "react";
+import React from "react";
 import DeleteIcon from "@material-ui/icons/Delete";
 
 const box: CSSProperties = {
@@ -18,10 +18,9 @@ const productImg: CSSProperties = {
   objectPosition: "center",
 };
 
-const selector: CSSProperties = {
-  width: "7.6rem",
-  display: "flex",
-};
+// const selector: CSSProperties = {
+//   width: "7.6rem",
+// };
 
 const imgContainer: CSSProperties = {
   height: "100%",
@@ -58,15 +57,16 @@ export default function CartCard(props: Props) {
   return (
     <Box style={box} className={"cartCardBox"}>
       <div style={imgContainer}>
-        <img style={productImg} src={props.imageUrl} />
+        <img style={productImg} src={props.imageUrl} alt="product" />
       </div>
       <div className={"flex-direction"}>
         <p>{shortenName(props.name)}</p>
         <Input
-          style={selector}
+          
           type="number"
           defaultValue={defaultValue}
           inputProps={{ min: 0 }}
+          className={"selector"}
         ></Input>
       </div>
       <div className={"flex-direction"}>

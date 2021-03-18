@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import { CSSProperties } from "@material-ui/styles";
 import Delete from "@material-ui/icons/Delete";
 import Edit from "@material-ui/icons/Edit";

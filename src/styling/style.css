@@ -66,6 +66,7 @@
   width: 41rem;
   height: 6.3rem;
   filter: drop-shadow(0 4px 4px grey);
+  margin-bottom: 1rem;
 }
 
 .flex-direction {
@@ -76,6 +77,9 @@
   justify-content: space-around;
 }
 
+.selector {
+width: 7.4rem;
+}
 
 /* TABLET SMALL */
 @media only screen and (max-width: 768px) {
@@ -85,6 +89,10 @@
   .productSubContainer {
     width: 100%;
   }
+
+  .selector {
+    width: 6rem,
+    }
 }
 
 /* MOBILE */
@@ -145,21 +153,28 @@
   .deliveryBox {
     width: 17rem;
     height: 20rem;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
   }
 
   .cartCardBox{
     width: 17.1rem;
     height: 6rem;
+    font-size: 0.9rem;
   }
 
   .flex-direction {
     display: flex;
     width: 6.6rem;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: center;
     justify-content: center;
     padding: 0 0.2rem 0 0.2rem;
   }
+
+  .selector {
+    width: 2rem;
+    align-self: flex-start;
+    }
+    
 
 }

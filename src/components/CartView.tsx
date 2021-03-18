@@ -1,5 +1,5 @@
 
-import { useContext } from "react";
+import { CSSProperties, useContext } from "react";
 import { CartContext } from "../contexts/CartContext";
 import CartCard from "./CartCard";
 
@@ -13,6 +13,10 @@ export default function CartView() {
       "Den här console loggen ligger i CartView, och är till för att ta bort produkten...."
     );
   };
+
+  const div: CSSProperties = {
+    margin: "1rem 0 1rem 0"
+  }
 
   const renderCartCards = () => {
     let cartCards: JSX.Element[] = [];
@@ -40,9 +44,14 @@ export default function CartView() {
     return <p>Du har inte lagt till några produkter ännu!</p>;
   } else {
     return (
-      <div>
+      <div style= {div}>
         {renderCartCards()}
       </div>
     );
   }
+
+  
+
+
+
 }

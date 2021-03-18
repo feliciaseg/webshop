@@ -5,7 +5,6 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 import PaymentForm from "../components/PaymentForm";
 import UserForm from "../components/UserForm";
-import CartCard from "../components/CartCard";
 import CartView from "../components/CartView";
 
 
