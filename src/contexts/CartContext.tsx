@@ -41,7 +41,7 @@ export default class CartProvider extends Component<{}, CartState> {
     }
 
     this.setState({ cart: newCart });
-    localStorage.setItem("cart", JSON.stringify([...newCart]));
+    saveCartToLocalStorage(newCart)
   };
 
   removeQuantity = (product: CartItem) => {
@@ -51,7 +51,7 @@ export default class CartProvider extends Component<{}, CartState> {
     );
     cartItem!.quantity--;
     this.setState({ cart: newCart });
-    localStorage.setItem("cart", JSON.stringify([...newCart]));
+    saveCartToLocalStorage(newCart)
   }
 
 

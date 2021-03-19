@@ -1,7 +1,6 @@
 
-import { CSSProperties, useContext, useState } from "react";
+import { CSSProperties, useContext } from "react";
 import { CartContext, CartItem } from "../contexts/CartContext";
-import { saveCartToLocalStorage } from "../helper";
 import CartCard from "./CartCard";
 
 export default function CartView() {

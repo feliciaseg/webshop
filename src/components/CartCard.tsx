@@ -1,4 +1,4 @@
-import { Box, Input} from "@material-ui/core";
+import { Box, Input } from "@material-ui/core";
 import { CSSProperties } from "@material-ui/styles";
 import React from "react";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -18,10 +18,6 @@ const productImg: CSSProperties = {
   objectPosition: "center",
 };
 
-// const selector: CSSProperties = {
-//   width: "7.6rem",
-// };
-
 const imgContainer: CSSProperties = {
   height: "100%",
   width: "7.25rem",
@@ -33,17 +29,10 @@ interface Props {
   price: number;
   numberOfProducts?: number | undefined;
   onClick: React.MouseEventHandler<SVGSVGElement>;
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export default function CartCard(props: Props) {
-  let numberOfProducts: number | undefined;
-  // if (props.numberOfProducts === undefined) {
-  //   numberOfProducts = 1;
-  // } else {
-  //   numberOfProducts = props.numberOfProducts;
-  // }
-
   const shortenName = (name: string) => {
     if (name.length > 11) {
       const newName = name.slice(0, 11);
@@ -65,7 +54,7 @@ export default function CartCard(props: Props) {
           defaultValue={props.numberOfProducts}
           inputProps={{ min: 0 }}
           className={"selector"}
-          onChange = {props.handleChange}
+          onChange={props.handleChange}
         ></Input>
       </div>
       <div className={"flex-direction"}>

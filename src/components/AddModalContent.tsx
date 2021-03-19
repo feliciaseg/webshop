@@ -1,6 +1,6 @@
 import { CSSProperties } from "@material-ui/styles";
 import { Button, TextField } from "@material-ui/core";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { ProductContext } from "../contexts/ProductContext";
 import { ModalContext } from "../contexts/ModalContext";
 import { Product } from "../products";
