@@ -2,11 +2,15 @@ import { Component, createContext } from "react";
 import { saveCartToLocalStorage } from "../helper";
 import { Product } from "../products";
 
+interface CartItem extends Product {
+  quantity: number;
+}
+
 interface CartState {
-  cart: Product[];
+  cart: CartItem[];
 }
 interface ContextState extends CartState {
-  cart: Product[];
+  cart: CartItem[];
   addToCart: (product: Product) => void;
   removeProduct: (product: Product) => void;
 }
@@ -23,26 +27,22 @@ export default class CartProvider extends Component<{}, CartState> {
   };
 
   addProductToCart = (product: Product) => {
-    if (this.state.cart.find((item) => item.id === product.id)) {
-      const targetIndex: number = this.state.cart.findIndex(
-        (item) => item.id === product.id
-      );
-      let updatedCart = [...this.state.cart];
-      if (!updatedCart[targetIndex].quantity) {
-        updatedCart[targetIndex].quantity = 2;
-      } else {
-        updatedCart[targetIndex].quantity! += 1;
-      }
-      saveCartToLocalStorage(updatedCart);
+    let newCart = [...this.state.cart];
+    const cartItem = this.state.cart.find(
+      (cartItem) => cartItem.id === product.id
+    );
+
+    if (cartItem) {
+      cartItem.quantity++;
     } else {
-      this.setState({ cart: [...this.state.cart, product] });
-      const updatedCart = [...this.state.cart, product];
-      saveCartToLocalStorage(updatedCart);
+      newCart = [...newCart, { ...product, quantity: 1 }];
     }
+
+    this.setState({ cart: newCart });
   };
 
   removeProductfromCart = (product: Product) => {
-    const updatedList: Product[] = this.state.cart.filter(
+    const updatedList: CartItem[] = this.state.cart.filter(
       (item) => item.id !== product.id
     );
     this.setState({ cart: [...updatedList] });

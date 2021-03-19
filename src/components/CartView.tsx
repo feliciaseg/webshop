@@ -21,8 +21,8 @@ export default function CartView() {
     for (let i = 0; i < cart.length; i++) {
       const imageUrl: string = cart[i].imageUrl;
       const name: string = cart[i].name;
-      const price: number = cart[i].price;
-      const numberOfProducts: number | undefined = cart[i].quantity;
+      const price: number = cart[i].price * cart[i].quantity
+      const numberOfProducts: number  = cart[i].quantity
       cartCards.push(
         <CartCard
           key={i}
