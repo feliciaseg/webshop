@@ -2,7 +2,7 @@ import { Component, createContext } from "react";
 import { saveCartToLocalStorage } from "../helper";
 import { Product } from "../products";
 
-interface CartItem extends Product {
+export interface CartItem extends Product {
   quantity: number;
 }
 
@@ -39,6 +39,7 @@ export default class CartProvider extends Component<{}, CartState> {
     }
 
     this.setState({ cart: newCart });
+    localStorage.setItem("cart", JSON.stringify([...newCart]));
   };
 
   removeProductfromCart = (product: Product) => {

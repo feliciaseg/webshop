@@ -1,5 +1,5 @@
 import { CSSProperties, useContext } from "react";
-import { CartContext } from "../contexts/CartContext";
+import { CartContext, CartItem } from "../contexts/CartContext";
 import { saveCartToLocalStorage } from "../helper";
 import CartCard from "./CartCard";
 
@@ -7,9 +7,20 @@ export default function CartView() {
   const context = useContext(CartContext);
   const cart = context.cart;
 
-  const handleClick = (i: number) => {
-    context.removeProduct(cart[i]);
-  };
+  const updateCart = ((e: React.ChangeEvent<HTMLInputElement>, product: CartItem): void => {
+    let currentValue = parseInt(e.currentTarget.value, 10)
+    
+    if (currentValue === 0) {
+      context.removeProduct(product)
+    }
+    
+    
+    console.log(currentValue);
+    console.log(product);
+    
+  
+  })
+
 
   const div: CSSProperties = {
     margin: "1rem 0 1rem 0",
@@ -32,6 +43,7 @@ export default function CartView() {
           numberOfProducts={numberOfProducts}
           onClick={() => context.removeProduct(cart[i])}
           {...i}
+          handleChange= {(e) => updateCart(e, cart[i])}
         />
       );
     }

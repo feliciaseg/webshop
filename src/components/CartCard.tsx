@@ -33,17 +33,16 @@ interface Props {
   price: number;
   numberOfProducts?: number | undefined;
   onClick: React.MouseEventHandler<SVGSVGElement>;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 export default function CartCard(props: Props) {
   let numberOfProducts: number | undefined;
-  if (props.numberOfProducts === undefined) {
-    numberOfProducts = 1;
-  } else {
-    numberOfProducts = props.numberOfProducts;
-  }
-
-  let defaultValue = numberOfProducts.toString();
+  // if (props.numberOfProducts === undefined) {
+  //   numberOfProducts = 1;
+  // } else {
+  //   numberOfProducts = props.numberOfProducts;
+  // }
 
   const shortenName = (name: string) => {
     if (name.length > 11) {
@@ -63,9 +62,10 @@ export default function CartCard(props: Props) {
         <p>{shortenName(props.name)}</p>
         <Input
           type="number"
-          defaultValue={defaultValue}
+          defaultValue={props.numberOfProducts}
           inputProps={{ min: 0 }}
           className={"selector"}
+          onChange = {props.handleChange}
         ></Input>
       </div>
       <div className={"flex-direction"}>
