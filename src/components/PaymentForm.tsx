@@ -44,7 +44,7 @@ export default function PaymentForm() {
   return (
     <Box className={"paymentBox"} style={box}>
       <FormControl component="fieldset">
-        <RadioGroup aria-label="gender" name="gender1">
+        <RadioGroup>
           <p className={"pInput"} style={p}>
             Swish
           </p>
@@ -77,7 +77,7 @@ export default function PaymentForm() {
             <TextField
               style={textField}
               id="kort"
-              helperText= "Kortnummber"
+              helperText= "Kortnummer"
               variant="outlined"
               className={"inputPayment"}
             />
