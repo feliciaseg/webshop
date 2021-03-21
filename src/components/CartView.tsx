@@ -8,16 +8,16 @@ export default function CartView() {
 
   const cart = context.cart;
 
-  const calculateSum = ():number => {
-    let arrayofsums:number[] = [];
-    let sum:number;
+  const calculateSum = (): number => {
+    let arrayOfSums: number[] = [];
+    let sum: number;
+
     for (let i = 0; i < cart.length; i++) {
-      arrayofsums.push(
-      cart[i].price * cart[i].quantity
-      )
+      arrayOfSums.push(cart[i].price * cart[i].quantity);
     }
-    console.log(arrayofsums)
-  return 0;
+    sum = arrayOfSums.reduce((a, b) => a + b, 0);
+
+    return sum;
   };
 
   const updateCart = (
@@ -42,7 +42,7 @@ export default function CartView() {
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
-    width: "41rem"
+    width: "41rem",
   };
 
   const renderCartCards = () => {
@@ -70,12 +70,12 @@ export default function CartView() {
   if (cart.length === 0) {
     return <p>Du har inte lagt till några produkter ännu!</p>;
   } else {
-    calculateSum()
+    calculateSum();
     return (
       <>
         <div style={div}>{renderCartCards()}</div>
-        <div style= {sumDiv}>
-          <p>Summa </p> <p> 5989 </p>
+        <div style={sumDiv}>
+          <p>Summa </p> <p> {calculateSum()}kr</p>
         </div>
       </>
     );
