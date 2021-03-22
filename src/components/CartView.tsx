@@ -1,4 +1,3 @@
-
 import { CSSProperties, useContext } from "react";
 import { CartContext, CartItem } from "../contexts/CartContext";
 import CartCard from "./CartCard";
@@ -8,6 +7,18 @@ export default function CartView() {
   const context = useContext(CartContext);
 
   const cart = context.cart;
+
+  const calculateSum = (): number => {
+    let arrayOfSums: number[] = [];
+    let sum: number;
+
+    for (let i = 0; i < cart.length; i++) {
+      arrayOfSums.push(cart[i].price * cart[i].quantity);
+    }
+    sum = arrayOfSums.reduce((a, b) => a + b, 0);
+
+    return sum;
+  };
 
   const updateCart = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -20,12 +31,18 @@ export default function CartView() {
     } else if (currentValue === product.quantity + 1) {
       context.addToCart(product);
     } else if (currentValue === product.quantity - 1) {
-      context.removeQuantity(product)
+      context.removeQuantity(product);
     }
   };
 
   const div: CSSProperties = {
     margin: "1rem 0 1rem 0",
+  };
+  const sumDiv: CSSProperties = {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "41rem",
   };
 
   const renderCartCards = () => {
@@ -48,14 +65,19 @@ export default function CartView() {
       );
     }
     return cartCards;
-   
   };
 
   if (cart.length === 0) {
     return <p>Du har inte lagt till några produkter ännu!</p>;
   } else {
-    return <div style={div}>{renderCartCards()}</div>;
+    calculateSum();
+    return (
+      <>
+        <div style={div}>{renderCartCards()}</div>
+        <div style={sumDiv}>
+          <p>Summa </p> <p> {calculateSum()}kr</p>
+        </div>
+      </>
+    );
   }
 }
-
-

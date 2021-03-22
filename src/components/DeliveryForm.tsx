@@ -44,7 +44,7 @@ export default function DeliveryForm(props: Props) {
   return (
     <Box className={"deliveryBox"} style={box}>
       <FormControl error={validation} component="fieldset">
-        <RadioGroup aria-label="gender" name="gender1">
+        <RadioGroup>
           <div>
             <FormControlLabel
               onChange={() => handleChange("postnord", postnordDelivery)}
