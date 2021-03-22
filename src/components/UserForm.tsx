@@ -1,4 +1,4 @@
-import { FormControl, TextField, Box} from "@material-ui/core";
+import { FormControl, TextField, Box } from "@material-ui/core";
 import { CSSProperties } from "@material-ui/styles";
 import { theme } from "../styling/colorTheme";
 import { useState } from "react";
@@ -30,11 +30,13 @@ export default function UserForm() {
     }
   };
 
-  const handleChange = (e: any, fieldValue: string) => {
-    if (fieldValue === value.nameValue) {
+  const handleChange = (field: string, fieldValue: string) => {
+    if (field === "name") {
       if (fieldValue === "") {
-        setError((prevState) => ({ ...prevState, nameError: "Var god fyll i fältet."}));
-        console.log("tomt fält");
+        setError((prevState) => ({
+          ...prevState,
+          nameError: "Var god fyll i fältet.",
+        }));
       } else if (/\d/.test(fieldValue)) {
         //Checks if name contains numbers
         setError((prevState) => ({
@@ -52,9 +54,8 @@ export default function UserForm() {
       }
     }
 
-    if (fieldValue === value.adressValue) {
+    if (field === "address") {
       if (fieldValue === " ") {
-        console.log("tomt fält");
         setError((prevState) => ({
           ...prevState,
           adressError: "Var god fyll i fältet.",
@@ -76,19 +77,20 @@ export default function UserForm() {
       }
     }
 
-    if (fieldValue === value.postalValue) {
+    if (field === "postalcode") {
       if (fieldValue === "") {
         console.log("tomt fält");
         setError((prevState) => ({
           ...prevState,
           postalError: "Var god fyll i fältet.",
         }));
-      } else if (fieldValue.length > 4 || fieldValue.length < 4) {
-        //checks so that length is 5
+      } else if (fieldValue.length !== 5) {
+        console.log(fieldValue.length);
+        //checks so that length is 6
         setError((prevState) => ({
           ...prevState,
           postalError:
-            "Fyll i ett giltigt postnummer (5 siffror utan mellanrum)",
+            "Fyll i ett giltigt postnummer (6 siffror utan mellanrum)",
         }));
       } else if (containsLetters(fieldValue)) {
         setError((prevState) => ({
@@ -100,13 +102,13 @@ export default function UserForm() {
       }
     }
 
-    if (fieldValue === value.cityValue) {
+    if (field === "city") {
       if (fieldValue === "") {
         console.log("tomt fält");
-        // setError((prevState) => ({
-        //   ...prevState,
-        //   cityError: "Var god fyll i fältet.",
-        // }));
+        setError((prevState) => ({
+          ...prevState,
+          cityError: "Var god fyll i fältet.",
+        }));
       } else if (/\d/.test(fieldValue)) {
         //checks so that there is no numbers
         setError((prevState) => ({
@@ -118,13 +120,13 @@ export default function UserForm() {
       }
     }
 
-    if (fieldValue === value.emailValue) {
+    if (field === "email") {
       if (fieldValue === "") {
         console.log("tomt fält");
-        // setError((prevState) => ({
-        //   ...prevState,
-        //   emailError: "Var god fyll i fältet.",
-        // }));
+        setError((prevState) => ({
+          ...prevState,
+          emailError: "Var god fyll i fältet.",
+        }));
       } else if (!fieldValue.includes("@")) {
         //checks that an "@" is included
         setError((prevState) => ({
@@ -136,19 +138,19 @@ export default function UserForm() {
       }
     }
 
-    if (fieldValue === value.phoneValue) {
+    if (field === "phone") {
       if (fieldValue === "") {
         console.log("tomt fält");
-        // setError((prevState) => ({
-        //   ...prevState,
-        //   phoneError: "Var god fyll i fältet.",
-        // }));
+        setError((prevState) => ({
+          ...prevState,
+          phoneError: "Var god fyll i fältet.",
+        }));
       } else if (containsLetters(fieldValue)) {
         setError((prevState) => ({
           ...prevState,
           phoneError: "Fältet får endast innehålla siffror!",
         }));
-      } else if (fieldValue.length > 9 || fieldValue.length < 9) {
+      } else if (fieldValue.length !== 10) {
         setError((prevState) => ({
           ...prevState,
           phoneError: "Ange ditt telefonnummer",
@@ -161,139 +163,124 @@ export default function UserForm() {
 
   return (
     <Box className={"userBox"} style={box}>
-        <FormControl>
-          <TextField
-            value={value.nameValue}
-            onChange={(e) => (
-              handleChange(e.target.value, value.nameValue),
-              setValue((prevState) => ({
-                ...prevState,
-                nameValue: e.target.value,
-              }))
-            )}
-            inputProps={{ autoComplete: "name" }}
-            style={textField}
-            id="name"
-            placeholder="Namn"
-            variant="outlined"
-            className={"userInput"}
-            error={Boolean(error.nameError)}
-            helperText={error.nameError}
-          />
-          </FormControl>
-          <FormControl>
-          <TextField
-            value={value.adressValue}
-            onChange={(e) => (
-              handleChange(
-                e.target.value,
-                value.adressValue
-              ),
-              setValue((prevState) => ({
-                ...prevState,
-                adressValue: e.target.value,
-              }))
-            )}
-            error={Boolean(error.adressError)}
-            helperText={error.adressError}
-            style={textField}
-            inputProps={{ autoComplete: "address" }}
-            id="address"
-            placeholder="Adress"
-            variant="outlined"
-            className={"userInput"}
-          />
-          </FormControl>
-          <FormControl>
-          <TextField
-            value={value.postalValue}
-            onChange={(e) => (
-              handleChange(
-                e.target.value,
-                value.postalValue
-              ),
-              setValue((prevState) => ({
-                ...prevState,
-                postalValue: e.target.value,
-              }))
-            )}
-            error={Boolean(error.postalError)}
-            helperText={error.postalError}
-            style={textField}
-            inputProps={{ autoComplete: "shipping postal-code" }}
-            id="postalcode"
-            placeholder="Postnummer"
-            variant="outlined"
-            className={"userInput"}
-          />
-          </FormControl>
-          <FormControl>
-          <TextField
-            value={value.cityValue}
-            onChange={(e) => (
-              handleChange(e.target.value, value.cityValue),
-              setValue((prevState) => ({
-                ...prevState,
-                cityValue: e.target.value,
-              }))
-            )}
-            error={Boolean(error.cityError)}
-            helperText={error.cityError}
-            style={textField}
-            inputProps={{ autoComplete: "shipping locality"}}
-            placeholder="Stad"
-            variant="outlined"
-            className={"userInput"}
-          />
-</FormControl>
-<FormControl>
-          <TextField
-            value={value.emailValue}
-            onChange={(e) => (
-              handleChange(e.target.value, value.emailValue),
-              setValue((prevState) => ({
-                ...prevState,
-                emailValue: e.target.value,
-              }))
-            )}
-            error={Boolean(error.emailError)}
-            helperText={error.emailError}
-            style={textField}
-            inputProps={{ autoComplete: "email" }}
-            id="email"
-            placeholder="Mail"
-            variant="outlined"
-            className={"userInput"}
-          />
-          </FormControl>
-          <FormControl>
-          <TextField
-            value={value.phoneValue}
-            onChange={(e) => (
-              handleChange(e.target.value, value.phoneValue),
-              setValue((prevState) => ({
-                ...prevState,
-                phoneValue: e.target.value,
-              }))
-            )}
-            error={Boolean(error.phoneError)}
-            helperText={error.phoneError}
-            style={textField}
-            id="phone"
-            placeholder="Telefonnummer"
-            variant="outlined"
-            className={"userInput"}
-            inputProps={{ autoComplete: "phone" }}
-          />
-        </FormControl>
-    
+      <TextField
+        value={value.nameValue}
+        onChange={(e) => (
+          setValue((prevState) => ({
+            ...prevState,
+            nameValue: e.target.value,
+          })),
+          handleChange("name", e.target.value)
+        )}
+        inputProps={{ autoComplete: "name", style: textFieldBackground }}
+        style={textField}
+        placeholder="Namn"
+        variant="outlined"
+        className={"userInput"}
+        error={Boolean(error.nameError)}
+        helperText={error.nameError}
+      />
+      <TextField
+        value={value.adressValue}
+        onChange={(e) => (
+          setValue((prevState) => ({
+            ...prevState,
+            adressValue: e.target.value,
+          })),
+          handleChange("address", e.target.value)
+        )}
+        error={Boolean(error.adressError)}
+        helperText={error.adressError}
+        style={textField}
+        inputProps={{ autoComplete: "address", style: textFieldBackground }}
+        placeholder="Adress"
+        variant="outlined"
+        className={"userInput"}
+      />
+      <TextField
+        value={value.postalValue}
+        onChange={(e) => (
+          setValue((prevState) => ({
+            ...prevState,
+            postalValue: e.target.value,
+          })),
+          handleChange("postalcode", e.target.value)
+        )}
+        error={Boolean(error.postalError)}
+        helperText={error.postalError}
+        style={textField}
+        inputProps={{
+          autoComplete: "shipping postal-code",
+          style: textFieldBackground,
+        }}
+        placeholder="Postnummer"
+        variant="outlined"
+        className={"userInput"}
+      />
+      <TextField
+        value={value.cityValue}
+        onChange={(e) => (
+          setValue((prevState) => ({
+            ...prevState,
+            cityValue: e.target.value,
+          })),
+          handleChange("city", e.target.value)
+        )}
+        error={Boolean(error.cityError)}
+        helperText={error.cityError}
+        style={textField}
+        inputProps={{
+          autoComplete: "shipping locality",
+          style: textFieldBackground,
+        }}
+        placeholder="Stad"
+        variant="outlined"
+        className={"userInput"}
+      />
+      <TextField
+        value={value.emailValue}
+        onChange={(e) => (
+          setValue((prevState) => ({
+            ...prevState,
+            emailValue: e.target.value,
+          })),
+          handleChange("email", e.target.value)
+        )}
+        error={Boolean(error.emailError)}
+        helperText={error.emailError}
+        style={textField}
+        inputProps={{ autoComplete: "email", style: textFieldBackground }}
+        placeholder="Mail"
+        variant="outlined"
+        className={"userInput"}
+      />
+      <TextField
+        value={value.phoneValue}
+        onChange={(e) => (
+          setValue((prevState) => ({
+            ...prevState,
+            phoneValue: e.target.value,
+          })),
+          handleChange("phone", e.target.value)
+        )}
+        error={Boolean(error.phoneError)}
+        helperText={error.phoneError}
+        style={textField}
+        placeholder="Telefonnummer"
+        variant="outlined"
+        className={"userInput"}
+        inputProps={{ autoComplete: "phone", style: textFieldBackground }}
+      />
     </Box>
   );
 }
 
 const textField: CSSProperties = {
-  backgroundColor: theme.palette.secondary.main,
   margin: "2rem 1.5rem 0.3rem 1.5rem",
+};
+
+const textFieldBackground: CSSProperties = {
+  backgroundColor: theme.palette.secondary.main,
 };
 
 const box: CSSProperties = {
