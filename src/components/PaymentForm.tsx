@@ -10,6 +10,7 @@ import React, { CSSProperties } from "react";
 import { theme } from "../styling/colorTheme";
 import "../styling/style.css";
 
+
 const textField: CSSProperties = {
   backgroundColor: "white",
   color: "black",
@@ -61,6 +62,8 @@ export default function PaymentForm() {
               variant="outlined"
               required 
               className={"inputPayment"}
+              inputProps ={{ autoComplete: "tel"}}
+            
               
             />
           </div>
@@ -77,9 +80,11 @@ export default function PaymentForm() {
             <TextField
               style={textField}
               id="kort"
+              name="cc-number"
               helperText= "Kortnummer"
               variant="outlined"
               className={"inputPayment"}
+              inputProps = {{ autoComplete: "cc-number"}}
             />
             <div className= {"cardInputs"} style = {cardInputs}>
             <TextField
@@ -88,6 +93,8 @@ export default function PaymentForm() {
               helperText= "CVVnummer"
               variant="outlined"
               className = {"inputSmallPayment"}
+              name="cvv"
+              inputProps= {{ autoComplete: "cc-cvv"}}
             />
             <TextField
               style={textField2}
@@ -96,6 +103,9 @@ export default function PaymentForm() {
               variant="outlined"
               className = {"inputSmallPayment"}
               placeholder = {"MM/YY"}
+              name="cc-exp"
+              inputProps= {{ autoComplete: "cc-exp"}}
+             
             />
             </div>
           </div>
