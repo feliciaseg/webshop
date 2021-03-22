@@ -36,13 +36,15 @@ export default function CartView() {
   };
 
   const div: CSSProperties = {
+    width: "100%",
     margin: "1rem 0 1rem 0",
   };
+
   const sumDiv: CSSProperties = {
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
-    width: "41rem",
+    width: "100%",
   };
 
   const renderCartCards = () => {
