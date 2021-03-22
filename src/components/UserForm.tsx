@@ -1,4 +1,4 @@
-import { FormControl, TextField, Box } from "@material-ui/core";
+import { TextField, Box } from "@material-ui/core";
 import { CSSProperties } from "@material-ui/styles";
 import { theme } from "../styling/colorTheme";
 import { useState } from "react";

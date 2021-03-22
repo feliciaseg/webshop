@@ -7,7 +7,7 @@ import {
   FormHelperText,
 } from "@material-ui/core";
 import { DateTime } from "luxon";
-import React, { CSSProperties, useEffect, useState } from "react";
+import { CSSProperties, useEffect, useState } from "react";
 import { theme } from "../styling/colorTheme";
 
 interface DeliveryInfo {

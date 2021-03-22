@@ -108,16 +108,4 @@
     height: 3.4rem;
     font-size: 0.8rem;
   }
-
-  /* USERFORM */
-  .userBox {
-    width: 15rem;
-    height: 20rem;
-    font-size: 0.7rem;
-  }
-
-  .userInput {
-    width: 14rem;
-    height: 2rem;
-  }
 }

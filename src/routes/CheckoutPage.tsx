@@ -1,5 +1,5 @@
 import { Box, Button } from "@material-ui/core";
-import React, { CSSProperties, useState } from "react";
+import { CSSProperties, useState } from "react";
 import DeliveryForm from "../components/DeliveryForm";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
