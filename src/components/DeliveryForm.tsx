@@ -50,7 +50,7 @@ export default function DeliveryForm(props: Props) {
             value="postnord"
             control={<Radio style={{ color: theme.palette.primary.main }} />}
             label={
-              <p>
+              <p style={label}>
                 Postnord 39kr <br /> Levereras {postnordDelivery}
               </p>
             }
@@ -60,7 +60,7 @@ export default function DeliveryForm(props: Props) {
             value="instabox"
             control={<Radio style={{ color: theme.palette.primary.main }} />}
             label={
-              <p>
+              <p style={label}>
                 Instabox 39kr <br /> Levereras {instaboxDelivery}
               </p>
             }
@@ -70,7 +70,7 @@ export default function DeliveryForm(props: Props) {
             value="Klarna"
             control={<Radio style={{ color: theme.palette.primary.main }} />}
             label={
-              <p>
+              <p style={label}>
                 Hemleverans 59kr <br /> Levereras {homeDelivery}
               </p>
             }
@@ -86,11 +86,14 @@ export default function DeliveryForm(props: Props) {
 
 const box: CSSProperties = {
   width: "100%",
-  padding: "1rem 0",
   display: "flex",
   flexDirection: "column",
   alignItems: "flex-start",
   justifyContent: "flex-start",
+};
+
+const label: CSSProperties = {
+  margin: "0 0 1.5rem 0",
 };
 
 const helperText: CSSProperties = {

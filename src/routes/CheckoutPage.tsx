@@ -20,16 +20,22 @@ export default function CheckoutPage() {
       <Header type="white" />
       <Box style={checkoutContainer}>
         <CartView />
-        <p>Dina Uppgifter</p>
-        <UserForm />
-        <p>Betalning</p>
-        <PaymentForm />
-        <p>Leveransmetod</p>
-        <DeliveryForm
-          returnValues={(delivery: DeliveryInfo | undefined) =>
-            setDelivery(delivery)
-          }
-        />
+        <div style={formContainer}>
+          <p style={heading}>Dina Uppgifter</p>
+          <UserForm />
+        </div>
+        <div style={formContainer}>
+          <p style={heading}>Betalning</p>
+          <PaymentForm />
+        </div>
+        <div style={formContainer}>
+          <p style={heading}>Leveransmetod</p>
+          <DeliveryForm
+            returnValues={(delivery: DeliveryInfo | undefined) =>
+              setDelivery(delivery)
+            }
+          />
+        </div>
         <Button variant="contained" color="primary" style={confirmationButton}>
           Slutför köp
         </Button>
@@ -48,6 +54,16 @@ const checkoutContainer: CSSProperties = {
   flexDirection: "column",
   width: "100%",
   maxWidth: "41rem",
+};
+
+const formContainer: CSSProperties = {
+  width: "100%",
+  padding: "1rem 0",
+};
+
+const heading: CSSProperties = {
+  margin: "1rem 0 1.5rem 0",
+  textAlign: "center",
 };
 
 const confirmationButton: CSSProperties = {

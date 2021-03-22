@@ -270,7 +270,7 @@ export default function UserForm() {
 }
 
 const textField: CSSProperties = {
-  margin: "1rem 0",
+  margin: "0 0 1.5rem 0",
   width: "100%",
 };
 
@@ -279,7 +279,6 @@ const inputField: CSSProperties = {
 };
 
 const box: CSSProperties = {
-  padding: "0 1.5rem",
   width: "100%",
   display: "flex",
   flexDirection: "column",
