@@ -10,6 +10,7 @@ import React, { CSSProperties } from "react";
 import { theme } from "../styling/colorTheme";
 import "../styling/style.css";
 
+
 const textField: CSSProperties = {
   backgroundColor: "white",
   color: "black",
@@ -124,6 +125,7 @@ export default function PaymentForm() {
               helperText="Personummer (12 siffror)"
               variant="outlined"
               className={"inputPayment"}
+              // inputProps={{autoComplete : "personnummer"}}
             />
           </div>
         </RadioGroup>
