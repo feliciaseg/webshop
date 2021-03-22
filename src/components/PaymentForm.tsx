@@ -220,7 +220,10 @@ export default function PaymentForm() {
                   placeholder={"Kortnummer"}
                   disabled={checkedOption.option === "card" ? false : true}
                   variant="outlined"
-                  inputProps={{ style: textFieldBackground }}
+                  inputProps={{
+                    style: textFieldBackground,
+                    autoComplete: "cc-number",
+                  }}
                 />
                 <div className="rowContainer">
                   <TextField
@@ -239,7 +242,10 @@ export default function PaymentForm() {
                     placeholder={"CVV/CVC"}
                     disabled={checkedOption.option === "card" ? false : true}
                     variant="outlined"
-                    inputProps={{ style: textFieldBackground }}
+                    inputProps={{
+                      style: textFieldBackground,
+                      autoComplete: "cc-csc",
+                    }}
                   />
                   <TextField
                     className="textFieldRow"
@@ -257,7 +263,10 @@ export default function PaymentForm() {
                     disabled={checkedOption.option === "card" ? false : true}
                     variant="outlined"
                     placeholder={"Giltighetsperiod MM/YY"}
-                    inputProps={{ style: textFieldBackground }}
+                    inputProps={{
+                      style: textFieldBackground,
+                      autoComplete: "cc-exp",
+                    }}
                   />
                 </div>
               </div>
@@ -293,7 +302,10 @@ export default function PaymentForm() {
                 disabled={checkedOption.option === "klarna" ? false : true}
                 variant="outlined"
                 className={"inputPayment"}
-                inputProps={{ style: textFieldBackground }}
+                inputProps={{
+                  style: textFieldBackground,
+                  autoComplete: "on",
+                }}
               />
             }
           />
