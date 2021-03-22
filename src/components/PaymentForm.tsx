@@ -125,7 +125,6 @@ export default function PaymentForm() {
               helperText="Personummer (12 siffror)"
               variant="outlined"
               className={"inputPayment"}
-              // inputProps={{autoComplete : "personnummer"}}
             />
           </div>
         </RadioGroup>
