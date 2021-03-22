@@ -5,6 +5,7 @@ import {
   FormControlLabel,
   Radio,
   TextField,
+  FormHelperText,
 } from "@material-ui/core";
 import React, { CSSProperties, useState } from "react";
 import { theme } from "../styling/colorTheme";
@@ -155,162 +156,167 @@ export default function PaymentForm() {
 
   return (
     <div style={paymentContainer}>
-      <RadioGroup style={radioContainer}>
-        <p style={heading}>Swish</p>
-        <div style={radioContainer}>
-          <FormControlLabel
-            style={radioButton}
-            className="radioButton"
-            value="Swish"
-            onChange={() => (
-              setCheckedOption({ isChecked: true, option: "swish" }),
-              resetState()
-            )}
-            control={<Radio style={{ color: theme.palette.primary.main }} />}
-            label={
-              <TextField
-                style={textField}
-                id="swish"
-                type="tel"
-                helperText={error.swishError}
-                value={String(value.swish)}
-                error={Boolean(error.swishError)}
-                onChange={(e) => (
-                  handleChange("swish", e.target.value),
-                  setValue({
-                    ...value,
-                    swish: e.target.value,
-                  })
-                )}
-                placeholder={"Telefonnummer"}
-                disabled={checkedOption.option === "swish" ? false : true}
-                variant="outlined"
-                required
-                inputProps={{ style: textFieldBackground }}
-              />
-            }
-          />
-        </div>
-        <p style={heading}>Kort</p>
-        <div style={radioContainer}>
-          <FormControlLabel
-            style={radioButton}
-            className="radioButton"
-            value="Kort"
-            onChange={() => (
-              setCheckedOption({ isChecked: true, option: "card" }),
-              resetState()
-            )}
-            control={<Radio style={{ color: theme.palette.primary.main }} />}
-            label={
-              <div style={columnContainer}>
+      <FormControl error={!checkedOption.isChecked}>
+        <RadioGroup style={radioContainer}>
+          <p style={heading}>Swish</p>
+          <div style={radioContainer}>
+            <FormControlLabel
+              style={radioButton}
+              className="radioButton"
+              value="Swish"
+              onChange={() => (
+                setCheckedOption({ isChecked: true, option: "swish" }),
+                resetState()
+              )}
+              control={<Radio style={{ color: theme.palette.primary.main }} />}
+              label={
                 <TextField
                   style={textField}
-                  id="kort"
-                  helperText={error.cardError}
-                  value={value.card.cardNumber}
-                  error={Boolean(error.cardError)}
+                  id="swish"
+                  type="tel"
+                  helperText={error.swishError}
+                  value={String(value.swish)}
+                  error={Boolean(error.swishError)}
                   onChange={(e) => (
-                    handleChange("card", e.target.value),
+                    handleChange("swish", e.target.value),
                     setValue({
                       ...value,
-                      card: { ...value.card, cardNumber: e.target.value },
+                      swish: e.target.value,
                     })
                   )}
-                  placeholder={"Kortnummer"}
-                  disabled={checkedOption.option === "card" ? false : true}
+                  placeholder={"Telefonnummer"}
+                  disabled={checkedOption.option === "swish" ? false : true}
                   variant="outlined"
+                  required
+                  inputProps={{ style: textFieldBackground }}
+                />
+              }
+            />
+          </div>
+          <p style={heading}>Kort</p>
+          <div style={radioContainer}>
+            <FormControlLabel
+              style={radioButton}
+              className="radioButton"
+              value="Kort"
+              onChange={() => (
+                setCheckedOption({ isChecked: true, option: "card" }),
+                resetState()
+              )}
+              control={<Radio style={{ color: theme.palette.primary.main }} />}
+              label={
+                <div style={columnContainer}>
+                  <TextField
+                    style={textField}
+                    id="kort"
+                    helperText={error.cardError}
+                    value={value.card.cardNumber}
+                    error={Boolean(error.cardError)}
+                    onChange={(e) => (
+                      handleChange("card", e.target.value),
+                      setValue({
+                        ...value,
+                        card: { ...value.card, cardNumber: e.target.value },
+                      })
+                    )}
+                    placeholder={"Kortnummer"}
+                    disabled={checkedOption.option === "card" ? false : true}
+                    variant="outlined"
+                    inputProps={{
+                      style: textFieldBackground,
+                      autoComplete: "cc-number",
+                    }}
+                  />
+                  <div className="rowContainer">
+                    <TextField
+                      className="textFieldRow"
+                      id="cvv"
+                      helperText={error.cvvError}
+                      value={value.card.cvv}
+                      error={Boolean(error.cvvError)}
+                      onChange={(e) => (
+                        handleChange("cvv", e.target.value),
+                        setValue({
+                          ...value,
+                          card: { ...value.card, cvv: e.target.value },
+                        })
+                      )}
+                      placeholder={"CVV/CVC"}
+                      disabled={checkedOption.option === "card" ? false : true}
+                      variant="outlined"
+                      inputProps={{
+                        style: textFieldBackground,
+                        autoComplete: "cc-csc",
+                      }}
+                    />
+                    <TextField
+                      className="textFieldRow"
+                      id="date"
+                      helperText={error.validityError}
+                      value={value.card.validity}
+                      error={Boolean(error.validityError)}
+                      onChange={(e) => (
+                        handleChange("validity", e.target.value),
+                        setValue({
+                          ...value,
+                          card: { ...value.card, validity: e.target.value },
+                        })
+                      )}
+                      disabled={checkedOption.option === "card" ? false : true}
+                      variant="outlined"
+                      placeholder={"Giltighetsperiod MM/YY"}
+                      inputProps={{
+                        style: textFieldBackground,
+                        autoComplete: "cc-exp",
+                      }}
+                    />
+                  </div>
+                </div>
+              }
+            />
+          </div>
+          <p style={heading}>Klarna</p>
+          <div style={radioContainer}>
+            <FormControlLabel
+              style={radioButton}
+              className="radioButton"
+              value="Klarna"
+              onChange={() => (
+                setCheckedOption({ isChecked: true, option: "klarna" }),
+                resetState()
+              )}
+              control={<Radio style={{ color: theme.palette.primary.main }} />}
+              label={
+                <TextField
+                  style={textField}
+                  id="klarna"
+                  helperText={error.klarnaError}
+                  value={value.klarna}
+                  error={Boolean(error.klarnaError)}
+                  onChange={(e) => (
+                    handleChange("klarna", e.target.value),
+                    setValue({
+                      ...value,
+                      klarna: e.target.value,
+                    })
+                  )}
+                  placeholder={"Personnummer"}
+                  disabled={checkedOption.option === "klarna" ? false : true}
+                  variant="outlined"
+                  className={"inputPayment"}
                   inputProps={{
                     style: textFieldBackground,
-                    autoComplete: "cc-number",
+                    autoComplete: "on",
                   }}
                 />
-                <div className="rowContainer">
-                  <TextField
-                    className="textFieldRow"
-                    id="cvv"
-                    helperText={error.cvvError}
-                    value={value.card.cvv}
-                    error={Boolean(error.cvvError)}
-                    onChange={(e) => (
-                      handleChange("cvv", e.target.value),
-                      setValue({
-                        ...value,
-                        card: { ...value.card, cvv: e.target.value },
-                      })
-                    )}
-                    placeholder={"CVV/CVC"}
-                    disabled={checkedOption.option === "card" ? false : true}
-                    variant="outlined"
-                    inputProps={{
-                      style: textFieldBackground,
-                      autoComplete: "cc-csc",
-                    }}
-                  />
-                  <TextField
-                    className="textFieldRow"
-                    id="date"
-                    helperText={error.validityError}
-                    value={value.card.validity}
-                    error={Boolean(error.validityError)}
-                    onChange={(e) => (
-                      handleChange("validity", e.target.value),
-                      setValue({
-                        ...value,
-                        card: { ...value.card, validity: e.target.value },
-                      })
-                    )}
-                    disabled={checkedOption.option === "card" ? false : true}
-                    variant="outlined"
-                    placeholder={"Giltighetsperiod MM/YY"}
-                    inputProps={{
-                      style: textFieldBackground,
-                      autoComplete: "cc-exp",
-                    }}
-                  />
-                </div>
-              </div>
-            }
-          />
-        </div>
-        <p style={heading}>Klarna</p>
-        <div style={radioContainer}>
-          <FormControlLabel
-            style={radioButton}
-            className="radioButton"
-            value="Klarna"
-            onChange={() => (
-              setCheckedOption({ isChecked: true, option: "klarna" }),
-              resetState()
-            )}
-            control={<Radio style={{ color: theme.palette.primary.main }} />}
-            label={
-              <TextField
-                style={textField}
-                id="klarna"
-                helperText={error.klarnaError}
-                value={value.klarna}
-                error={Boolean(error.klarnaError)}
-                onChange={(e) => (
-                  handleChange("klarna", e.target.value),
-                  setValue({
-                    ...value,
-                    klarna: e.target.value,
-                  })
-                )}
-                placeholder={"Personnummer"}
-                disabled={checkedOption.option === "klarna" ? false : true}
-                variant="outlined"
-                className={"inputPayment"}
-                inputProps={{
-                  style: textFieldBackground,
-                  autoComplete: "on",
-                }}
-              />
-            }
-          />
-        </div>
-      </RadioGroup>
+              }
+            />
+          </div>
+        </RadioGroup>
+        <FormHelperText style={helperText}>
+          {checkedOption.isChecked ? null : "Vänligen välj en betalmetod"}
+        </FormHelperText>
+      </FormControl>
     </div>
   );
 }
@@ -353,5 +359,9 @@ const columnContainer: CSSProperties = {
 };
 
 const heading: CSSProperties = {
-  margin: "1rem 0 0 2rem",
+  margin: "1rem 0 0 3rem",
+};
+
+const helperText: CSSProperties = {
+  margin: "0.5rem 0 0 3rem",
 };

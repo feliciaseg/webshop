@@ -18,18 +18,7 @@ export default function CheckoutPage() {
   return (
     <>
       <Header type="white" />
-      <Box
-        style={{
-          display: "flex",
-          flex: 1,
-          margin: "auto",
-          padding: "2rem 0",
-          alignItems: "center",
-          flexDirection: "column",
-          width: "100%",
-          maxWidth: "41rem",
-        }}
-      >
+      <Box style={checkoutContainer}>
         <CartView />
         <p>Dina Uppgifter</p>
         <UserForm />
@@ -49,6 +38,17 @@ export default function CheckoutPage() {
     </>
   );
 }
+
+const checkoutContainer: CSSProperties = {
+  display: "flex",
+  flex: 1,
+  margin: "auto",
+  padding: "2rem 1rem 4rem 1rem",
+  alignItems: "center",
+  flexDirection: "column",
+  width: "100%",
+  maxWidth: "41rem",
+};
 
 const confirmationButton: CSSProperties = {
   width: "100%",

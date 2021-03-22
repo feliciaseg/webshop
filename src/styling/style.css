@@ -43,12 +43,8 @@
 
 .MuiRadio-root {
   margin-top: 0.5rem;
+  margin-right: 1rem;
   align-self: flex-start;
-}
-
-/* DELIVERYFORM */
-.deliveryBox {
-  width: 41rem;
 }
 
 /* USERFORM */
@@ -131,12 +127,6 @@
   .userInput {
     width: 14rem;
     height: 2rem;
-  }
-
-  .deliveryBox {
-    width: 17rem;
-    height: 20rem;
-    font-size: 0.7rem;
   }
 
   .cartCardBox {
