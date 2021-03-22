@@ -93,7 +93,7 @@ export default function PaymentForm() {
               helperText= "CVVnummer"
               variant="outlined"
               className = {"inputSmallPayment"}
-              name="cvc"
+              name="cvv"
               inputProps= {{ autoComplete: "cc-cvv"}}
             />
             <TextField
