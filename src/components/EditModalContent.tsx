@@ -9,20 +9,6 @@ export default function EditModalContent() {
   const products = useContext(ProductContext);
   const modal = useContext(ModalContext);
 
-  const [formValidation, setFormValidation] = useState(false);
-  const [nameValidation, setNameValidation] = useState<undefined | boolean>(
-    undefined
-  );
-  const [urlValidation, setUrlValidation] = useState<undefined | boolean>(
-    undefined
-  );
-  const [priceValidation, setPriceValidation] = useState<undefined | boolean>(
-    undefined
-  );
-  const [descriptionValidation, setDescriptionValidation] = useState<
-    undefined | boolean
-  >(undefined);
-
   const [inputValues, setInputValues] = useState<Product>({
     imageUrl: modal.editProduct.imageUrl,
     id: modal.editProduct.id,
@@ -31,54 +17,41 @@ export default function EditModalContent() {
     description: modal.editProduct.description,
   });
 
-  function handleChange(key: string, value: string | number) {
-    setInputValues({ ...inputValues, [key]: value });
-    if (value !== 0 && value !== "") {
-      switch (key) {
-        case "name":
-          return setNameValidation(false);
-        case "imageUrl":
-          return setUrlValidation(false);
-        case "price":
-          return setPriceValidation(false);
-        case "description":
-          return setDescriptionValidation(false);
-      }
+  const [error, setError] = useState({
+    name: "",
+    imageUrl: "",
+    price: "",
+    description: "",
+  });
+
+  function handleChange(field: string, fieldValue: string | number) {
+    setInputValues({ ...inputValues, [field]: fieldValue });
+
+    if (!fieldValue || fieldValue === 0) {
+      setError({ ...error, [field]: "Vänligen fyll i fältet." });
+    } else {
+      setError({ ...error, [field]: "" });
     }
   }
 
   function createProduct(e: any) {
-    if (formValidation) {
+    if (
+      error.imageUrl.length +
+        error.name.length +
+        error.price.length +
+        error.name.length +
+        error.description.length ===
+        0 &&
+      (inputValues.description,
+      inputValues.name,
+      inputValues.id,
+      inputValues.price,
+      inputValues.imageUrl)
+    ) {
       products.editProduct(inputValues);
       modal.setModalIsOpen(false);
     }
     e.preventDefault();
-  }
-
-  function checkValidation() {
-    if (
-      nameValidation &&
-      urlValidation &&
-      priceValidation &&
-      descriptionValidation
-    ) {
-      setFormValidation(false);
-    } else {
-      setFormValidation(true);
-    }
-
-    if (!inputValues.name) {
-      setNameValidation(true);
-    }
-    if (!inputValues.imageUrl) {
-      setUrlValidation(true);
-    }
-    if (!inputValues.price) {
-      setPriceValidation(true);
-    }
-    if (!inputValues.description) {
-      setDescriptionValidation(true);
-    }
   }
 
   return (
@@ -91,7 +64,8 @@ export default function EditModalContent() {
         fullWidth
         defaultValue={modal.editProduct.name}
         required={true}
-        error={nameValidation}
+        error={Boolean(error.name)}
+        helperText={error.name}
         onChange={(event) => handleChange("name", event.target.value)}
         InputLabelProps={{
           margin: "dense",
@@ -121,7 +95,8 @@ export default function EditModalContent() {
         variant="outlined"
         fullWidth
         defaultValue={modal.editProduct.imageUrl}
-        error={urlValidation}
+        error={Boolean(error.imageUrl)}
+        helperText={error.imageUrl}
         required={true}
         onChange={(event) => handleChange("imageUrl", event.target.value)}
         InputLabelProps={{
@@ -138,7 +113,8 @@ export default function EditModalContent() {
         type="number"
         fullWidth
         defaultValue={modal.editProduct.price}
-        error={priceValidation}
+        error={Boolean(error.price)}
+        helperText={error.price}
         required={true}
         onChange={(event) => handleChange("price", Number(event.target.value))}
         InputLabelProps={{
@@ -156,7 +132,8 @@ export default function EditModalContent() {
         variant="outlined"
         fullWidth
         defaultValue={modal.editProduct.description}
-        error={descriptionValidation}
+        error={Boolean(error.description)}
+        helperText={error.description}
         required={true}
         onChange={(event) => handleChange("description", event.target.value)}
         InputLabelProps={{
@@ -170,7 +147,6 @@ export default function EditModalContent() {
         color="primary"
         style={createButton}
         type="submit"
-        onClick={() => checkValidation()}
       >
         Ändra produkt
       </Button>
