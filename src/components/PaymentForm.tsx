@@ -109,7 +109,7 @@ export default function PaymentForm({
     if (field === "swish") {
       validateSwish(fieldValue);
     }
-    if (field === "card") {
+    if (field === "cardNumber") {
       validateCardNumber(fieldValue);
     }
     if (field === "cvv") {
@@ -147,7 +147,11 @@ export default function PaymentForm({
         ...prevState,
         cardError: "Var god fyll i fältet.",
       }));
-    } else if (!/^[0-9]+$/.test(fieldValue)) {
+    } else if (
+      !/^[0-9]+$/.test(fieldValue) ||
+      fieldValue.length < 10 ||
+      fieldValue.length > 14
+    ) {
       setError((prevState) => ({
         ...prevState,
         cardError: "Vänligen skriv in ett giltigt kortnummer",
@@ -165,7 +169,11 @@ export default function PaymentForm({
         ...prevState,
         cvvError: "Var god fyll i fältet.",
       }));
-    } else if (!/^[0-9]+$/.test(fieldValue)) {
+    } else if (
+      !/^[0-9]+$/.test(fieldValue) ||
+      fieldValue.length < 3 ||
+      fieldValue.length > 4
+    ) {
       setError((prevState) => ({
         ...prevState,
         cvvError: "Vänligen skriv in ett giltigt CVV/CVC nummer",
