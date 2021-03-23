@@ -205,7 +205,7 @@ export default function PaymentForm({
         ...prevState,
         klarnaError: "Var god fyll i fältet.",
       }));
-    } else if (fieldValue.length !== 10) {
+    } else if (fieldValue.length !== 10 || !/^[0-9/]+$/.test(fieldValue)) {
       setError((prevState) => ({
         ...prevState,
         klarnaError: "Vänligen skriv in ett 10-siffrigt personnummer",

@@ -64,7 +64,7 @@ export default function UserForm({
     }
   };
 
-  const validateName = (fieldValue: string) => {
+  function validateName(fieldValue: string) {
     if (fieldValue === "") {
       setError((prevState) => ({
         ...prevState,
@@ -85,7 +85,107 @@ export default function UserForm({
     } else {
       setError((prevState) => ({ ...prevState, nameError: "" }));
     }
-  };
+  }
+
+  function validateAddress(fieldValue: string) {
+    if (fieldValue === "") {
+      setError((prevState) => ({
+        ...prevState,
+        adressError: "Var god fyll i fältet.",
+      }));
+    } else if (!/\d/.test(fieldValue)) {
+      // Checks so that the adress contains a number.
+      setError((prevState) => ({
+        ...prevState,
+        adressError: "Skriv in gatunumret.",
+      }));
+    } else if (!/\s/.test(fieldValue)) {
+      //Checks if the adress contains a space
+      setError((prevState) => ({
+        ...prevState,
+        adressError: "Skriv in en giltig postadress.",
+      }));
+    } else {
+      setError((prevState) => ({ ...prevState, adressError: "" }));
+    }
+  }
+
+  function validatePostalcode(fieldValue: string) {
+    if (fieldValue === "") {
+      setError((prevState) => ({
+        ...prevState,
+        postalError: "Var god fyll i fältet.",
+      }));
+    } else if (fieldValue.length !== 5) {
+      //checks so that length is 6
+      setError((prevState) => ({
+        ...prevState,
+        postalError: "Fyll i ett giltigt postnummer (6 siffror utan mellanrum)",
+      }));
+    } else if (containsLetters(fieldValue)) {
+      setError((prevState) => ({
+        ...prevState,
+        postalError: "Postnumret kan ej innehålla bokstäver.",
+      }));
+    } else {
+      setError((prevState) => ({ ...prevState, postalError: "" }));
+    }
+  }
+
+  function validateCity(fieldValue: string) {
+    if (fieldValue === "") {
+      setError((prevState) => ({
+        ...prevState,
+        cityError: "Var god fyll i fältet.",
+      }));
+    } else if (/\d/.test(fieldValue)) {
+      //checks so that there is no numbers
+      setError((prevState) => ({
+        ...prevState,
+        cityError: "Får ej innehålla siffror.",
+      }));
+    } else {
+      setError((prevState) => ({ ...prevState, cityError: "" }));
+    }
+  }
+
+  function validateEmail(fieldValue: string) {
+    if (fieldValue === "") {
+      setError((prevState) => ({
+        ...prevState,
+        emailError: "Var god fyll i fältet.",
+      }));
+    } else if (!fieldValue.includes("@")) {
+      //checks that an "@" is included
+      setError((prevState) => ({
+        ...prevState,
+        emailError: "Skriv en giltig email-adress.",
+      }));
+    } else {
+      setError((prevState) => ({ ...prevState, emailError: "" }));
+    }
+  }
+
+  function validatePhone(fieldValue: string) {
+    if (fieldValue === "") {
+      setError((prevState) => ({
+        ...prevState,
+        phoneError: "Var god fyll i fältet.",
+      }));
+    } else if (containsLetters(fieldValue)) {
+      setError((prevState) => ({
+        ...prevState,
+        phoneError: "Fältet får endast innehålla siffror!",
+      }));
+    } else if (fieldValue.length !== 10) {
+      setError((prevState) => ({
+        ...prevState,
+        phoneError: "Ange ditt telefonnummer",
+      }));
+    } else {
+      setError((prevState) => ({ ...prevState, phoneError: "" }));
+    }
+  }
 
   const handleChange = (field: string, fieldValue: string) => {
     setUser({ ...user, [field]: fieldValue });
@@ -93,106 +193,20 @@ export default function UserForm({
     if (field === "name") {
       validateName(fieldValue);
     }
-
     if (field === "address") {
-      if (fieldValue === "") {
-        setError((prevState) => ({
-          ...prevState,
-          adressError: "Var god fyll i fältet.",
-        }));
-      } else if (!/\d/.test(fieldValue)) {
-        // Checks so that the adress contains a number.
-        setError((prevState) => ({
-          ...prevState,
-          adressError: "Skriv in gatunumret.",
-        }));
-      } else if (!/\s/.test(fieldValue)) {
-        //Checks if the adress contains a space
-        setError((prevState) => ({
-          ...prevState,
-          adressError: "Skriv in en giltig postadress.",
-        }));
-      } else {
-        setError((prevState) => ({ ...prevState, adressError: "" }));
-      }
+      validateAddress(fieldValue);
     }
-
     if (field === "postalcode") {
-      if (fieldValue === "") {
-        setError((prevState) => ({
-          ...prevState,
-          postalError: "Var god fyll i fältet.",
-        }));
-      } else if (fieldValue.length !== 5) {
-        //checks so that length is 6
-        setError((prevState) => ({
-          ...prevState,
-          postalError:
-            "Fyll i ett giltigt postnummer (6 siffror utan mellanrum)",
-        }));
-      } else if (containsLetters(fieldValue)) {
-        setError((prevState) => ({
-          ...prevState,
-          postalError: "Postnumret kan ej innehålla bokstäver.",
-        }));
-      } else {
-        setError((prevState) => ({ ...prevState, postalError: "" }));
-      }
+      validatePostalcode(fieldValue);
     }
-
     if (field === "city") {
-      if (fieldValue === "") {
-        setError((prevState) => ({
-          ...prevState,
-          cityError: "Var god fyll i fältet.",
-        }));
-      } else if (/\d/.test(fieldValue)) {
-        //checks so that there is no numbers
-        setError((prevState) => ({
-          ...prevState,
-          cityError: "Får ej innehålla siffror.",
-        }));
-      } else {
-        setError((prevState) => ({ ...prevState, cityError: "" }));
-      }
+      validateCity(fieldValue);
     }
-
     if (field === "email") {
-      if (fieldValue === "") {
-        setError((prevState) => ({
-          ...prevState,
-          emailError: "Var god fyll i fältet.",
-        }));
-      } else if (!fieldValue.includes("@")) {
-        //checks that an "@" is included
-        setError((prevState) => ({
-          ...prevState,
-          emailError: "Skriv en giltig email-adress.",
-        }));
-      } else {
-        setError((prevState) => ({ ...prevState, emailError: "" }));
-      }
+      validateEmail(fieldValue);
     }
-
     if (field === "phone") {
-      if (fieldValue === "") {
-        setError((prevState) => ({
-          ...prevState,
-          phoneError: "Var god fyll i fältet.",
-        }));
-      } else if (containsLetters(fieldValue)) {
-        setError((prevState) => ({
-          ...prevState,
-          phoneError: "Fältet får endast innehålla siffror!",
-        }));
-      } else if (fieldValue.length !== 10) {
-        setError((prevState) => ({
-          ...prevState,
-          phoneError: "Ange ditt telefonnummer",
-        }));
-      } else {
-        setError((prevState) => ({ ...prevState, phoneError: "" }));
-      }
+      validatePhone(fieldValue);
     }
   };
 
