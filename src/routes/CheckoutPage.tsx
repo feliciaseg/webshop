@@ -30,7 +30,6 @@ export default function CheckoutPage() {
   
   return (
     <>
-    <OrderConfirmationModal products = {cart} totalCost = {333} name = {user.name} paymentMethod= {"Klarna"} />
       <Header type="white" />
       <Box style={checkoutContainer}>
         <form>

@@ -7,11 +7,10 @@ import { CartContext, CartItem } from "../contexts/CartContext";
 import { useContext } from "react";
 
 interface Props {
-  // ordernumber: string; //Gjort en mathrandom istället
   products: CartItem[];
   totalCost: number;
   name?: string;
-  paymentMethod: string;
+  deliveryPrice?: number;
 }
 
 export default function OrderConfirmationModal(props: Props) {
@@ -33,13 +32,13 @@ export default function OrderConfirmationModal(props: Props) {
               }}
             >
               <p style={section}>{item.name}</p>
-              <p style={section}>{item.quantity}st</p>
+              <p style={{...section, width: "10rem"}}>{item.quantity}st</p>
               <p style={section}>{item.price}kr</p>
             </div>
           ) : (
             <div style={{ ...productSection, backgroundColor: "#ffff" }} key= {index}>
               <p style={section}>{item.name}</p>
-              <p style={section}>{item.quantity}st</p>
+              <p style={{...section, width: "10rem"}}>{item.quantity}st</p>
               <p style={section}>{item.price}kr</p>
             </div>
           )
