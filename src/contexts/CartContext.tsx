@@ -15,6 +15,7 @@ interface ContextState extends CartState {
   removeProduct: (product: Product) => void;
   removeQuantity: (product: CartItem) => void;
   emptyCart: () => void;
+  getTotalPriceOfCart: () => number;
 }
 
 export const CartContext = createContext<ContextState>({
@@ -23,6 +24,7 @@ export const CartContext = createContext<ContextState>({
   removeProduct: () => {},
   removeQuantity: () => {},
   emptyCart: () => {},
+  getTotalPriceOfCart: () => 0,
 });
 
 export default class CartProvider extends Component<{}, CartState> {
@@ -62,6 +64,17 @@ export default class CartProvider extends Component<{}, CartState> {
     saveCartToLocalStorage(emptyCart)
   }
 
+  getTotalPriceOfCart = ():number => {
+      let arrayOfSums: number[] = [];
+      let sum: number;
+      for (let i = 0; i < this.state.cart.length; i++) {
+        arrayOfSums.push(this.state.cart[i].price * this.state.cart[i].quantity);
+      }
+      sum = arrayOfSums.reduce((a, b) => a + b, 0);
+
+      return sum; 
+  }
+
   removeProductfromCart = (product: Product) => {
     const updatedList: CartItem[] = this.state.cart.filter(
       (item) => item.id !== product.id
@@ -78,7 +91,8 @@ export default class CartProvider extends Component<{}, CartState> {
           addToCart: this.addProductToCart,
           removeProduct: this.removeProductfromCart,
           removeQuantity: this.removeQuantity,
-          emptyCart: this.emptyCart
+          emptyCart: this.emptyCart,
+          getTotalPriceOfCart: this.getTotalPriceOfCart
         }}
       >
         {this.props.children}

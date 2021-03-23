@@ -8,13 +8,14 @@ import { useContext } from "react";
 
 interface Props {
   products: CartItem[];
-  totalCost: number;
+  totalCost?: number;
   name?: string;
-  deliveryPrice?: number;
+  display: boolean
 }
 
 export default function OrderConfirmationModal(props: Props) {
   const context = useContext(CartContext);
+  if (props.display ===true){
   return (
     <div style={modalContainer}>
       <p style={confirmationGreeting}>Tack för ditt köp, {props.name}!</p>
@@ -31,14 +32,14 @@ export default function OrderConfirmationModal(props: Props) {
                 backgroundColor: theme.palette.secondary.main,
               }}
             >
-              <p style={section}>{item.name}</p>
-              <p style={{...section, width: "10rem"}}>{item.quantity}st</p>
+              <p style={{...section, width: "10rem"}}>{item.name}</p>
+              <p style={section}>{item.quantity}st</p>
               <p style={section}>{item.price}kr</p>
             </div>
           ) : (
             <div style={{ ...productSection, backgroundColor: "#ffff" }} key= {index}>
-              <p style={section}>{item.name}</p>
-              <p style={{...section, width: "10rem"}}>{item.quantity}st</p>
+              <p style={{...section, width: "10rem"}}>{item.name}</p>
+              <p style={section}>{item.quantity}st</p>
               <p style={section}>{item.price}kr</p>
             </div>
           )
@@ -57,6 +58,9 @@ export default function OrderConfirmationModal(props: Props) {
       </Link>
     </div>
   );
+} else {
+  return null;
+}
 }
 
 const modalContainer: CSSProperties = {
