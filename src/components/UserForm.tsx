@@ -2,6 +2,7 @@ import { TextField, Box } from "@material-ui/core";
 import { CSSProperties } from "@material-ui/styles";
 import { theme } from "../styling/colorTheme";
 import { useEffect, useState } from "react";
+import { Validation } from "../routes/CheckoutPage";
 
 export interface UserInfo {
   name?: string;
@@ -15,8 +16,8 @@ export interface UserInfo {
 interface Props {
   user: UserInfo;
   setUser: (user: UserInfo) => void;
-  setValidation: (validation: any) => void;
-  validation: any;
+  setValidation: (validation: Validation) => void;
+  validation: Validation;
 }
 
 export default function UserForm({
