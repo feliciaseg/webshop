@@ -8,18 +8,6 @@ export default function CartView() {
 
   const cart = context.cart;
 
-  const calculateSum = (): number => {
-    let arrayOfSums: number[] = [];
-    let sum: number;
-
-    for (let i = 0; i < cart.length; i++) {
-      arrayOfSums.push(cart[i].price * cart[i].quantity);
-    }
-    sum = arrayOfSums.reduce((a, b) => a + b, 0);
-
-    return sum;
-  };
-
   const updateCart = (
     e: React.ChangeEvent<HTMLInputElement>,
     product: CartItem
@@ -72,12 +60,12 @@ export default function CartView() {
   if (cart.length === 0) {
     return <p>Du har inte lagt till några produkter ännu!</p>;
   } else {
-    calculateSum();
+    
     return (
       <>
         <div style={div}>{renderCartCards()}</div>
         <div style={sumDiv}>
-          <p>Summa </p> <p> {calculateSum()}kr</p>
+          <p>Summa </p> <p> {context.getTotalPriceOfCart()}kr</p>
         </div>
       </>
     );

@@ -3,47 +3,44 @@ import { CSSProperties } from "@material-ui/styles";
 import { theme } from "../styling/colorTheme";
 import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
-
-interface Product {
-  name: string;
-  totalPrice: number;
-  number: number;
-  imageUrl?: string;
-  id?: string;
-  description?: string;
-}
+import { CartContext, CartItem } from "../contexts/CartContext";
+import { useContext } from "react";
 
 interface Props {
-  ordernumber: string;
-  products: Product[];
-  totalCost: number;
+  products: CartItem[];
+  totalCost?: number;
+  name?: string;
+  display: boolean
 }
 
 export default function OrderConfirmationModal(props: Props) {
+  const context = useContext(CartContext);
+  if (props.display ===true){
   return (
     <div style={modalContainer}>
-      <p style={confirmationGreeting}>Tack för ditt köp!</p>
+      <p style={confirmationGreeting}>Tack för ditt köp, {props.name}!</p>
       <p style={ordernumber}>
-        Ordernummer: <b>{props.ordernumber}</b>
+        Ordernummer: <b>{Math.floor(100000 + Math.random() * 900000)}</b>
       </p>
       <div style={productList}>
-        {props.products.map((item: Product, index: number) =>
+        {props.products.map((item: CartItem, index: number) =>
           index % 2 === 0 ? (
             <div
+            key = {index}
               style={{
                 ...productSection,
                 backgroundColor: theme.palette.secondary.main,
               }}
             >
-              <p style={section}>{item.name}</p>
-              <p style={section}>{item.number}</p>
-              <p style={section}>{item.totalPrice}</p>
+              <p style={{...section, width: "10rem"}}>{item.name}</p>
+              <p style={section}>{item.quantity}st</p>
+              <p style={section}>{item.price}kr</p>
             </div>
           ) : (
-            <div style={{ ...productSection, backgroundColor: "#ffff" }}>
-              <p style={section}>{item.name}</p>
-              <p style={section}>{item.number}</p>
-              <p style={section}>{item.totalPrice}</p>
+            <div style={{ ...productSection, backgroundColor: "#ffff" }} key= {index}>
+              <p style={{...section, width: "10rem"}}>{item.name}</p>
+              <p style={section}>{item.quantity}st</p>
+              <p style={section}>{item.price}kr</p>
             </div>
           )
         )}
@@ -55,12 +52,15 @@ export default function OrderConfirmationModal(props: Props) {
         </p>
       </div>
       <Link to={"/"}>
-        <Button variant="contained" color="primary" style={confirmationButton}>
+        <Button variant="contained" color="primary" style={confirmationButton} onClick={context.emptyCart}>
           Ok
         </Button>
       </Link>
     </div>
   );
+} else {
+  return null;
+}
 }
 
 const modalContainer: CSSProperties = {
@@ -76,6 +76,7 @@ const modalContainer: CSSProperties = {
   padding: "2rem",
   backgroundColor: "#ffff",
   boxShadow: "0px 2px 5px 0px rgba(0,0,0,0.3)",
+  zIndex: 1,
 };
 
 const confirmationGreeting: CSSProperties = {
@@ -87,6 +88,7 @@ const confirmationGreeting: CSSProperties = {
 const ordernumber: CSSProperties = {
   fontSize: "1rem",
 };
+
 
 const productList: CSSProperties = {
   flex: 1,

@@ -1,11 +1,12 @@
 import { Box, Button } from "@material-ui/core";
-import { CSSProperties, useContext, useEffect, useState } from "react";
+import { CSSProperties, useContext, useState, useEffect } from "react";
+import DeliveryForm, { DeliveryInfo } from "../components/DeliveryForm";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import UserForm, { UserInfo } from "../components/UserForm";
 import PaymentForm, { PaymentInfo } from "../components/PaymentForm";
-import DeliveryForm, { DeliveryInfo } from "../components/DeliveryForm";
 import CartView from "../components/CartView";
+import OrderConfirmationModal from "../components/OrderConfirmationModal";
 import { CartContext } from "../contexts/CartContext";
 
 export interface Validation {
@@ -20,6 +21,8 @@ export default function CheckoutPage() {
   const [user, setUser] = useState<UserInfo>({});
   const [payment, setPayment] = useState<PaymentInfo>({});
   const [delivery, setDelivery] = useState<DeliveryInfo>({});
+  const [disabled, setDisabled] = useState(true)
+  const [showModal, setShowModal] = useState(false)
   const [validation, setValidation] = useState<Validation>({
     cartValidation: Boolean(cartContext.cart.length),
     paymentValidation: false,
@@ -34,8 +37,21 @@ export default function CheckoutPage() {
     });
   }, [cartContext]);
 
+  useEffect(() => {
+    if (validation.cartValidation === true && validation.paymentValidation === true && validation.userValidation === true && validation.deliveryValidation === true ){
+      setDisabled(false)
+    }
+  }, [validation]);
+
+  const handleClick = () => {
+    setDisabled(true)
+    setTimeout(setShowModal, 1000, true)
+
+  }
+
   return (
     <>
+     <OrderConfirmationModal display = {showModal} products = {cartContext.cart} name = {user.name} totalCost = {delivery.price! + cartContext.getTotalPriceOfCart()}  />
       <Header type="white" />
       <Box style={checkoutContainer}>
         <form>
@@ -71,6 +87,8 @@ export default function CheckoutPage() {
             variant="contained"
             color="primary"
             style={confirmationButton}
+            disabled = {disabled}
+            onClick = {handleClick}
           >
             Slutför köp
           </Button>
@@ -80,6 +98,7 @@ export default function CheckoutPage() {
     </>
   );
 }
+
 
 const checkoutContainer: CSSProperties = {
   display: "flex",
