@@ -5,62 +5,73 @@ import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { CartContext, CartItem } from "../contexts/CartContext";
 import { useContext } from "react";
+import { generateOrderID } from "../helper";
 
 interface Props {
   products: CartItem[];
   totalCost?: number;
   name?: string;
-  display: boolean
+  display: boolean;
 }
 
 export default function OrderConfirmationModal(props: Props) {
   const context = useContext(CartContext);
-  if (props.display ===true){
-  return (
-    <div style={modalContainer}>
-      <p style={confirmationGreeting}>Tack för ditt köp, {props.name}!</p>
-      <p style={ordernumber}>
-        Ordernummer: <b>{Math.floor(100000 + Math.random() * 900000)}</b>
-      </p>
-      <div style={productList}>
-        {props.products.map((item: CartItem, index: number) =>
-          index % 2 === 0 ? (
-            <div
-            key = {index}
-              style={{
-                ...productSection,
-                backgroundColor: theme.palette.secondary.main,
-              }}
+  if (props.display === true) {
+    return (
+      <div style={darkUnderlay}>
+        <div style={modalContainer}>
+          <p style={confirmationGreeting}>Tack för ditt köp, {props.name}!</p>
+          <p style={ordernumber}>
+            Ordernummer: <b>{generateOrderID()}</b>
+          </p>
+          <div style={productList}>
+            {props.products.map((item: CartItem, index: number) =>
+              index % 2 === 0 ? (
+                <div
+                  key={index}
+                  style={{
+                    ...productSection,
+                    backgroundColor: theme.palette.secondary.main,
+                  }}
+                >
+                  <p style={{ ...section, width: "10rem" }}>{item.name}</p>
+                  <p style={section}>{item.quantity}st</p>
+                  <p style={section}>{item.price}kr</p>
+                </div>
+              ) : (
+                <div
+                  style={{ ...productSection, backgroundColor: "#ffff" }}
+                  key={index}
+                >
+                  <p style={{ ...section, width: "10rem" }}>{item.name}</p>
+                  <p style={section}>{item.quantity}st</p>
+                  <p style={section}>{item.price}kr</p>
+                </div>
+              )
+            )}
+          </div>
+          <div style={summaryContainer}>
+            <p>Total kostnad:</p>
+            <p>
+              <b>{props.totalCost} kr</b>
+            </p>
+          </div>
+          <Link to={"/"}>
+            <Button
+              variant="contained"
+              color="primary"
+              style={confirmationButton}
+              onClick={context.emptyCart}
             >
-              <p style={{...section, width: "10rem"}}>{item.name}</p>
-              <p style={section}>{item.quantity}st</p>
-              <p style={section}>{item.price}kr</p>
-            </div>
-          ) : (
-            <div style={{ ...productSection, backgroundColor: "#ffff" }} key= {index}>
-              <p style={{...section, width: "10rem"}}>{item.name}</p>
-              <p style={section}>{item.quantity}st</p>
-              <p style={section}>{item.price}kr</p>
-            </div>
-          )
-        )}
+              Ok
+            </Button>
+          </Link>
+        </div>
       </div>
-      <div style={summaryContainer}>
-        <p>Total kostnad:</p>
-        <p>
-          <b>{props.totalCost} kr</b>
-        </p>
-      </div>
-      <Link to={"/"}>
-        <Button variant="contained" color="primary" style={confirmationButton} onClick={context.emptyCart}>
-          Ok
-        </Button>
-      </Link>
-    </div>
-  );
-} else {
-  return null;
-}
+    );
+  } else {
+    return null;
+  }
 }
 
 const modalContainer: CSSProperties = {
@@ -79,6 +90,16 @@ const modalContainer: CSSProperties = {
   zIndex: 1,
 };
 
+const darkUnderlay: CSSProperties = {
+  position: "fixed",
+  top: 0,
+  right: 0,
+  left: 0,
+  bottom: 0,
+  backgroundColor: "rgba(0,0,0,0.5)",
+  zIndex: 90,
+};
+
 const confirmationGreeting: CSSProperties = {
   fontSize: "1.2rem",
   fontWeight: 600,
@@ -88,7 +109,6 @@ const confirmationGreeting: CSSProperties = {
 const ordernumber: CSSProperties = {
   fontSize: "1rem",
 };
-
 
 const productList: CSSProperties = {
   flex: 1,

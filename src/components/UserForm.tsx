@@ -116,11 +116,11 @@ export default function UserForm({
         ...prevState,
         postalError: "Var god fyll i fältet.",
       }));
-    } else if (fieldValue.length !== 5) {
+    } else if (fieldValue.length < 5 || fieldValue.length > 6) {
       //checks so that length is 6
       setError((prevState) => ({
         ...prevState,
-        postalError: "Fyll i ett giltigt postnummer (6 siffror utan mellanrum)",
+        postalError: "Fyll i ett giltigt postnummer",
       }));
     } else if (containsLetters(fieldValue)) {
       setError((prevState) => ({
