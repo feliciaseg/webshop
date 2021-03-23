@@ -67,6 +67,7 @@ const box: CSSProperties = {
   display: "flex",
   height: "6.5rem",
   width: "100%",
+  marginBottom: "1rem",
   flexDirection: "row",
   justifyContent: "space-between",
   alignItems: "center",

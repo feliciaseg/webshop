@@ -7,20 +7,28 @@ import {
   FormHelperText,
 } from "@material-ui/core";
 import { DateTime } from "luxon";
-import { CSSProperties, useEffect, useState } from "react";
+import { CSSProperties } from "react";
 import { theme } from "../styling/colorTheme";
+import { Validation } from "../routes/CheckoutPage";
 
-interface DeliveryInfo {
-  supplier: string;
-  date: string;
+export interface DeliveryInfo {
+  supplier?: string;
+  date?: string;
+  price?: number;
 }
 interface Props {
-  returnValues: (delivery: DeliveryInfo | undefined) => DeliveryInfo | void;
+  delivery: DeliveryInfo;
+  setDelivery: (delivery: DeliveryInfo) => void;
+  validation: Validation;
+  setValidation: (validation: Validation) => void;
 }
 
-export default function DeliveryForm(props: Props) {
-  const [delivery, setDelivery] = useState<DeliveryInfo>();
-  const [validation, setValidation] = useState(false);
+export default function DeliveryForm({
+  delivery,
+  setDelivery,
+  validation,
+  setValidation,
+}: Props) {
   const dt = DateTime.now();
   const postnordDelivery = dt
     .plus({ days: 1 })
@@ -30,23 +38,27 @@ export default function DeliveryForm(props: Props) {
     .toLocaleString(DateTime.DATE_FULL);
   const homeDelivery = dt.plus({ days: 3 }).toLocaleString(DateTime.DATE_FULL);
 
-  function handleChange(supplier: string, date: string) {
-    setDelivery({ supplier: supplier, date: date });
-    setValidation(true);
+  function handleChange(supplier: string, date: string, price: number) {
+    setDelivery({
+      supplier: supplier,
+      date: date,
+      price: price,
+    });
+    setValidation({
+      ...validation,
+      deliveryValidation: true,
+    });
   }
-
-  useEffect(() => {
-    if (validation) {
-      props.returnValues(delivery);
-    }
-  }, [delivery]);
 
   return (
     <Box style={box}>
       <RadioGroup>
-        <FormControl error={!validation} component="fieldset">
+        <FormControl
+          error={!validation.deliveryValidation}
+          component="fieldset"
+        >
           <FormControlLabel
-            onChange={() => handleChange("postnord", postnordDelivery)}
+            onChange={() => handleChange("postnord", postnordDelivery, 39)}
             value="postnord"
             control={<Radio style={{ color: theme.palette.primary.main }} />}
             label={
@@ -56,17 +68,17 @@ export default function DeliveryForm(props: Props) {
             }
           />
           <FormControlLabel
-            onChange={() => handleChange("instabox", instaboxDelivery)}
+            onChange={() => handleChange("instabox", instaboxDelivery, 49)}
             value="instabox"
             control={<Radio style={{ color: theme.palette.primary.main }} />}
             label={
               <p style={label}>
-                Instabox 39kr <br /> Levereras {instaboxDelivery}
+                Instabox 49kr <br /> Levereras {instaboxDelivery}
               </p>
             }
           />
           <FormControlLabel
-            onChange={() => handleChange("klarna", homeDelivery)}
+            onChange={() => handleChange("klarna", homeDelivery, 59)}
             value="Klarna"
             control={<Radio style={{ color: theme.palette.primary.main }} />}
             label={
@@ -76,7 +88,9 @@ export default function DeliveryForm(props: Props) {
             }
           />
           <FormHelperText style={helperText}>
-            {validation ? null : "Vänligen välj en leveransmetod"}
+            {validation.deliveryValidation
+              ? null
+              : "Vänligen välj en leveransmetod"}
           </FormHelperText>
         </FormControl>
       </RadioGroup>
