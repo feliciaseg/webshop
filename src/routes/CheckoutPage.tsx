@@ -2,8 +2,8 @@ import { Box, Button } from "@material-ui/core";
 import { CSSProperties, useState } from "react";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-import PaymentForm from "../components/PaymentForm";
 import UserForm, { UserInfo } from "../components/UserForm";
+import PaymentForm, { PaymentInfo } from "../components/PaymentForm";
 import DeliveryForm, { DeliveryInfo } from "../components/DeliveryForm";
 import CartView from "../components/CartView";
 
@@ -15,8 +15,9 @@ export interface Validation {
 }
 
 export default function CheckoutPage() {
-  const [delivery, setDelivery] = useState<DeliveryInfo>({});
   const [user, setUser] = useState<UserInfo>({});
+  const [payment, setPayment] = useState<PaymentInfo>({});
+  const [delivery, setDelivery] = useState<DeliveryInfo>({});
   const [validation, setValidation] = useState<Validation>({
     cartValidation: false,
     paymentValidation: false,
@@ -25,6 +26,7 @@ export default function CheckoutPage() {
   });
 
   console.log(validation);
+  console.log(payment);
 
   return (
     <>
@@ -43,7 +45,12 @@ export default function CheckoutPage() {
           </div>
           <div style={formContainer}>
             <p style={heading}>Betalning</p>
-            <PaymentForm />
+            <PaymentForm
+              payment={payment}
+              setPayment={setPayment}
+              validation={validation}
+              setValidation={setValidation}
+            />
           </div>
           <div style={formContainer}>
             <p style={heading}>Leveransmetod</p>

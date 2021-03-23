@@ -1,5 +1,4 @@
 import {
-  Box,
   FormControl,
   RadioGroup,
   FormControlLabel,
@@ -7,24 +6,39 @@ import {
   TextField,
   FormHelperText,
 } from "@material-ui/core";
-import React, { CSSProperties, useState } from "react";
+import { CSSProperties, useEffect, useState } from "react";
+import { Validation } from "../routes/CheckoutPage";
 import { theme } from "../styling/colorTheme";
 import "../styling/style.css";
 
-export default function PaymentForm() {
+export interface PaymentInfo {
+  swish?: string;
+  card?: Card;
+  klarna?: string;
+}
+
+interface Card {
+  cardNumber?: string;
+  cvv?: string;
+  validity?: string;
+}
+
+interface Props {
+  payment: PaymentInfo;
+  setPayment: (payment: PaymentInfo) => void;
+  validation: Validation;
+  setValidation: (validation: Validation) => void;
+}
+
+export default function PaymentForm({
+  payment,
+  setPayment,
+  validation,
+  setValidation,
+}: Props) {
   const [checkedOption, setCheckedOption] = useState({
     isChecked: false,
     option: "",
-  });
-
-  const [value, setValue] = useState({
-    swish: "",
-    card: {
-      cardNumber: "",
-      cvv: "",
-      validity: "",
-    },
-    klarna: "",
   });
 
   const [error, setError] = useState({
@@ -36,7 +50,7 @@ export default function PaymentForm() {
   });
 
   function resetState() {
-    setValue({
+    setPayment({
       swish: "",
       card: {
         cardNumber: "",
@@ -45,7 +59,6 @@ export default function PaymentForm() {
       },
       klarna: "",
     });
-
     setError({
       swishError: "",
       cardError: "",
@@ -53,104 +66,155 @@ export default function PaymentForm() {
       validityError: "",
       klarnaError: "",
     });
+    setValidation({ ...validation, paymentValidation: false });
   }
 
-  function handleChange(field: string, fieldValue: string) {
-    console.log(fieldValue);
-    console.log(field);
-    if (field === "swish") {
-      if (fieldValue === "") {
-        setError((prevState) => ({
-          ...prevState,
-          swishError: "Var god fyll i fältet.",
-        }));
-      } else if (!/^[0-9]+$/.test(fieldValue) || fieldValue.length !== 10) {
-        setError((prevState) => ({
-          ...prevState,
-          swishError: "Vänligen skriv in ett giltigt telefonnummer.",
-        }));
-      } else {
-        setError((prevState) => ({
-          ...prevState,
-          swishError: "",
-        }));
+  useEffect(() => {
+    if (checkedOption.option === "swish") {
+      if (error.swishError.length === 0 && payment?.swish) {
+        setValidation({ ...validation, paymentValidation: true });
       }
+    } else if (checkedOption.option === "card") {
+      if (
+        error.cardError.length +
+          error.cvvError.length +
+          error.validityError.length ===
+          0 &&
+        (payment?.card?.cardNumber, payment?.card?.cvv, payment?.card?.validity)
+      ) {
+        setValidation({ ...validation, paymentValidation: true });
+      }
+    } else if (checkedOption.option === "klarna") {
+      if (error.klarnaError.length === 0 && payment?.klarna) {
+        setValidation({ ...validation, paymentValidation: true });
+      }
+    }
+  }, [payment, error]);
+
+  function handleRadioChange(radio: string) {
+    setCheckedOption({
+      option: radio,
+      isChecked: true,
+    });
+    resetState();
+  }
+
+  function handleInputChange(field: string, fieldValue: string) {
+    if (field === "cardNumber" || field === "cvv" || field === "validity") {
+      setPayment({ card: { ...payment.card, [field]: fieldValue } });
+    } else {
+      setPayment({ [field]: fieldValue });
+    }
+
+    if (field === "swish") {
+      validateSwish(fieldValue);
     }
     if (field === "card") {
-      if (fieldValue === "") {
-        setError((prevState) => ({
-          ...prevState,
-          cardError: "Var god fyll i fältet.",
-        }));
-      } else if (!/^[0-9]+$/.test(fieldValue)) {
-        setError((prevState) => ({
-          ...prevState,
-          cardError: "Vänligen skriv in ett giltigt kortnummer",
-        }));
-      } else {
-        setError((prevState) => ({
-          ...prevState,
-          cardError: "",
-        }));
-      }
+      validateCardNumber(fieldValue);
     }
     if (field === "cvv") {
-      if (fieldValue === "") {
-        setError((prevState) => ({
-          ...prevState,
-          cvvError: "Var god fyll i fältet.",
-        }));
-      } else if (!/^[0-9]+$/.test(fieldValue)) {
-        setError((prevState) => ({
-          ...prevState,
-          cvvError: "Vänligen skriv in ett giltigt CVV/CVC nummer",
-        }));
-      } else {
-        setError((prevState) => ({
-          ...prevState,
-          cvvError: "",
-        }));
-      }
+      validateCVV(fieldValue);
     }
     if (field === "validity") {
-      if (fieldValue === "") {
-        setError((prevState) => ({
-          ...prevState,
-          validityError: "Var god fyll i fältet.",
-        }));
-      } else if (
-        !/^[0-9/]+$/.test(fieldValue) ||
-        fieldValue.length > 5 ||
-        fieldValue.length < 4
-      ) {
-        setError((prevState) => ({
-          ...prevState,
-          validityError: "Vänligen skriv in giltighetsdatum i formatet MM/YY",
-        }));
-      } else {
-        setError((prevState) => ({
-          ...prevState,
-          validityError: "",
-        }));
-      }
+      validateValidity(fieldValue);
     }
     if (field === "klarna") {
-      if (fieldValue === "") {
-        setError((prevState) => ({
-          ...prevState,
-          klarnaError: "Var god fyll i fältet.",
-        }));
-      } else if (fieldValue.length !== 10) {
-        setError((prevState) => ({
-          ...prevState,
-          klarnaError: "Vänligen skriv in ett 10-siffrigt personnummer",
-        }));
-      } else {
-        setError((prevState) => ({
-          ...prevState,
-          klarnaError: "",
-        }));
-      }
+      validateKlarna(fieldValue);
+    }
+  }
+
+  function validateSwish(fieldValue: string) {
+    if (fieldValue === "") {
+      setError((prevState) => ({
+        ...prevState,
+        swishError: "Var god fyll i fältet.",
+      }));
+    } else if (!/^[0-9]+$/.test(fieldValue) || fieldValue.length !== 10) {
+      setError((prevState) => ({
+        ...prevState,
+        swishError: "Vänligen skriv in ett giltigt telefonnummer.",
+      }));
+    } else {
+      setError((prevState) => ({
+        ...prevState,
+        swishError: "",
+      }));
+    }
+  }
+  function validateCardNumber(fieldValue: string) {
+    if (fieldValue === "") {
+      setError((prevState) => ({
+        ...prevState,
+        cardError: "Var god fyll i fältet.",
+      }));
+    } else if (!/^[0-9]+$/.test(fieldValue)) {
+      setError((prevState) => ({
+        ...prevState,
+        cardError: "Vänligen skriv in ett giltigt kortnummer",
+      }));
+    } else {
+      setError((prevState) => ({
+        ...prevState,
+        cardError: "",
+      }));
+    }
+  }
+  function validateCVV(fieldValue: string) {
+    if (fieldValue === "") {
+      setError((prevState) => ({
+        ...prevState,
+        cvvError: "Var god fyll i fältet.",
+      }));
+    } else if (!/^[0-9]+$/.test(fieldValue)) {
+      setError((prevState) => ({
+        ...prevState,
+        cvvError: "Vänligen skriv in ett giltigt CVV/CVC nummer",
+      }));
+    } else {
+      setError((prevState) => ({
+        ...prevState,
+        cvvError: "",
+      }));
+    }
+  }
+  function validateValidity(fieldValue: string) {
+    if (fieldValue === "") {
+      setError((prevState) => ({
+        ...prevState,
+        validityError: "Var god fyll i fältet.",
+      }));
+    } else if (
+      !/^[0-9/]+$/.test(fieldValue) ||
+      fieldValue.length > 5 ||
+      fieldValue.length < 4
+    ) {
+      setError((prevState) => ({
+        ...prevState,
+        validityError: "Vänligen skriv in giltighetsdatum i formatet MM/YY",
+      }));
+    } else {
+      setError((prevState) => ({
+        ...prevState,
+        validityError: "",
+      }));
+    }
+  }
+  function validateKlarna(fieldValue: string) {
+    if (fieldValue === "") {
+      setError((prevState) => ({
+        ...prevState,
+        klarnaError: "Var god fyll i fältet.",
+      }));
+    } else if (fieldValue.length !== 10) {
+      setError((prevState) => ({
+        ...prevState,
+        klarnaError: "Vänligen skriv in ett 10-siffrigt personnummer",
+      }));
+    } else {
+      setError((prevState) => ({
+        ...prevState,
+        klarnaError: "",
+      }));
     }
   }
 
@@ -164,10 +228,7 @@ export default function PaymentForm() {
               style={radioButton}
               className="radioButton"
               value="Swish"
-              onChange={() => (
-                setCheckedOption({ isChecked: true, option: "swish" }),
-                resetState()
-              )}
+              onChange={() => handleRadioChange("swish")}
               control={<Radio style={{ color: theme.palette.primary.main }} />}
               label={
                 <TextField
@@ -175,15 +236,9 @@ export default function PaymentForm() {
                   id="swish"
                   type="tel"
                   helperText={error.swishError}
-                  value={String(value.swish)}
+                  value={payment.swish}
                   error={Boolean(error.swishError)}
-                  onChange={(e) => (
-                    handleChange("swish", e.target.value),
-                    setValue({
-                      ...value,
-                      swish: e.target.value,
-                    })
-                  )}
+                  onChange={(e) => handleInputChange("swish", e.target.value)}
                   placeholder={"Telefonnummer"}
                   disabled={checkedOption.option === "swish" ? false : true}
                   variant="outlined"
@@ -199,10 +254,7 @@ export default function PaymentForm() {
               style={radioButton}
               className="radioButton"
               value="Kort"
-              onChange={() => (
-                setCheckedOption({ isChecked: true, option: "card" }),
-                resetState()
-              )}
+              onChange={() => handleRadioChange("card")}
               control={<Radio style={{ color: theme.palette.primary.main }} />}
               label={
                 <div style={columnContainer}>
@@ -210,15 +262,11 @@ export default function PaymentForm() {
                     style={textField}
                     id="kort"
                     helperText={error.cardError}
-                    value={value.card.cardNumber}
+                    value={payment.card?.cardNumber}
                     error={Boolean(error.cardError)}
-                    onChange={(e) => (
-                      handleChange("card", e.target.value),
-                      setValue({
-                        ...value,
-                        card: { ...value.card, cardNumber: e.target.value },
-                      })
-                    )}
+                    onChange={(e) =>
+                      handleInputChange("cardNumber", e.target.value)
+                    }
                     placeholder={"Kortnummer"}
                     disabled={checkedOption.option === "card" ? false : true}
                     variant="outlined"
@@ -232,15 +280,9 @@ export default function PaymentForm() {
                       className="textFieldRow"
                       id="cvv"
                       helperText={error.cvvError}
-                      value={value.card.cvv}
+                      value={payment.card?.cvv}
                       error={Boolean(error.cvvError)}
-                      onChange={(e) => (
-                        handleChange("cvv", e.target.value),
-                        setValue({
-                          ...value,
-                          card: { ...value.card, cvv: e.target.value },
-                        })
-                      )}
+                      onChange={(e) => handleInputChange("cvv", e.target.value)}
                       placeholder={"CVV/CVC"}
                       disabled={checkedOption.option === "card" ? false : true}
                       variant="outlined"
@@ -253,15 +295,11 @@ export default function PaymentForm() {
                       className="textFieldRow"
                       id="date"
                       helperText={error.validityError}
-                      value={value.card.validity}
+                      value={payment.card?.validity}
                       error={Boolean(error.validityError)}
-                      onChange={(e) => (
-                        handleChange("validity", e.target.value),
-                        setValue({
-                          ...value,
-                          card: { ...value.card, validity: e.target.value },
-                        })
-                      )}
+                      onChange={(e) =>
+                        handleInputChange("validity", e.target.value)
+                      }
                       disabled={checkedOption.option === "card" ? false : true}
                       variant="outlined"
                       placeholder={"Giltighetsperiod MM/YY"}
@@ -281,25 +319,16 @@ export default function PaymentForm() {
               style={radioButton}
               className="radioButton"
               value="Klarna"
-              onChange={() => (
-                setCheckedOption({ isChecked: true, option: "klarna" }),
-                resetState()
-              )}
+              onChange={() => handleRadioChange("klarna")}
               control={<Radio style={{ color: theme.palette.primary.main }} />}
               label={
                 <TextField
                   style={textField}
                   id="klarna"
                   helperText={error.klarnaError}
-                  value={value.klarna}
+                  value={payment.klarna}
                   error={Boolean(error.klarnaError)}
-                  onChange={(e) => (
-                    handleChange("klarna", e.target.value),
-                    setValue({
-                      ...value,
-                      klarna: e.target.value,
-                    })
-                  )}
+                  onChange={(e) => handleInputChange("klarna", e.target.value)}
                   placeholder={"Personnummer"}
                   disabled={checkedOption.option === "klarna" ? false : true}
                   variant="outlined"

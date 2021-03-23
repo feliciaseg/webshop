@@ -16,8 +16,8 @@ export interface UserInfo {
 interface Props {
   user: UserInfo;
   setUser: (user: UserInfo) => void;
-  setValidation: (validation: Validation) => void;
   validation: Validation;
+  setValidation: (validation: Validation) => void;
 }
 
 export default function UserForm({
