@@ -1,10 +1,10 @@
-import { Box, Button } from "@material-ui/core";
+import { Box, Button, useRadioGroup } from "@material-ui/core";
 import React, { CSSProperties, useState } from "react";
 import DeliveryForm from "../components/DeliveryForm";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import PaymentForm from "../components/PaymentForm";
-import UserForm from "../components/UserForm";
+import UserForm, { UserInfo } from "../components/UserForm";
 import CartView from "../components/CartView";
 
 interface DeliveryInfo {
@@ -12,9 +12,18 @@ interface DeliveryInfo {
   date: string;
 }
 
+
 export default function CheckoutPage() {
   const [delivery, setDelivery] = useState<DeliveryInfo | undefined>();
-
+  const [user, setUser] = useState<UserInfo>({});
+  const [validation, setValidation] = useState({
+    cartValidation: false,
+    paymentValidation: false,
+    userValidation: false,
+    deliveryValidation: false,
+  })
+ 
+  
   return (
     <>
       <Header type="white" />
@@ -30,9 +39,10 @@ export default function CheckoutPage() {
           maxWidth: "41rem",
         }}
       >
+        <form>
         <CartView />
         <p>Dina Uppgifter</p>
-        <UserForm />
+        <UserForm user={user} setUser={setUser} validation = {validation} setValidation= {setValidation}/>
         <p>Betalning</p>
         <PaymentForm />
         <p>Leveransmetod</p>
@@ -44,8 +54,9 @@ export default function CheckoutPage() {
         <Button variant="contained" color="primary" style={confirmationButton}>
           Slutför köp
         </Button>
+        </form>
       </Box>
-      <Footer />
+      <Footer/>
     </>
   );
 }
