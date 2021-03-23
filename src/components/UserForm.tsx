@@ -1,17 +1,30 @@
 import { TextField, Box } from "@material-ui/core";
 import { CSSProperties } from "@material-ui/styles";
 import { theme } from "../styling/colorTheme";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export default function UserForm() {
-  const [value, setValue] = useState({
-    nameValue: "",
-    adressValue: "",
-    postalValue: "",
-    cityValue: "",
-    emailValue: "",
-    phoneValue: "",
-  });
+export interface UserInfo {
+  name?: string;
+  adress?: string;
+  postal?: string;
+  city?: string;
+  email?: string;
+  phone?: string;
+}
+
+interface Props {
+  user: UserInfo;
+  setUser: (user: UserInfo) => void;
+  setValidation: (validation: any) => void;
+  validation: any;
+}
+
+export default function UserForm({
+  user,
+  setUser,
+  validation,
+  setValidation,
+}: Props) {
   const [error, setError] = useState({
     nameError: "",
     adressError: "",
@@ -20,6 +33,26 @@ export default function UserForm() {
     emailError: "",
     phoneError: "",
   });
+
+  useEffect(() => {
+    if (
+      error.nameError.length +
+        error.adressError.length +
+        error.postalError.length +
+        error.cityError.length +
+        error.emailError.length +
+        error.phoneError.length ===
+        0 &&
+      (user!.name,
+      user!.adress,
+      user!.postal,
+      user!.city,
+      user!.email,
+      user!.phone)
+    ) {
+      setValidation({ ...validation, userValidation: true });
+    }
+  }, [user, error]);
 
   const containsLetters = (input: string) => {
     const letters = /^[a-zA-Z]+$/;
@@ -30,32 +63,38 @@ export default function UserForm() {
     }
   };
 
+  const validateName = (fieldValue: string) => {
+    if (fieldValue === "") {
+      setError((prevState) => ({
+        ...prevState,
+        nameError: "Var god fyll i fältet.",
+      }));
+    } else if (/\d/.test(fieldValue)) {
+      //Checks if name contains numbers
+      setError((prevState) => ({
+        ...prevState,
+        nameError: "Fältet kan endast innehålla bokstäver",
+      }));
+    } else if (!/\s/.test(fieldValue)) {
+      //Checks if there is a space in the string (to see if both first and last name is written)
+      setError((prevState) => ({
+        ...prevState,
+        nameError: "Skriv in både för- och efternamn.",
+      }));
+    } else {
+      setError((prevState) => ({ ...prevState, nameError: "" }));
+    }
+  };
+
   const handleChange = (field: string, fieldValue: string) => {
+    setUser({ ...user, [field]: fieldValue });
+
     if (field === "name") {
-      if (fieldValue === "") {
-        setError((prevState) => ({
-          ...prevState,
-          nameError: "Var god fyll i fältet.",
-        }));
-      } else if (/\d/.test(fieldValue)) {
-        //Checks if name contains numbers
-        setError((prevState) => ({
-          ...prevState,
-          nameError: "Fältet kan endast innehålla bokstäver",
-        }));
-      } else if (!/\s/.test(fieldValue)) {
-        //Checks if there is a space in the string (to see if both first and last name is written)
-        setError((prevState) => ({
-          ...prevState,
-          nameError: "Skriv in både för- och efternamn.",
-        }));
-      } else {
-        setError((prevState) => ({ ...prevState, nameError: "" }));
-      }
+      validateName(fieldValue);
     }
 
     if (field === "address") {
-      if (fieldValue === " ") {
+      if (fieldValue === "") {
         setError((prevState) => ({
           ...prevState,
           adressError: "Var god fyll i fältet.",
@@ -79,13 +118,11 @@ export default function UserForm() {
 
     if (field === "postalcode") {
       if (fieldValue === "") {
-        console.log("tomt fält");
         setError((prevState) => ({
           ...prevState,
           postalError: "Var god fyll i fältet.",
         }));
       } else if (fieldValue.length !== 5) {
-        console.log(fieldValue.length);
         //checks so that length is 6
         setError((prevState) => ({
           ...prevState,
@@ -104,7 +141,6 @@ export default function UserForm() {
 
     if (field === "city") {
       if (fieldValue === "") {
-        console.log("tomt fält");
         setError((prevState) => ({
           ...prevState,
           cityError: "Var god fyll i fältet.",
@@ -122,7 +158,6 @@ export default function UserForm() {
 
     if (field === "email") {
       if (fieldValue === "") {
-        console.log("tomt fält");
         setError((prevState) => ({
           ...prevState,
           emailError: "Var god fyll i fältet.",
@@ -140,7 +175,6 @@ export default function UserForm() {
 
     if (field === "phone") {
       if (fieldValue === "") {
-        console.log("tomt fält");
         setError((prevState) => ({
           ...prevState,
           phoneError: "Var god fyll i fältet.",
@@ -164,14 +198,8 @@ export default function UserForm() {
   return (
     <Box style={box}>
       <TextField
-        value={value.nameValue}
-        onChange={(e) => (
-          setValue((prevState) => ({
-            ...prevState,
-            nameValue: e.target.value,
-          })),
-          handleChange("name", e.target.value)
-        )}
+        value={user.name}
+        onChange={(e) => handleChange("name", e.target.value)}
         inputProps={{ autoComplete: "name", style: inputField }}
         style={textField}
         placeholder="Namn"
@@ -180,14 +208,8 @@ export default function UserForm() {
         helperText={error.nameError}
       />
       <TextField
-        value={value.adressValue}
-        onChange={(e) => (
-          setValue((prevState) => ({
-            ...prevState,
-            adressValue: e.target.value,
-          })),
-          handleChange("address", e.target.value)
-        )}
+        value={user.adress}
+        onChange={(e) => handleChange("address", e.target.value)}
         error={Boolean(error.adressError)}
         helperText={error.adressError}
         style={textField}
@@ -196,14 +218,8 @@ export default function UserForm() {
         variant="outlined"
       />
       <TextField
-        value={value.postalValue}
-        onChange={(e) => (
-          setValue((prevState) => ({
-            ...prevState,
-            postalValue: e.target.value,
-          })),
-          handleChange("postalcode", e.target.value)
-        )}
+        value={user.postal}
+        onChange={(e) => handleChange("postalcode", e.target.value)}
         error={Boolean(error.postalError)}
         helperText={error.postalError}
         style={textField}
@@ -211,18 +227,13 @@ export default function UserForm() {
           autoComplete: "shipping postal-code",
           style: inputField,
         }}
+        name="ZipCode"
         placeholder="Postnummer"
         variant="outlined"
       />
       <TextField
-        value={value.cityValue}
-        onChange={(e) => (
-          setValue((prevState) => ({
-            ...prevState,
-            cityValue: e.target.value,
-          })),
-          handleChange("city", e.target.value)
-        )}
+        value={user.city}
+        onChange={(e) => handleChange("city", e.target.value)}
         error={Boolean(error.cityError)}
         helperText={error.cityError}
         style={textField}
@@ -234,14 +245,8 @@ export default function UserForm() {
         variant="outlined"
       />
       <TextField
-        value={value.emailValue}
-        onChange={(e) => (
-          setValue((prevState) => ({
-            ...prevState,
-            emailValue: e.target.value,
-          })),
-          handleChange("email", e.target.value)
-        )}
+        value={user.email}
+        onChange={(e) => handleChange("email", e.target.value)}
         error={Boolean(error.emailError)}
         helperText={error.emailError}
         style={textField}
@@ -250,14 +255,8 @@ export default function UserForm() {
         variant="outlined"
       />
       <TextField
-        value={value.phoneValue}
-        onChange={(e) => (
-          setValue((prevState) => ({
-            ...prevState,
-            phoneValue: e.target.value,
-          })),
-          handleChange("phone", e.target.value)
-        )}
+        value={user.phone}
+        onChange={(e) => handleChange("phone", e.target.value)}
         error={Boolean(error.phoneError)}
         helperText={error.phoneError}
         style={textField}

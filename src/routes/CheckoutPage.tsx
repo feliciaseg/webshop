@@ -4,7 +4,7 @@ import DeliveryForm from "../components/DeliveryForm";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import PaymentForm from "../components/PaymentForm";
-import UserForm from "../components/UserForm";
+import UserForm, { UserInfo } from "../components/UserForm";
 import CartView from "../components/CartView";
 
 interface DeliveryInfo {
@@ -12,17 +12,27 @@ interface DeliveryInfo {
   date: string;
 }
 
+
 export default function CheckoutPage() {
   const [delivery, setDelivery] = useState<DeliveryInfo | undefined>();
-
+  const [user, setUser] = useState<UserInfo>({});
+  const [validation, setValidation] = useState({
+    cartValidation: false,
+    paymentValidation: false,
+    userValidation: false,
+    deliveryValidation: false,
+  })
+ 
+  
   return (
     <>
       <Header type="white" />
       <Box style={checkoutContainer}>
+        <form>
         <CartView />
         <div style={formContainer}>
           <p style={heading}>Dina Uppgifter</p>
-          <UserForm />
+          <UserForm user={user} setUser={setUser} validation = {validation} setValidation= {setValidation} />
         </div>
         <div style={formContainer}>
           <p style={heading}>Betalning</p>
@@ -39,8 +49,9 @@ export default function CheckoutPage() {
         <Button variant="contained" color="primary" style={confirmationButton}>
           Slutför köp
         </Button>
+        </form>
       </Box>
-      <Footer />
+      <Footer/>
     </>
   );
 }
