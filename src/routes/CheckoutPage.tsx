@@ -1,11 +1,12 @@
 import { Box, Button } from "@material-ui/core";
-import { CSSProperties, useState } from "react";
+import { CSSProperties, useContext, useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import UserForm, { UserInfo } from "../components/UserForm";
 import PaymentForm, { PaymentInfo } from "../components/PaymentForm";
 import DeliveryForm, { DeliveryInfo } from "../components/DeliveryForm";
 import CartView from "../components/CartView";
+import { CartContext } from "../contexts/CartContext";
 
 export interface Validation {
   cartValidation: boolean;
@@ -15,18 +16,23 @@ export interface Validation {
 }
 
 export default function CheckoutPage() {
+  const cartContext = useContext(CartContext);
   const [user, setUser] = useState<UserInfo>({});
   const [payment, setPayment] = useState<PaymentInfo>({});
   const [delivery, setDelivery] = useState<DeliveryInfo>({});
   const [validation, setValidation] = useState<Validation>({
-    cartValidation: false,
+    cartValidation: Boolean(cartContext.cart.length),
     paymentValidation: false,
     userValidation: false,
     deliveryValidation: false,
   });
 
-  console.log(validation);
-  console.log(payment);
+  useEffect(() => {
+    setValidation({
+      ...validation,
+      cartValidation: Boolean(cartContext.cart.length),
+    });
+  }, [cartContext]);
 
   return (
     <>
