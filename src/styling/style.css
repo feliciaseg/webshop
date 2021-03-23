@@ -23,62 +23,39 @@
 }
 
 /* PAYMENT FORM */
-.paymentBox {
-  width: 41rem;
-  height: 25rem;
+.rowContainer {
+  display: flex;
+  justify-content: space-between;
 }
 
-.inputPayment {
-  width: 34.3rem;
-  height: 2rem;
+.textFieldRow {
+  width: 48%;
+  margin: 0.5rem 0;
 }
 
-.inputSmallPayment {
-  height: 2rem;
+.textFieldRow .MuiInputBase-root {
+  width: 100%;
 }
 
-.cardInputs {
-  flex-direction: row;
+.radioButton > .MuiTypography-root {
+  width: 100%;
 }
 
-.pInput {
-  font-size: 1rem;
-  margin: 2.2rem 0 0.3rem 3rem;
-}
-
-/* DELIVERYFORM */
-.deliveryBox {
-  width: 41rem;
+.MuiRadio-root {
+  margin-top: 0.5rem;
+  margin-right: 1rem;
+  align-self: flex-start;
 }
 
 /* USERFORM */
-.userBox {
-  width: 40rem;
-  height: 28rem;
-}
-
-.userInput {
-  width: 34.3rem;
-  height: 2rem;
-}
-
-.cartCardBox{
-  width: 41rem;
-  height: 6.3rem;
-  filter: drop-shadow(0 4px 4px grey);
-  margin-bottom: 1rem;
-}
 
 .flex-direction {
   display: flex;
-  width: 16.8rem;
-  flex-direction: row;
+  height: 100%;
+  width: 43%;
   align-items: center;
-  justify-content: space-around;
-}
-
-.selector {
-width: 7.4rem;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 /* TABLET SMALL */
@@ -90,9 +67,29 @@ width: 7.4rem;
     width: 100%;
   }
 
-  .selector {
-    width: 6rem,
-    }
+  /* PAYMENTFORM */
+  .rowContainer {
+    flex-direction: column;
+  }
+
+  .textFieldRow {
+    width: 100%;
+  }
+
+  /* CARTCARD */
+  .flex-direction {
+    width: 50%;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .alignEnd {
+    align-items: flex-end;
+  }
+
+  .alignStart {
+    align-items: flex-start;
+  }
 }
 
 /* MOBILE */
@@ -111,70 +108,4 @@ width: 7.4rem;
     height: 3.4rem;
     font-size: 0.8rem;
   }
-  /* UserForm */
-  .userBox {
-    width: 15rem;
-    height: 20rem;
-    font-size: 0.7rem;
-  }
-
-  .userInput {
-    width: 14rem;
-    height: 2rem;
-  }
-
-  /* PAYMENT FORM */
-  .paymentBox {
-    width: 17rem;
-    height: 26rem;
-    font-size: 0.8rem;
-  }
-
-  .inputPayment  {
-    width: 12.3rem;
-    margin-bottom: 1rem;
-  }
-
-  .pInput {
-    font-size: 1rem;
-    margin: 1rem 0 0rem 3rem;
-  }
-
-
-  .cardInputs {
-    flex-direction: column;
-  }
-
-  .inputSmallPayment {
-    height: 2rem;
-    margin-bottom: 2rem;
-  }
-
-  .deliveryBox {
-    width: 17rem;
-    height: 20rem;
-    font-size: 0.7rem;
-  }
-
-  .cartCardBox{
-    width: 17.1rem;
-    height: 6rem;
-    font-size: 0.9rem;
-  }
-
-  .flex-direction {
-    display: flex;
-    width: 6.6rem;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 0 0.2rem 0 0.2rem;
-  }
-
-  .selector {
-    width: 2rem;
-    align-self: flex-start;
-    }
-    
-
 }

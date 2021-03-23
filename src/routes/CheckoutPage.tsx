@@ -1,5 +1,5 @@
-import { Box, Button, useRadioGroup } from "@material-ui/core";
-import React, { CSSProperties, useState } from "react";
+import { Box, Button } from "@material-ui/core";
+import { CSSProperties, useState } from "react";
 import DeliveryForm from "../components/DeliveryForm";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
@@ -27,30 +27,25 @@ export default function CheckoutPage() {
   return (
     <>
       <Header type="white" />
-      <Box
-        style={{
-          display: "flex",
-          flex: 1,
-          margin: "auto",
-          padding: "2rem 0",
-          alignItems: "center",
-          flexDirection: "column",
-          width: "100%",
-          maxWidth: "41rem",
-        }}
-      >
+      <Box style={checkoutContainer}>
         <form>
         <CartView />
-        <p>Dina Uppgifter</p>
-        <UserForm user={user} setUser={setUser} validation = {validation} setValidation= {setValidation}/>
-        <p>Betalning</p>
-        <PaymentForm />
-        <p>Leveransmetod</p>
-        <DeliveryForm
-          returnValues={(delivery: DeliveryInfo | undefined) =>
-            setDelivery(delivery)
-          }
-        />
+        <div style={formContainer}>
+          <p style={heading}>Dina Uppgifter</p>
+          <UserForm user={user} setUser={setUser} validation = {validation} setValidation= {setValidation} />
+        </div>
+        <div style={formContainer}>
+          <p style={heading}>Betalning</p>
+          <PaymentForm />
+        </div>
+        <div style={formContainer}>
+          <p style={heading}>Leveransmetod</p>
+          <DeliveryForm
+            returnValues={(delivery: DeliveryInfo | undefined) =>
+              setDelivery(delivery)
+            }
+          />
+        </div>
         <Button variant="contained" color="primary" style={confirmationButton}>
           Slutför köp
         </Button>
@@ -60,6 +55,27 @@ export default function CheckoutPage() {
     </>
   );
 }
+
+const checkoutContainer: CSSProperties = {
+  display: "flex",
+  flex: 1,
+  margin: "auto",
+  padding: "2rem 1rem 4rem 1rem",
+  alignItems: "center",
+  flexDirection: "column",
+  width: "100%",
+  maxWidth: "41rem",
+};
+
+const formContainer: CSSProperties = {
+  width: "100%",
+  padding: "1rem 0",
+};
+
+const heading: CSSProperties = {
+  margin: "1rem 0 1.5rem 0",
+  textAlign: "center",
+};
 
 const confirmationButton: CSSProperties = {
   width: "100%",

@@ -196,15 +196,14 @@ export default function UserForm({
   };
 
   return (
-    <Box className={"userBox"} style={box}>
+    <Box style={box}>
       <TextField
         value={user.name}
         onChange={(e) => handleChange("name", e.target.value)}
-        inputProps={{ autoComplete: "name", style: textFieldBackground }}
+        inputProps={{ autoComplete: "name", style: inputField }}
         style={textField}
         placeholder="Namn"
         variant="outlined"
-        className={"userInput"}
         error={Boolean(error.nameError)}
         helperText={error.nameError}
       />
@@ -214,10 +213,9 @@ export default function UserForm({
         error={Boolean(error.adressError)}
         helperText={error.adressError}
         style={textField}
-        inputProps={{ autoComplete: "address", style: textFieldBackground }}
+        inputProps={{ autoComplete: "address", style: inputField }}
         placeholder="Adress"
         variant="outlined"
-        className={"userInput"}
       />
       <TextField
         value={user.postal}
@@ -227,12 +225,11 @@ export default function UserForm({
         style={textField}
         inputProps={{
           autoComplete: "shipping postal-code",
-          style: textFieldBackground,
+          style: inputField,
         }}
         name="ZipCode"
         placeholder="Postnummer"
         variant="outlined"
-        className={"userInput"}
       />
       <TextField
         value={user.city}
@@ -242,11 +239,10 @@ export default function UserForm({
         style={textField}
         inputProps={{
           autoComplete: "shipping locality",
-          style: textFieldBackground,
+          style: inputField,
         }}
         placeholder="Stad"
         variant="outlined"
-        className={"userInput"}
       />
       <TextField
         value={user.email}
@@ -254,10 +250,9 @@ export default function UserForm({
         error={Boolean(error.emailError)}
         helperText={error.emailError}
         style={textField}
-        inputProps={{ autoComplete: "email", style: textFieldBackground }}
+        inputProps={{ autoComplete: "email", style: inputField }}
         placeholder="Mail"
         variant="outlined"
-        className={"userInput"}
       />
       <TextField
         value={user.phone}
@@ -267,23 +262,23 @@ export default function UserForm({
         style={textField}
         placeholder="Telefonnummer"
         variant="outlined"
-        className={"userInput"}
-        inputProps={{ autoComplete: "phone", style: textFieldBackground }}
+        inputProps={{ autoComplete: "phone", style: inputField }}
       />
     </Box>
   );
 }
 
 const textField: CSSProperties = {
-  margin: "2rem 1.5rem 0.3rem 1.5rem",
+  margin: "0 0 1.5rem 0",
+  width: "100%",
 };
 
-const textFieldBackground: CSSProperties = {
+const inputField: CSSProperties = {
   backgroundColor: theme.palette.secondary.main,
 };
 
 const box: CSSProperties = {
-  backgroundColor: "white",
+  width: "100%",
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
