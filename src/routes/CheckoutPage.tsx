@@ -1,11 +1,13 @@
 import { Box, Button } from "@material-ui/core";
-import { CSSProperties, useState } from "react";
+import { CSSProperties, useContext, useState } from "react";
 import DeliveryForm from "../components/DeliveryForm";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import PaymentForm from "../components/PaymentForm";
 import UserForm, { UserInfo } from "../components/UserForm";
 import CartView from "../components/CartView";
+import OrderConfirmationModal from "../components/OrderConfirmationModal";
+import { CartContext } from "../contexts/CartContext";
 
 interface DeliveryInfo {
   supplier: string;
@@ -14,6 +16,8 @@ interface DeliveryInfo {
 
 
 export default function CheckoutPage() {
+  const context = useContext(CartContext);
+  const cart = context.cart;
   const [delivery, setDelivery] = useState<DeliveryInfo | undefined>();
   const [user, setUser] = useState<UserInfo>({});
   const [validation, setValidation] = useState({
@@ -26,6 +30,7 @@ export default function CheckoutPage() {
   
   return (
     <>
+    <OrderConfirmationModal products = {cart} totalCost = {333} name = {user.name} paymentMethod= {"Klarna"} />
       <Header type="white" />
       <Box style={checkoutContainer}>
         <form>

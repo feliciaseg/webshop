@@ -14,6 +14,7 @@ interface ContextState extends CartState {
   addToCart: (product: Product) => void;
   removeProduct: (product: Product) => void;
   removeQuantity: (product: CartItem) => void;
+  emptyCart: () => void;
 }
 
 export const CartContext = createContext<ContextState>({
@@ -21,6 +22,7 @@ export const CartContext = createContext<ContextState>({
   addToCart: () => {},
   removeProduct: () => {},
   removeQuantity: () => {},
+  emptyCart: () => {},
 });
 
 export default class CartProvider extends Component<{}, CartState> {
@@ -54,7 +56,11 @@ export default class CartProvider extends Component<{}, CartState> {
     saveCartToLocalStorage(newCart)
   }
 
-
+  emptyCart = () => {
+    let emptyCart: CartItem[] = [];
+    this.setState({ cart: emptyCart });
+    saveCartToLocalStorage(emptyCart)
+  }
 
   removeProductfromCart = (product: Product) => {
     const updatedList: CartItem[] = this.state.cart.filter(
@@ -71,7 +77,8 @@ export default class CartProvider extends Component<{}, CartState> {
           cart: this.state.cart,
           addToCart: this.addProductToCart,
           removeProduct: this.removeProductfromCart,
-          removeQuantity: this.removeQuantity
+          removeQuantity: this.removeQuantity,
+          emptyCart: this.emptyCart
         }}
       >
         {this.props.children}
