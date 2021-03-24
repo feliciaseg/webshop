@@ -8,6 +8,7 @@ import PaymentForm, { PaymentInfo } from "../components/PaymentForm";
 import CartView from "../components/CartView";
 import OrderConfirmationModal from "../components/OrderConfirmationModal";
 import { CartContext } from "../contexts/CartContext";
+import SubTotal from "../components/SubTotal";
 
 export interface Validation {
   cartValidation: boolean;
@@ -18,11 +19,13 @@ export interface Validation {
 
 export default function CheckoutPage() {
   const cartContext = useContext(CartContext);
+  const [cart] = useState([...cartContext.cart]);
+  const [totalPriceOfCart] = useState(cartContext.getTotalPriceOfCart);
   const [user, setUser] = useState<UserInfo>({});
   const [payment, setPayment] = useState<PaymentInfo>({});
   const [delivery, setDelivery] = useState<DeliveryInfo>({});
-  const [disabled, setDisabled] = useState(true)
-  const [showModal, setShowModal] = useState(false)
+  const [disabled, setDisabled] = useState(true);
+  const [showModal, setShowModal] = useState(false);
   const [validation, setValidation] = useState<Validation>({
     cartValidation: Boolean(cartContext.cart.length),
     paymentValidation: false,
@@ -38,21 +41,30 @@ export default function CheckoutPage() {
   }, [cartContext]);
 
   useEffect(() => {
-    if (validation.cartValidation === true && validation.paymentValidation === true && validation.userValidation === true && validation.deliveryValidation === true ){
-      setDisabled(false)
+    if (
+      validation.cartValidation === true &&
+      validation.paymentValidation === true &&
+      validation.userValidation === true &&
+      validation.deliveryValidation === true
+    ) {
+      setDisabled(false);
     }
   }, [validation]);
 
   const handleClick = () => {
-    setDisabled(true)
-    setTimeout(setShowModal, 1000, true)
+    setDisabled(true);
+    setTimeout(setShowModal, 1000, true);
+    cartContext.emptyCart();
+  };
 
-  }
-  console.log("Delivery: " + delivery.price + "Cartprice = " + cartContext.getTotalPriceOfCart())
-// Spara information för modal props i nytt objekt, radera cart onclick
   return (
     <>
-     <OrderConfirmationModal display = {showModal} products = {cartContext.cart} name = {user.name} totalCost = {delivery.price! + cartContext.getTotalPriceOfCart()}  />
+      <OrderConfirmationModal
+        display={showModal}
+        products={cart}
+        name={user.name}
+        totalCost={delivery.price! + totalPriceOfCart}
+      />
       <Header type="white" />
       <Box style={checkoutContainer}>
         <form>
@@ -69,6 +81,7 @@ export default function CheckoutPage() {
           <div style={formContainer}>
             <p style={heading}>Betalsätt</p>
             <PaymentForm
+              userPhone={user.phone}
               payment={payment}
               setPayment={setPayment}
               validation={validation}
@@ -84,12 +97,17 @@ export default function CheckoutPage() {
               setValidation={setValidation}
             />
           </div>
+          <SubTotal
+            products={cartContext.cart}
+            display={true}
+            totalCost={delivery.price! + cartContext.getTotalPriceOfCart()}
+          />
           <Button
             variant="contained"
             color="primary"
             style={confirmationButton}
-            disabled = {disabled}
-            onClick = {handleClick}
+            disabled={disabled}
+            onClick={handleClick}
           >
             Slutför köp
           </Button>
@@ -99,7 +117,6 @@ export default function CheckoutPage() {
     </>
   );
 }
-
 
 const checkoutContainer: CSSProperties = {
   display: "flex",

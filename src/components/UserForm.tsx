@@ -228,7 +228,7 @@ export default function UserForm({
         error={Boolean(error.adressError)}
         helperText={error.adressError}
         style={textField}
-        inputProps={{ autoComplete: "address", style: inputField }}
+        inputProps={{ autoComplete: "street-address", style: inputField }}
         placeholder="Adress"
         variant="outlined"
       />
@@ -239,7 +239,7 @@ export default function UserForm({
         helperText={error.postalError}
         style={textField}
         inputProps={{
-          autoComplete: "shipping postal-code",
+          autoComplete: "postal-code",
           style: inputField,
         }}
         name="ZipCode"
@@ -253,7 +253,7 @@ export default function UserForm({
         helperText={error.cityError}
         style={textField}
         inputProps={{
-          autoComplete: "shipping locality",
+          autoComplete: "address-level2",
           style: inputField,
         }}
         placeholder="Stad"
@@ -277,7 +277,7 @@ export default function UserForm({
         style={textField}
         placeholder="Telefonnummer"
         variant="outlined"
-        inputProps={{ autoComplete: "phone", style: inputField }}
+        inputProps={{ autoComplete: "tel", style: inputField }}
       />
     </Box>
   );
