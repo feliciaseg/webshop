@@ -90,7 +90,7 @@ export default function DeliveryForm({
           <FormHelperText style={helperText}>
             {validation.deliveryValidation
               ? null
-              : "Vänligen välj en leveransmetod"}
+              : "Vänligen välj en leveransmetod."}
           </FormHelperText>
         </FormControl>
       </RadioGroup>
