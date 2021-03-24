@@ -24,6 +24,7 @@ interface Card {
 }
 
 interface Props {
+  userPhone?: string;
   payment: PaymentInfo;
   setPayment: (payment: PaymentInfo) => void;
   validation: Validation;
@@ -31,6 +32,7 @@ interface Props {
 }
 
 export default function PaymentForm({
+  userPhone,
   payment,
   setPayment,
   validation,
@@ -238,6 +240,9 @@ export default function PaymentForm({
                   style={textField}
                   helperText={error.swishError}
                   value={payment.swish}
+                  onClick={() =>
+                    handleInputChange("swish", userPhone ? userPhone : "")
+                  }
                   error={Boolean(error.swishError)}
                   onChange={(e) => handleInputChange("swish", e.target.value)}
                   placeholder={"Telefonnummer"}
