@@ -65,6 +65,8 @@ export function validateEmail(fieldValue: string) {
   } else if (!fieldValue.includes("@")) {
     //checks that an "@" is included
     return "Skriv en giltig email-adress.";
+  } else if (!fieldValue.includes(".")){
+    return "Skriv en giltig email-adress."
   } else {
     return "";
   }
@@ -77,6 +79,68 @@ export function validatePhone(fieldValue: string) {
     return "Fältet får endast innehålla siffror!";
   } else if (fieldValue.length !== 10) {
     return "Ange ditt telefonnummer";
+  } else {
+    return "";
+  }
+}
+
+export function validateSwish(fieldValue: string) {
+  if (fieldValue === "") {
+    return "Var god fyll i fältet.";
+  } else if (!/^[0-9]+$/.test(fieldValue) || fieldValue.length !== 10) {
+    return "Vänligen skriv in ett giltigt telefonnummer.";
+  } else {
+    return "";
+  }
+}
+
+export function validateCardNumber(fieldValue: string) {
+  if (fieldValue === "") {
+    return "Var god fyll i fältet.";
+  } else if (
+    !/^[0-9]+$/.test(fieldValue) ||
+    fieldValue.length < 10 ||
+    fieldValue.length > 14
+  ) {
+    return "Vänligen skriv in ett giltigt kortnummer";
+  } else {
+    return "";
+  }
+}
+
+export function validateCVV(fieldValue: string) {
+  if (fieldValue === "") {
+    return "Var god fyll i fältet.";
+  } else if (
+    !/^[0-9]+$/.test(fieldValue) ||
+    fieldValue.length < 3 ||
+    fieldValue.length > 4
+  ) {
+    return "Vänligen skriv in ett giltigt CVV/CVC nummer";
+  } else {
+    return "";
+  }
+}
+
+export function validateValidity(fieldValue: string) {
+  if (fieldValue === "") {
+    return "Var god fyll i fältet.";
+  } else if (
+    !/^[0-9/]+$/.test(fieldValue) ||
+    fieldValue.length !== 5 ||
+    !/^[/\/(\w+)/ig]+$/.test(fieldValue)
+  ) {
+    return "Vänligen skriv in giltighetsdatum i formatet MM/YY";
+  } else {
+    return "";
+  }
+}
+
+export function validateKlarna(fieldValue: string) {
+  if (fieldValue === "") {
+    return "Var god fyll i fältet.";
+  } else if (fieldValue.length !== 10 || !/^[0-9/]+$/.test(fieldValue)) {
+    return "Vänligen skriv in ett 10-siffrigt personnummer";
   } else {
     return "";
   }
