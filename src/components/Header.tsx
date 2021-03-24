@@ -32,6 +32,7 @@ export default function Header(props: Props) {
 
   return (
     <div
+      className="headerContainer"
       style={{
         ...headerStyling,
         backgroundColor: bgColor,
@@ -61,7 +62,6 @@ export default function Header(props: Props) {
 
 const headerStyling: CSSProperties = {
   display: "flex",
-  padding: "0 3.5rem",
   flexDirection: "row",
   justifyContent: "space-between",
   alignItems: "center",

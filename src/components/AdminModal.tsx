@@ -10,7 +10,7 @@ export default function AdminModal() {
   const modal = useContext(ModalContext);
   return (
     <div style={darkUnderlay}>
-      <div style={modalContainer}>
+      <div className="modalContainer" style={modalContainer}>
         <Cancel
           style={cancelIcon}
           onClick={() => modal.setModalIsOpen(false)}
@@ -31,7 +31,6 @@ const modalContainer: CSSProperties = {
   maxWidth: "40rem",
   minHeight: "30rem",
   transform: "translate(-50%, -50%)",
-  padding: "2rem",
   backgroundColor: "#ffff",
   boxShadow: "0px 2px 5px 0px rgba(0,0,0,0.3)",
   zIndex: 100,

@@ -111,5 +111,5 @@ const label: CSSProperties = {
 };
 
 const helperText: CSSProperties = {
-  margin: "0 0 0 3rem",
+  margin: "0 0 0 2.5rem",
 };

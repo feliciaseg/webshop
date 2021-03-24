@@ -10,7 +10,6 @@ import SmallModal from "../components/SmallModal";
 import { ProductContext } from "../contexts/ProductContext";
 import { Product } from "../products";
 
-
 interface Id {
   id: string;
 }
@@ -69,7 +68,10 @@ export default function ProductPage(props: Props) {
             alt={product?.name}
           ></img>
         </div>
-        <div className="productSubContainer" style={infoContainer}>
+        <div
+          className="productSubContainer gridContainer"
+          style={infoContainer}
+        >
           <h2 style={productName}>{product?.name}</h2>
           <p style={productPrice}>{product?.price}&nbsp;kr</p>
           <Button
@@ -116,7 +118,6 @@ const productImage: CSSProperties = {
 const infoContainer: CSSProperties = {
   display: "flex",
   flexDirection: "column",
-  padding: "4rem 3.5rem",
 };
 
 const productName: CSSProperties = {

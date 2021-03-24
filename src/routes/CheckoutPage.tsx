@@ -66,7 +66,7 @@ export default function CheckoutPage() {
         totalCost={delivery.price! + totalPriceOfCart}
       />
       <Header type="white" />
-      <Box style={checkoutContainer}>
+      <Box className="paddingContainer" style={checkoutContainer}>
         <form>
           <CartView />
           <div style={formContainer}>
@@ -122,7 +122,6 @@ const checkoutContainer: CSSProperties = {
   display: "flex",
   flex: 1,
   margin: "auto",
-  padding: "2rem 1rem 4rem 1rem",
   alignItems: "center",
   flexDirection: "column",
   width: "100%",
