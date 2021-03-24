@@ -12,7 +12,14 @@ interface Props {
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
+interface MenuItem {
+  value: number;
+  label: number;
+
+}
+
 export default function CartCard(props: Props) {
+  let quantities: MenuItem[] = []
   const shortenName = (name: string) => {
     if (name.length > 11) {
       const newName = name.slice(0, 11);
@@ -22,6 +29,15 @@ export default function CartCard(props: Props) {
     }
   };
 
+  const getQuantities = () => {
+    for (let i = 0; i < 20; i++){
+      
+    }
+  }
+  
+
+
+
   return (
     <Box style={box}>
       <div style={imgContainer}>
@@ -30,12 +46,31 @@ export default function CartCard(props: Props) {
       <div style={spaceBetween}>
         <div className={"flex-direction alignStart"}>
           <p style={itemSpacing}>{shortenName(props.name)}</p>
-          <Input
+          
+          <TextField
+          id="quantity"
+          select
+          label="quantity"
+          defaultValue={props.numberOfProducts}
+          value = {quantitySelections}
+          onChange={props.handleChange}
+          
+        >
+       
+        </TextField>
+          
+          {/* <Input
             type="number"
             defaultValue={props.numberOfProducts}
-            inputProps={{ min: 0, style: selector }}
+            inputProps={{ min: 0, style: selector, onKeyDown: (e) => {
+              e.preventDefault();
+              },}}
             onChange={props.handleChange}
-          ></Input>
+          ></Input> */}
+        
+        
+        
+        
         </div>
         <div className={"flex-direction alignEnd"}>
           <p style={itemSpacing}>{props.price} kr</p>

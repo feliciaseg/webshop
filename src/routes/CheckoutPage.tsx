@@ -48,7 +48,8 @@ export default function CheckoutPage() {
     setTimeout(setShowModal, 1000, true)
 
   }
-
+  console.log("Delivery: " + delivery.price + "Cartprice = " + cartContext.getTotalPriceOfCart())
+// Spara information för modal props i nytt objekt, radera cart onclick
   return (
     <>
      <OrderConfirmationModal display = {showModal} products = {cartContext.cart} name = {user.name} totalCost = {delivery.price! + cartContext.getTotalPriceOfCart()}  />
@@ -66,7 +67,7 @@ export default function CheckoutPage() {
             />
           </div>
           <div style={formContainer}>
-            <p style={heading}>Betalning</p>
+            <p style={heading}>Betalsätt</p>
             <PaymentForm
               payment={payment}
               setPayment={setPayment}
@@ -75,7 +76,7 @@ export default function CheckoutPage() {
             />
           </div>
           <div style={formContainer}>
-            <p style={heading}>Leveransmetod</p>
+            <p style={heading}>Fraktsätt</p>
             <DeliveryForm
               delivery={delivery}
               setDelivery={setDelivery}
