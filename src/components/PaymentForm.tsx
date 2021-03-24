@@ -36,10 +36,7 @@ export default function PaymentForm({
   validation,
   setValidation,
 }: Props) {
-  const [checkedOption, setCheckedOption] = useState({
-    isChecked: false,
-    option: "",
-  });
+  const [checkedOption, setCheckedOption] = useState("swish");
 
   const [error, setError] = useState({
     swishError: "",
@@ -70,11 +67,11 @@ export default function PaymentForm({
   }
 
   useEffect(() => {
-    if (checkedOption.option === "swish") {
+    if (checkedOption === "swish") {
       if (error.swishError.length === 0 && payment?.swish) {
         setValidation({ ...validation, paymentValidation: true });
       }
-    } else if (checkedOption.option === "card") {
+    } else if (checkedOption === "card") {
       if (
         error.cardError.length +
           error.cvvError.length +
@@ -84,7 +81,7 @@ export default function PaymentForm({
       ) {
         setValidation({ ...validation, paymentValidation: true });
       }
-    } else if (checkedOption.option === "klarna") {
+    } else if (checkedOption === "klarna") {
       if (error.klarnaError.length === 0 && payment?.klarna) {
         setValidation({ ...validation, paymentValidation: true });
       }
@@ -92,10 +89,7 @@ export default function PaymentForm({
   }, [payment, error]);
 
   function handleRadioChange(radio: string) {
-    setCheckedOption({
-      option: radio,
-      isChecked: true,
-    });
+    setCheckedOption(radio);
     resetState();
   }
 
@@ -193,8 +187,8 @@ export default function PaymentForm({
       }));
     } else if (
       !/^[0-9/]+$/.test(fieldValue) ||
-      fieldValue.length > 5 ||
-      fieldValue.length < 4
+      fieldValue.length !== 5 ||
+      !/^[/\/(\w+)/ig]+$/.test(fieldValue)
     ) {
       setError((prevState) => ({
         ...prevState,
@@ -228,30 +222,32 @@ export default function PaymentForm({
 
   return (
     <div style={paymentContainer}>
-      <FormControl error={!checkedOption.isChecked}>
-        <RadioGroup style={radioContainer}>
+      <FormControl>
+        <RadioGroup style={radioContainer} value={checkedOption}>
           <p style={heading}>Swish</p>
           <div style={radioContainer}>
             <FormControlLabel
               style={radioButton}
               className="radioButton"
-              value="Swish"
+              value="swish"
+              defaultChecked={true}
               onChange={() => handleRadioChange("swish")}
               control={<Radio style={{ color: theme.palette.primary.main }} />}
               label={
                 <TextField
                   style={textField}
-                  id="swish"
-                  type="tel"
                   helperText={error.swishError}
                   value={payment.swish}
                   error={Boolean(error.swishError)}
                   onChange={(e) => handleInputChange("swish", e.target.value)}
                   placeholder={"Telefonnummer"}
-                  disabled={checkedOption.option === "swish" ? false : true}
+                  disabled={checkedOption === "swish" ? false : true}
                   variant="outlined"
                   required
-                  inputProps={{ style: textFieldBackground }}
+                  inputProps={{
+                    style: textFieldBackground,
+                    autoComplete: "tel",
+                  }}
                 />
               }
             />
@@ -261,14 +257,13 @@ export default function PaymentForm({
             <FormControlLabel
               style={radioButton}
               className="radioButton"
-              value="Kort"
+              value="card"
               onChange={() => handleRadioChange("card")}
               control={<Radio style={{ color: theme.palette.primary.main }} />}
               label={
                 <div style={columnContainer}>
                   <TextField
                     style={textField}
-                    id="kort"
                     helperText={error.cardError}
                     value={payment.card?.cardNumber}
                     error={Boolean(error.cardError)}
@@ -276,7 +271,7 @@ export default function PaymentForm({
                       handleInputChange("cardNumber", e.target.value)
                     }
                     placeholder={"Kortnummer"}
-                    disabled={checkedOption.option === "card" ? false : true}
+                    disabled={checkedOption === "card" ? false : true}
                     variant="outlined"
                     inputProps={{
                       style: textFieldBackground,
@@ -286,13 +281,12 @@ export default function PaymentForm({
                   <div className="rowContainer">
                     <TextField
                       className="textFieldRow"
-                      id="cvv"
                       helperText={error.cvvError}
                       value={payment.card?.cvv}
                       error={Boolean(error.cvvError)}
                       onChange={(e) => handleInputChange("cvv", e.target.value)}
                       placeholder={"CVV/CVC"}
-                      disabled={checkedOption.option === "card" ? false : true}
+                      disabled={checkedOption === "card" ? false : true}
                       variant="outlined"
                       inputProps={{
                         style: textFieldBackground,
@@ -301,14 +295,13 @@ export default function PaymentForm({
                     />
                     <TextField
                       className="textFieldRow"
-                      id="date"
                       helperText={error.validityError}
                       value={payment.card?.validity}
                       error={Boolean(error.validityError)}
                       onChange={(e) =>
                         handleInputChange("validity", e.target.value)
                       }
-                      disabled={checkedOption.option === "card" ? false : true}
+                      disabled={checkedOption === "card" ? false : true}
                       variant="outlined"
                       placeholder={"Giltighetsperiod MM/YY"}
                       inputProps={{
@@ -326,19 +319,18 @@ export default function PaymentForm({
             <FormControlLabel
               style={radioButton}
               className="radioButton"
-              value="Klarna"
+              value="klarna"
               onChange={() => handleRadioChange("klarna")}
               control={<Radio style={{ color: theme.palette.primary.main }} />}
               label={
                 <TextField
                   style={textField}
-                  id="klarna"
                   helperText={error.klarnaError}
                   value={payment.klarna}
                   error={Boolean(error.klarnaError)}
                   onChange={(e) => handleInputChange("klarna", e.target.value)}
                   placeholder={"Personnummer"}
-                  disabled={checkedOption.option === "klarna" ? false : true}
+                  disabled={checkedOption === "klarna" ? false : true}
                   variant="outlined"
                   className={"inputPayment"}
                   inputProps={{
@@ -351,7 +343,7 @@ export default function PaymentForm({
           </div>
         </RadioGroup>
         <FormHelperText style={helperText}>
-          {checkedOption.isChecked ? null : "Vänligen välj en betalmetod"}
+          {checkedOption ? null : "Vänligen välj en betalmetod"}
         </FormHelperText>
       </FormControl>
     </div>

@@ -61,7 +61,6 @@ export default function OrderConfirmationModal(props: Props) {
               variant="contained"
               color="primary"
               style={confirmationButton}
-              onClick={context.emptyCart}
             >
               Ok
             </Button>
