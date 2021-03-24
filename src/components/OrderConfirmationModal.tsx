@@ -19,7 +19,7 @@ export default function OrderConfirmationModal(props: Props) {
   if (props.display === true) {
     return (
       <div style={darkUnderlay}>
-        <div style={modalContainer}>
+        <div className="modalContainer" style={modalContainer}>
           <p style={confirmationGreeting}>Tack för ditt köp, {props.name}!</p>
           <p style={ordernumber}>
             Ordernummer: <b>{generateOrderID()}</b>
@@ -83,7 +83,6 @@ const modalContainer: CSSProperties = {
   maxWidth: "40rem",
   minHeight: "30rem",
   transform: "translate(-50%, -50%)",
-  padding: "2rem",
   backgroundColor: "#ffff",
   boxShadow: "0px 2px 5px 0px rgba(0,0,0,0.3)",
   zIndex: 1,

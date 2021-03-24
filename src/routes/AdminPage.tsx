@@ -29,7 +29,7 @@ export default function AdminPage() {
   return (
     <>
       <Header type={"white"} />
-      <div style={adminContainer}>
+      <div className="paddingContainer" style={adminContainer}>
         {modal.modalIsOpen && <AdminModal />}
         <Button
           onClick={() => (
@@ -51,7 +51,6 @@ const adminContainer: CSSProperties = {
   display: "flex",
   flexDirection: "column",
   width: "100%",
-  padding: "3.5rem",
 };
 const addButton: CSSProperties = {
   width: "100%",

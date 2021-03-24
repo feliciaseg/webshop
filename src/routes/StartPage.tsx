@@ -7,7 +7,7 @@ import HeroBanner from "../components/HeroBanner";
 import { useEffect, useState, useContext } from "react";
 import { ProductContext } from "../contexts/ProductContext";
 import { Product } from "../products";
-
+import "../styling/style.css";
 
 interface ProductList {
   component: (props: Product) => JSX.Element;
@@ -30,7 +30,7 @@ export default function StartPage() {
       <Header type={"transparent"} />
       <HeroBanner />
       <Box style={{ display: "flex", flexDirection: "column" }}>
-        <div style={{ width: "100%", padding: "3.5rem" }}>
+        <div className="paddingContainer" style={{ width: "100%" }}>
           <Grid products={productList} />
         </div>
       </Box>

@@ -11,7 +11,23 @@
 }
 
 .footerButton {
-  margin: 1.8rem 6.25rem 0 0;
+  margin: 1.8rem 3.5rem 0 0;
+}
+
+.paddingContainer {
+  padding: 3.5rem;
+}
+
+.modalContainer {
+  padding: 2rem;
+}
+
+.headerContainer {
+  padding: 0 3.5rem;
+}
+
+.MuiFormControlLabel-root {
+  margin: 0;
 }
 
 /* Product-added modal */
@@ -45,6 +61,7 @@
   margin-top: 0.5rem;
   margin-right: 1rem;
   align-self: flex-start;
+  padding: 0.5rem 0 0.5rem 0;
 }
 
 /* USERFORM */
@@ -63,8 +80,25 @@
   .productContainer {
     flex-direction: column;
   }
+
   .productSubContainer {
     width: 100%;
+  }
+
+  .footerButton {
+    margin: 1.8rem 2.5rem 0 0;
+  }
+
+  .paddingContainer {
+    padding: 3.5rem 2.5rem;
+  }
+
+  .modalContainer {
+    padding: 1.5rem;
+  }
+
+  .headerContainer {
+    padding: 0 2.5rem;
   }
 
   /* PAYMENTFORM */
@@ -99,7 +133,15 @@
   }
 
   .footerButton {
-    margin: 1.1rem 1.6rem 0 0;
+    margin: 1.1rem 1.5rem 0 0;
+  }
+
+  .paddingContainer {
+    padding: 2rem 1.5rem;
+  }
+
+  .headerContainer {
+    padding: 0 2rem;
   }
 
   /* Product-added modal */

@@ -56,9 +56,12 @@ export default function CartView() {
   };
 
   if (cart.length === 0) {
-    return <p>Du har inte lagt till några produkter ännu!</p>;
+    return (
+      <p style={{ textAlign: "center" }}>
+        Du har inte lagt till några produkter ännu!
+      </p>
+    );
   } else {
-    
     return (
       <>
         <div style={div}>{renderCartCards()}</div>

@@ -142,7 +142,7 @@ export default function PaymentForm({
   }
 
   return (
-    <div style={paymentContainer}>
+    <div className="modalContainer" style={paymentContainer}>
       <FormControl error={Boolean(!checkedOption)}>
         <RadioGroup style={radioContainer} value={checkedOption}>
           <p style={heading}>Swish</p>
@@ -279,13 +279,12 @@ const paymentContainer: CSSProperties = {
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  padding: "2rem",
 };
 
 const radioButton: CSSProperties = {
   width: "100%",
   alignSelf: "flex-start",
-  marginTop: "0.5rem",
+  margin: "0.5rem 0 0 0",
 };
 
 const textField: CSSProperties = {
@@ -311,9 +310,9 @@ const columnContainer: CSSProperties = {
 };
 
 const heading: CSSProperties = {
-  margin: "1rem 0 0 3rem",
+  margin: "1rem 0 0 2.5rem",
 };
 
 const helperText: CSSProperties = {
-  margin: "0.5rem 0 0 3rem",
+  margin: "0.5rem 0 0 2.5rem",
 };
