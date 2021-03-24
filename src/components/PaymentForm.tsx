@@ -8,6 +8,13 @@ import {
 } from "@material-ui/core";
 import { CSSProperties, useEffect, useState } from "react";
 import { Validation } from "../routes/CheckoutPage";
+import {
+  validateCardNumber,
+  validateCVV,
+  validateKlarna,
+  validateSwish,
+  validateValidity,
+} from "../routes/validation";
 import { theme } from "../styling/colorTheme";
 import "../styling/style.css";
 
@@ -103,121 +110,33 @@ export default function PaymentForm({
     }
 
     if (field === "swish") {
-      validateSwish(fieldValue);
+      setError((prevState) => ({
+        ...prevState,
+        swishError: validateSwish(fieldValue),
+      }));
     }
     if (field === "cardNumber") {
-      validateCardNumber(fieldValue);
+      setError((prevState) => ({
+        ...prevState,
+        cardError: validateCardNumber(fieldValue),
+      }));
     }
     if (field === "cvv") {
-      validateCVV(fieldValue);
+      setError((prevState) => ({
+        ...prevState,
+        cvvError: validateCVV(fieldValue),
+      }));
     }
     if (field === "validity") {
-      validateValidity(fieldValue);
+      setError((prevState) => ({
+        ...prevState,
+        validityError: validateValidity(fieldValue),
+      }));
     }
     if (field === "klarna") {
-      validateKlarna(fieldValue);
-    }
-  }
-
-  function validateSwish(fieldValue: string) {
-    if (fieldValue === "") {
       setError((prevState) => ({
         ...prevState,
-        swishError: "Var god fyll i fältet.",
-      }));
-    } else if (!/^[0-9]+$/.test(fieldValue) || fieldValue.length !== 10) {
-      setError((prevState) => ({
-        ...prevState,
-        swishError: "Vänligen skriv in ett giltigt telefonnummer.",
-      }));
-    } else {
-      setError((prevState) => ({
-        ...prevState,
-        swishError: "",
-      }));
-    }
-  }
-  function validateCardNumber(fieldValue: string) {
-    if (fieldValue === "") {
-      setError((prevState) => ({
-        ...prevState,
-        cardError: "Var god fyll i fältet.",
-      }));
-    } else if (
-      !/^[0-9]+$/.test(fieldValue) ||
-      fieldValue.length < 10 ||
-      fieldValue.length > 14
-    ) {
-      setError((prevState) => ({
-        ...prevState,
-        cardError: "Vänligen skriv in ett giltigt kortnummer",
-      }));
-    } else {
-      setError((prevState) => ({
-        ...prevState,
-        cardError: "",
-      }));
-    }
-  }
-  function validateCVV(fieldValue: string) {
-    if (fieldValue === "") {
-      setError((prevState) => ({
-        ...prevState,
-        cvvError: "Var god fyll i fältet.",
-      }));
-    } else if (
-      !/^[0-9]+$/.test(fieldValue) ||
-      fieldValue.length < 3 ||
-      fieldValue.length > 4
-    ) {
-      setError((prevState) => ({
-        ...prevState,
-        cvvError: "Vänligen skriv in ett giltigt CVV/CVC nummer",
-      }));
-    } else {
-      setError((prevState) => ({
-        ...prevState,
-        cvvError: "",
-      }));
-    }
-  }
-  function validateValidity(fieldValue: string) {
-    if (fieldValue === "") {
-      setError((prevState) => ({
-        ...prevState,
-        validityError: "Var god fyll i fältet.",
-      }));
-    } else if (
-      !/^[0-9/]+$/.test(fieldValue) ||
-      fieldValue.length !== 5 ||
-      !/^[/\/(\w+)/ig]+$/.test(fieldValue)
-    ) {
-      setError((prevState) => ({
-        ...prevState,
-        validityError: "Vänligen skriv in giltighetsdatum i formatet MM/YY",
-      }));
-    } else {
-      setError((prevState) => ({
-        ...prevState,
-        validityError: "",
-      }));
-    }
-  }
-  function validateKlarna(fieldValue: string) {
-    if (fieldValue === "") {
-      setError((prevState) => ({
-        ...prevState,
-        klarnaError: "Var god fyll i fältet.",
-      }));
-    } else if (fieldValue.length !== 10 || !/^[0-9/]+$/.test(fieldValue)) {
-      setError((prevState) => ({
-        ...prevState,
-        klarnaError: "Vänligen skriv in ett 10-siffrigt personnummer",
-      }));
-    } else {
-      setError((prevState) => ({
-        ...prevState,
-        klarnaError: "",
+        klarnaError: validateKlarna(fieldValue),
       }));
     }
   }
