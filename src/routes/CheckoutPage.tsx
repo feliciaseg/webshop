@@ -101,6 +101,8 @@ export default function CheckoutPage() {
             products={cartContext.cart}
             display={true}
             totalCost={delivery.price! + cartContext.getTotalPriceOfCart()}
+            momsResoult ={cartContext.getTotalPriceOfCart() * 0.25}
+            deliveryPrice = {delivery.price}
           />
           <Button
             variant="contained"
