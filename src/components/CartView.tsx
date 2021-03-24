@@ -16,10 +16,8 @@ export default function CartView() {
 
     if (currentValue === 0 ) {
       context.removeProduct(product);
-    } else if (currentValue === product.quantity + 1) {
-      context.addToCart(product);
-    } else if (currentValue === product.quantity - 1) {
-      context.removeQuantity(product);
+    } else {
+      context.updateQuantity(product, currentValue)
     }
   };
 

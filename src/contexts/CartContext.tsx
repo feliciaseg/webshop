@@ -13,16 +13,16 @@ interface ContextState extends CartState {
   cart: CartItem[];
   addToCart: (product: Product) => void;
   removeProduct: (product: Product) => void;
-  removeQuantity: (product: CartItem) => void;
   emptyCart: () => void;
   getTotalPriceOfCart: () => number;
+  updateQuantity: (product: CartItem, quantity: number) => void;
 }
 
 export const CartContext = createContext<ContextState>({
   cart: [],
   addToCart: () => {},
   removeProduct: () => {},
-  removeQuantity: () => {},
+  updateQuantity: () => {},
   emptyCart: () => {},
   getTotalPriceOfCart: () => 0,
 });
@@ -48,16 +48,18 @@ export default class CartProvider extends Component<{}, CartState> {
     saveCartToLocalStorage(newCart)
   };
 
-  removeQuantity = (product: CartItem) => {
+
+  updateQuantity = (product: CartItem, quantity: number) => {
     let newCart = [...this.state.cart];
     const cartItem = newCart.find(
       (cartItem) => cartItem.id === product.id
     );
-    cartItem!.quantity--;
+    cartItem!.quantity = quantity
     this.setState({ cart: newCart });
     saveCartToLocalStorage(newCart)
   }
 
+ 
   emptyCart = () => {
     let emptyCart: CartItem[] = [];
     this.setState({ cart: emptyCart });
@@ -90,9 +92,9 @@ export default class CartProvider extends Component<{}, CartState> {
           cart: this.state.cart,
           addToCart: this.addProductToCart,
           removeProduct: this.removeProductfromCart,
-          removeQuantity: this.removeQuantity,
           emptyCart: this.emptyCart,
-          getTotalPriceOfCart: this.getTotalPriceOfCart
+          getTotalPriceOfCart: this.getTotalPriceOfCart,
+          updateQuantity: this.updateQuantity,
         }}
       >
         {this.props.children}

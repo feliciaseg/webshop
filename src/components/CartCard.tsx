@@ -1,4 +1,4 @@
-import { Box, Input } from "@material-ui/core";
+import { Box, Input, MenuItem, TextField } from "@material-ui/core";
 import { CSSProperties } from "@material-ui/styles";
 import React from "react";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -30,8 +30,12 @@ export default function CartCard(props: Props) {
   };
 
   const getQuantities = () => {
-    for (let i = 0; i < 20; i++){
-      
+    for (let i = 1; i < 21; i++){
+      quantities.push({
+        value: i,
+        label: i
+      }
+      )
     }
   }
   
@@ -50,13 +54,20 @@ export default function CartCard(props: Props) {
           <TextField
           id="quantity"
           select
-          label="quantity"
+          label=""
           defaultValue={props.numberOfProducts}
-          value = {quantitySelections}
           onChange={props.handleChange}
+          inputProps = {{style: selector}}
+          SelectProps = {{native: true}}
+          
           
         >
-       
+          {getQuantities()}
+        {quantities.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
         </TextField>
           
           {/* <Input
@@ -96,6 +107,7 @@ const itemSpacing: CSSProperties = {
 
 const selector: CSSProperties = {
   width: "4rem",
+  height: "2rem",
 };
 
 const box: CSSProperties = {
