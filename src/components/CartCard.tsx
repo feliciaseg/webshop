@@ -15,11 +15,10 @@ interface Props {
 interface MenuItem {
   value: number;
   label: number;
-
 }
 
 export default function CartCard(props: Props) {
-  let quantities: MenuItem[] = []
+  let quantities: MenuItem[] = [];
   const shortenName = (name: string) => {
     if (name.length > 11) {
       const newName = name.slice(0, 11);
@@ -30,17 +29,13 @@ export default function CartCard(props: Props) {
   };
 
   const getQuantities = () => {
-    for (let i = 1; i < 21; i++){
+    for (let i = 1; i < 21; i++) {
       quantities.push({
         value: i,
-        label: i
-      }
-      )
+        label: i,
+      });
     }
-  }
-  
-
-
+  };
 
   return (
     <Box style={box}>
@@ -50,38 +45,23 @@ export default function CartCard(props: Props) {
       <div style={spaceBetween}>
         <div className={"flex-direction alignStart"}>
           <p style={itemSpacing}>{shortenName(props.name)}</p>
-          
+
           <TextField
-          id="quantity"
-          select
-          label=""
-          defaultValue={props.numberOfProducts}
-          onChange={props.handleChange}
-          inputProps = {{style: selector}}
-          SelectProps = {{native: true}}
-          
-          
-        >
-          {getQuantities()}
-        {quantities.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </TextField>
-          
-          {/* <Input
-            type="number"
+            id="quantity"
+            select
+            label=""
             defaultValue={props.numberOfProducts}
-            inputProps={{ min: 0, style: selector, onKeyDown: (e) => {
-              e.preventDefault();
-              },}}
             onChange={props.handleChange}
-          ></Input> */}
-        
-        
-        
-        
+            inputProps={{ style: selector }}
+            SelectProps={{ native: true }}
+          >
+            {getQuantities()}
+            {quantities.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </TextField>
         </div>
         <div className={"flex-direction alignEnd"}>
           <p style={itemSpacing}>{props.price} kr</p>
