@@ -8,6 +8,8 @@ import PaymentForm, { PaymentInfo } from "../components/PaymentForm";
 import CartView from "../components/CartView";
 import OrderConfirmationModal from "../components/OrderConfirmationModal";
 import { CartContext } from "../contexts/CartContext";
+import  SubTotal  from "../components/SubTotal";
+ 
 
 export interface Validation {
   cartValidation: boolean;
@@ -83,6 +85,7 @@ export default function CheckoutPage() {
               setValidation={setValidation}
             />
           </div>
+          <SubTotal products={cartContext.cart} display={true} totalCost={delivery.price! + cartContext.getTotalPriceOfCart()}/>
           <Button
             variant="contained"
             color="primary"
