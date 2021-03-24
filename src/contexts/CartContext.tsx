@@ -45,37 +45,33 @@ export default class CartProvider extends Component<{}, CartState> {
     }
 
     this.setState({ cart: newCart });
-    saveCartToLocalStorage(newCart)
+    saveCartToLocalStorage(newCart);
   };
-
 
   updateQuantity = (product: CartItem, quantity: number) => {
     let newCart = [...this.state.cart];
-    const cartItem = newCart.find(
-      (cartItem) => cartItem.id === product.id
-    );
-    cartItem!.quantity = quantity
+    const cartItem = newCart.find((cartItem) => cartItem.id === product.id);
+    cartItem!.quantity = quantity;
     this.setState({ cart: newCart });
-    saveCartToLocalStorage(newCart)
-  }
+    saveCartToLocalStorage(newCart);
+  };
 
- 
   emptyCart = () => {
     let emptyCart: CartItem[] = [];
     this.setState({ cart: emptyCart });
-    saveCartToLocalStorage(emptyCart)
-  }
+    saveCartToLocalStorage(emptyCart);
+  };
 
-  getTotalPriceOfCart = ():number => {
-      let arrayOfSums: number[] = [];
-      let sum: number;
-      for (let i = 0; i < this.state.cart.length; i++) {
-        arrayOfSums.push(this.state.cart[i].price * this.state.cart[i].quantity);
-      }
-      sum = arrayOfSums.reduce((a, b) => a + b, 0);
+  getTotalPriceOfCart = (): number => {
+    let arrayOfSums: number[] = [];
+    let sum: number;
+    for (let i = 0; i < this.state.cart.length; i++) {
+      arrayOfSums.push(this.state.cart[i].price * this.state.cart[i].quantity);
+    }
+    sum = arrayOfSums.reduce((a, b) => a + b, 0);
 
-      return sum; 
-  }
+    return sum;
+  };
 
   removeProductfromCart = (product: Product) => {
     const updatedList: CartItem[] = this.state.cart.filter(
