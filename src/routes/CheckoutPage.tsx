@@ -79,7 +79,7 @@ export default function CheckoutPage() {
             />
           </div>
           <div style={formContainer}>
-            <p style={heading}>Betalning</p>
+            <p style={heading}>Betalsätt</p>
             <PaymentForm
               userPhone={user.phone}
               payment={payment}
@@ -89,7 +89,7 @@ export default function CheckoutPage() {
             />
           </div>
           <div style={formContainer}>
-            <p style={heading}>Leveransmetod</p>
+            <p style={heading}>Fraktsätt</p>
             <DeliveryForm
               delivery={delivery}
               setDelivery={setDelivery}

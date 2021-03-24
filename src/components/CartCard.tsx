@@ -1,4 +1,4 @@
-import { Box, Input } from "@material-ui/core";
+import { Box, TextField } from "@material-ui/core";
 import { CSSProperties } from "@material-ui/styles";
 import React from "react";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -12,13 +12,28 @@ interface Props {
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
+interface MenuItem {
+  value: number;
+  label: number;
+}
+
 export default function CartCard(props: Props) {
+  let quantities: MenuItem[] = [];
   const shortenName = (name: string) => {
     if (name.length > 11) {
       const newName = name.slice(0, 11);
       return newName + "...";
     } else {
       return name;
+    }
+  };
+
+  const getQuantities = () => {
+    for (let i = 1; i < 21; i++) {
+      quantities.push({
+        value: i,
+        label: i,
+      });
     }
   };
 
@@ -30,12 +45,23 @@ export default function CartCard(props: Props) {
       <div style={spaceBetween}>
         <div className={"flex-direction alignStart"}>
           <p style={itemSpacing}>{shortenName(props.name)}</p>
-          <Input
-            type="number"
+
+          <TextField
+            id="quantity"
+            select
+            label=""
             defaultValue={props.numberOfProducts}
-            inputProps={{ min: 0, style: selector }}
             onChange={props.handleChange}
-          ></Input>
+            inputProps={{ style: selector }}
+            SelectProps={{ native: true }}
+          >
+            {getQuantities()}
+            {quantities.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </TextField>
         </div>
         <div className={"flex-direction alignEnd"}>
           <p style={itemSpacing}>{props.price} kr</p>
@@ -61,6 +87,7 @@ const itemSpacing: CSSProperties = {
 
 const selector: CSSProperties = {
   width: "4rem",
+  height: "2rem",
 };
 
 const box: CSSProperties = {
