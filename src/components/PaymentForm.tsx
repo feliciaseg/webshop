@@ -38,7 +38,7 @@ export default function PaymentForm({
   validation,
   setValidation,
 }: Props) {
-  const [checkedOption, setCheckedOption] = useState("swish");
+  const [checkedOption, setCheckedOption] = useState<string>();
 
   const [error, setError] = useState({
     swishError: "",
@@ -224,7 +224,7 @@ export default function PaymentForm({
 
   return (
     <div style={paymentContainer}>
-      <FormControl>
+      <FormControl error={Boolean(!checkedOption)}>
         <RadioGroup style={radioContainer} value={checkedOption}>
           <p style={heading}>Swish</p>
           <div style={radioContainer}>
@@ -232,17 +232,16 @@ export default function PaymentForm({
               style={radioButton}
               className="radioButton"
               value="swish"
-              defaultChecked={true}
-              onChange={() => handleRadioChange("swish")}
+              onChange={() => (
+                handleRadioChange("swish"),
+                handleInputChange("swish", userPhone ? userPhone : "")
+              )}
               control={<Radio style={{ color: theme.palette.primary.main }} />}
               label={
                 <TextField
                   style={textField}
                   helperText={error.swishError}
                   value={payment.swish}
-                  onClick={() =>
-                    handleInputChange("swish", userPhone ? userPhone : "")
-                  }
                   error={Boolean(error.swishError)}
                   onChange={(e) => handleInputChange("swish", e.target.value)}
                   placeholder={"Telefonnummer"}
