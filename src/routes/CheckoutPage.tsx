@@ -31,15 +31,7 @@ export default function CheckoutPage() {
     email: "",
     phone: "",
   });
-  const [payment, setPayment] = useState<PaymentInfo>({
-    swish: "",
-      card: {
-        cardNumber: "",
-        cvv: "",
-        validity: "",
-      },
-      klarna: "",
-  });
+  const [payment, setPayment] = useState<PaymentInfo>({});
   const [delivery, setDelivery] = useState<DeliveryInfo>({});
   const [disabled, setDisabled] = useState(true);
   const [showModal, setShowModal] = useState(false);
