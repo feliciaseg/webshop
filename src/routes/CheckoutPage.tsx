@@ -22,8 +22,23 @@ export default function CheckoutPage() {
   const cartContext = useContext(CartContext);
   const [cart] = useState([...cartContext.cart]);
   const [totalPriceOfCart] = useState(cartContext.getTotalPriceOfCart);
-  const [user, setUser] = useState<UserInfo>({});
-  const [payment, setPayment] = useState<PaymentInfo>({});
+  const [user, setUser] = useState<UserInfo>({
+    name: "",
+    adress: "",
+    postal: "",
+    city: "",
+    email: "",
+    phone: "",
+  });
+  const [payment, setPayment] = useState<PaymentInfo>({
+    swish: "",
+      card: {
+        cardNumber: "",
+        cvv: "",
+        validity: "",
+      },
+      klarna: "",
+  });
   const [delivery, setDelivery] = useState<DeliveryInfo>({});
   const [disabled, setDisabled] = useState(true);
   const [showModal, setShowModal] = useState(false);

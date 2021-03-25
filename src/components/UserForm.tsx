@@ -13,12 +13,12 @@ import {
 } from "../routes/validation";
 
 export interface UserInfo {
-  name?: string;
-  adress?: string;
-  postal?: string;
-  city?: string;
-  email?: string;
-  phone?: string;
+  name: string;
+  adress: string;
+  postal: string;
+  city: string;
+  email: string;
+  phone: string;
 }
 
 interface Props {
@@ -52,18 +52,18 @@ export default function UserForm({
         error.emailError.length +
         error.phoneError.length ===
         0 &&
-      (user!.name,
-      user!.adress,
-      user!.postal,
-      user!.city,
-      user!.email,
-      user!.phone)
+      (user.name,
+      user.adress,
+      user.postal,
+      user.city,
+      user.email,
+      user.phone)
     ) {
       setValidation({ ...validation, userValidation: true });
     }
   }, [user, error]);
 
-  const handleChange = (field: string, fieldValue: string) => {
+  const handleChange = (field: keyof UserInfo, fieldValue: string) => {
     setUser({ ...user, [field]: fieldValue });
 
     if (field === "name") {
@@ -72,13 +72,13 @@ export default function UserForm({
         nameError: validateName(fieldValue),
       }));
     }
-    if (field === "address") {
+    if (field === "adress") {
       setError((prevState) => ({
         ...prevState,
         adressError: validateAddress(fieldValue),
       }));
     }
-    if (field === "postalcode") {
+    if (field === "postal") {
       setError((prevState) => ({
         ...prevState,
         postalError: validatePostalcode(fieldValue),
@@ -118,7 +118,7 @@ export default function UserForm({
       />
       <TextField
         value={user.adress}
-        onChange={(e) => handleChange("address", e.target.value)}
+        onChange={(e) => handleChange("adress", e.target.value)}
         error={Boolean(error.adressError)}
         helperText={error.adressError}
         style={textField}
@@ -128,7 +128,7 @@ export default function UserForm({
       />
       <TextField
         value={user.postal}
-        onChange={(e) => handleChange("postalcode", e.target.value)}
+        onChange={(e) => handleChange("postal", e.target.value)}
         error={Boolean(error.postalError)}
         helperText={error.postalError}
         style={textField}
