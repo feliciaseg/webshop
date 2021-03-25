@@ -1,6 +1,4 @@
 import { CSSProperties } from "@material-ui/styles";
-import { findByLabelText } from "@testing-library/dom";
-import { PropertySignature } from "typescript";
 import {  CartItem } from "../contexts/CartContext";
 import DeliveryForm, { DeliveryInfo } from "./DeliveryForm";
 
@@ -9,14 +7,15 @@ export interface Props {
     products: CartItem[];
     delivery?: DeliveryInfo[];
     totalCost?: number;
-    display: boolean
+    display: boolean;
     momsResoult?: number;
     deliveryPrice?: number;
+    deliveryValidation?: boolean;
     
 }  
 
 export default function SubTotal(props: Props) {
-      
+   
     if (props.display === true) {
     return (
         
@@ -38,14 +37,13 @@ export default function SubTotal(props: Props) {
             </div>
                 </div>
             );
-    } else {
-        return null;
+    } 
+
+     else {
+         return null;
     }
 
        }
-
-
-
 
 const container: CSSProperties = {
     width: "100%",

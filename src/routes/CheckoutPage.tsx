@@ -10,6 +10,7 @@ import OrderConfirmationModal from "../components/OrderConfirmationModal";
 import { CartContext } from "../contexts/CartContext";
 import SubTotal from "../components/SubTotal";
 
+
 export interface Validation {
   cartValidation: boolean;
   paymentValidation: boolean;
@@ -26,6 +27,7 @@ export default function CheckoutPage() {
   const [delivery, setDelivery] = useState<DeliveryInfo>({});
   const [disabled, setDisabled] = useState(true);
   const [showModal, setShowModal] = useState(false);
+  const [showSubTotal, setShowSubTotal] = useState(false);
   const [validation, setValidation] = useState<Validation>({
     cartValidation: Boolean(cartContext.cart.length),
     paymentValidation: false,
@@ -45,9 +47,10 @@ export default function CheckoutPage() {
       validation.cartValidation === true &&
       validation.paymentValidation === true &&
       validation.userValidation === true &&
-      validation.deliveryValidation === true
+      validation.deliveryValidation === true 
     ) {
       setDisabled(false);
+      setShowSubTotal(true);
     }
   }, [validation]);
 
@@ -99,10 +102,11 @@ export default function CheckoutPage() {
           </div>
           <SubTotal
             products={cartContext.cart}
-            display={true}
+            display={showSubTotal}
             totalCost={delivery.price! + cartContext.getTotalPriceOfCart()}
             momsResoult ={cartContext.getTotalPriceOfCart() * 0.25}
             deliveryPrice = {delivery.price}
+            
           />
           <Button
             variant="contained"
