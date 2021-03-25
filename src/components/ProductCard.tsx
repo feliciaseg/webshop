@@ -1,14 +1,23 @@
 import { CSSProperties } from "@material-ui/styles";
 import AddCircle from "@material-ui/icons/AddCircle";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import SmallModal from "./SmallModal";
 import { Link } from "react-router-dom";
 import { CartContext } from "../contexts/CartContext";
 import { Product } from "../products";
+import { theme } from "../styling/colorTheme";
 
 export default function ProductCard(props: Product) {
   const cart = useContext(CartContext);
   const [modal, showModal] = useState(false);
+  const [iconHover, setIconHover] = useState(false);
+  const [iconColor, setIconColor] = useState("#ffff");
+
+  useEffect(() => {
+    iconHover
+      ? setIconColor(theme.palette.secondary.dark)
+      : setIconColor("#ffff");
+  }, [iconHover]);
 
   const handleClick = (e: any) => {
     e.preventDefault();
@@ -33,7 +42,16 @@ export default function ProductCard(props: Product) {
               src={props.imageUrl}
               alt={props.name}
             ></img>
-            <AddCircle style={addIcon} onClick={(e) => handleClick(e)} />
+            <div
+              onMouseOver={() => setIconHover(!iconHover)}
+              onMouseOut={() => setIconHover(!iconHover)}
+              style={iconContainer}
+            >
+              <AddCircle
+                style={{ ...addIcon, color: iconColor }}
+                onClick={(e) => handleClick(e)}
+              />
+            </div>
           </div>
           <div style={productDescription}>
             <h2 style={productName}>{props.name}</h2>
@@ -64,13 +82,21 @@ const productImage: CSSProperties = {
 };
 
 const addIcon: CSSProperties = {
-  position: "absolute",
-  right: "1rem",
-  bottom: "1rem",
-  color: "#ffff",
+  position: "relative",
   fontSize: "2rem",
   filter: "drop-shadow(0px 0px 3px rgba(0,0,0,0.4))",
   cursor: "pointer",
+  zIndex: -100,
+};
+
+const iconContainer: CSSProperties = {
+  position: "absolute",
+  right: "1rem",
+  bottom: "1rem",
+  height: "2rem",
+  width: "2rem",
+  borderRadius: 50,
+  zIndex: 150,
 };
 
 const productDescription: CSSProperties = {

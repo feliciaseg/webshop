@@ -39,6 +39,7 @@ const modalContainer: CSSProperties = {
 const cancelIcon: CSSProperties = {
   alignSelf: "flex-end",
   color: theme.palette.primary.main,
+  cursor: "pointer",
 };
 
 const darkUnderlay: CSSProperties = {
