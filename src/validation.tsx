@@ -128,7 +128,7 @@ export function validateValidity(fieldValue: string) {
   } else if (
     !/^[0-9/]+$/.test(fieldValue) ||
     fieldValue.length !== 5 ||
-    !/^[/\/(\w+)/ig]+$/.test(fieldValue)
+    !/^[//(\w+)/ig]+$/.test(fieldValue)
   ) {
     return "Vänligen skriv in giltighetsdatum i formatet MM/YY";
   } else {
