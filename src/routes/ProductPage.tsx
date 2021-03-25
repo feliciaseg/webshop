@@ -33,7 +33,7 @@ export default function ProductPage(props: Props) {
   };
 
   useEffect(() => {
-    products.productList.map((item: Product) => {
+    products.productList.forEach((item: Product) => {
       if (item.id === props.match.params.id) {
         setProduct({
           imageUrl: item.imageUrl,
@@ -45,7 +45,7 @@ export default function ProductPage(props: Props) {
       } else {
       }
     });
-  }, []);
+  }, [products.productList, props.match.params.id]);
 
   return (
     <>

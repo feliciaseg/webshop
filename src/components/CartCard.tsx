@@ -65,7 +65,7 @@ export default function CartCard(props: Props) {
         </div>
         <div className={"flex-direction alignEnd"}>
           <p style={itemSpacing}>{props.price} kr</p>
-          <DeleteIcon onClick={props.onClick} />
+          <DeleteIcon style = {{cursor: "pointer"}} onClick={props.onClick} />
         </div>
       </div>
     </Box>
