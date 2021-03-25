@@ -1,14 +1,47 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CSSProperties } from "@material-ui/styles";
 import Delete from "@material-ui/icons/Delete";
 import Edit from "@material-ui/icons/Edit";
 import { ModalContext } from "../contexts/ModalContext";
 import { ProductContext } from "../contexts/ProductContext";
 import { Product } from "../products";
+import { theme } from "../styling/colorTheme";
 
 export default function ProductCardAdmin(props: Product) {
   const modal = useContext(ModalContext);
   const products = useContext(ProductContext);
+  const [iconHover, setIconHover] = useState({
+    delete: false,
+    edit: false,
+  });
+  const [iconColor, setIconColor] = useState({
+    delete: "#ffff",
+    edit: "#ffff",
+  });
+
+  useEffect(() => {
+    iconHover.delete
+      ? setIconColor({
+          ...iconColor,
+          delete: theme.palette.secondary.dark,
+        })
+      : setIconColor({
+          ...iconColor,
+          delete: "#ffff",
+        });
+  }, [iconHover.delete]);
+
+  useEffect(() => {
+    iconHover.edit
+      ? setIconColor({
+          ...iconColor,
+          edit: theme.palette.secondary.dark,
+        })
+      : setIconColor({
+          ...iconColor,
+          edit: "#ffff",
+        });
+  }, [iconHover.edit]);
 
   return (
     <>
@@ -16,11 +49,23 @@ export default function ProductCardAdmin(props: Product) {
         <div style={imageContainer}>
           <img style={productImage} src={props.imageUrl} alt={props.name}></img>
           <Delete
-            style={deleteIcon}
+            style={{ ...deleteIcon, color: iconColor.delete }}
+            onMouseOver={() =>
+              setIconHover({ ...iconHover, delete: !iconHover.delete })
+            }
+            onMouseOut={() =>
+              setIconHover({ ...iconHover, delete: !iconHover.delete })
+            }
             onClick={() => products.removeProduct(props)}
           />
           <Edit
-            style={editIcon}
+            style={{ ...editIcon, color: iconColor.edit }}
+            onMouseOver={() =>
+              setIconHover({ ...iconHover, edit: !iconHover.edit })
+            }
+            onMouseOut={() =>
+              setIconHover({ ...iconHover, edit: !iconHover.edit })
+            }
             onClick={() => (
               modal.setModalIsOpen(true),
               modal.setModalType("edit"),
@@ -59,7 +104,6 @@ const deleteIcon: CSSProperties = {
   position: "absolute",
   right: "1rem",
   bottom: "1rem",
-  color: "#ffff",
   fontSize: "2rem",
   filter: "drop-shadow(0px 0px 3px rgba(0,0,0,0.4))",
   cursor: "pointer",
@@ -69,7 +113,6 @@ const editIcon: CSSProperties = {
   position: "absolute",
   left: "1rem",
   bottom: "1rem",
-  color: "#ffff",
   fontSize: "2rem",
   filter: "drop-shadow(0px 0px 3px rgba(0,0,0,0.4))",
   cursor: "pointer",

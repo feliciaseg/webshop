@@ -9,6 +9,7 @@ import { CartContext } from "../contexts/CartContext";
 import SmallModal from "../components/SmallModal";
 import { ProductContext } from "../contexts/ProductContext";
 import { Product } from "../products";
+import "../styling/style.css";
 
 interface Id {
   id: string;
@@ -57,6 +58,7 @@ export default function ProductPage(props: Props) {
               variant="contained"
               color="secondary"
               style={goBackButton}
+              className="goBackButton"
               startIcon={<ArrowBack />}
             >
               Tillbaka
@@ -69,7 +71,7 @@ export default function ProductPage(props: Props) {
           ></img>
         </div>
         <div
-          className="productSubContainer gridContainer"
+          className="productSubContainer paddingContainer"
           style={infoContainer}
         >
           <h2 style={productName}>{product?.name}</h2>
@@ -104,7 +106,7 @@ const imageContainer: CSSProperties = {
 const goBackButton: CSSProperties = {
   position: "absolute",
   borderRadius: 0,
-  margin: "1.5rem 3.5rem",
+  zIndex: 100,
 };
 
 const productImage: CSSProperties = {
