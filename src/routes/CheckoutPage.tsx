@@ -9,6 +9,7 @@ import CartView from "../components/CartView";
 import OrderConfirmationModal from "../components/OrderConfirmationModal";
 import { CartContext } from "../contexts/CartContext";
 import SubTotal from "../components/SubTotal";
+import { Order, sendOrderToApi } from "../mockedAPI";
 
 
 export interface Validation {
@@ -35,6 +36,21 @@ export default function CheckoutPage() {
     deliveryValidation: false,
   });
 
+  const handleClick = async () => {
+    const order: Order = {
+      cart: cartContext.cart,
+      user: user,
+      payment: payment,
+      delivery: delivery,
+    }
+    
+    setDisabled(true);
+    await sendOrderToApi(order)
+    setDisabled(false);
+    setShowModal(true);
+    cartContext.emptyCart();
+  };
+
   useEffect(() => {
     setValidation({
       ...validation,
@@ -54,11 +70,7 @@ export default function CheckoutPage() {
     }
   }, [validation]);
 
-  const handleClick = () => {
-    setDisabled(true);
-    setTimeout(setShowModal, 1000, true);
-    cartContext.emptyCart();
-  };
+ 
 
   return (
     <>
