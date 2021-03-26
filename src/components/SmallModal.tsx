@@ -1,4 +1,4 @@
-import React, {  CSSProperties } from "react";
+import React, { CSSProperties } from "react";
 import { theme } from "../styling/colorTheme";
 import CheckIcon from "@material-ui/icons/Check";
 import "../styling/style.css";
@@ -6,7 +6,6 @@ import { Box } from "@material-ui/core";
 
 const boxStyle: CSSProperties = {
   backgroundColor: "white",
-  zIndex: 1,
   position: "fixed",
   bottom: 50,
   margin: "auto",
@@ -19,6 +18,7 @@ const boxStyle: CSSProperties = {
   fontFamily: "Roboto",
   fontWeight: 700,
   color: theme.palette.primary.main,
+  zIndex: 150,
 };
 
 export default function SmallModal() {
