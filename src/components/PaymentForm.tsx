@@ -37,7 +37,7 @@ interface Props {
   paymentOption: string;
   setPaymentOption: (paymentOption: string) => void;
   validation: Validation;
-  setValidation: (validation: Validation) => void;
+  setValidation: (validation: React.SetStateAction<Validation>) => void;
 }
 
 export default function PaymentForm({
@@ -71,7 +71,7 @@ export default function PaymentForm({
   useEffect(() => {
     if (paymentOption === "swish") {
       if (error.swishError.length === 0 && paymentInfo?.swish) {
-        setValidation({ ...validation, paymentValidation: true });
+        setValidation((prevValidation) => ({ ...prevValidation, paymentValidation: true }));
       }
     } else if (paymentOption === "card") {
       if (
@@ -83,14 +83,14 @@ export default function PaymentForm({
         paymentInfo.card.cvv,
         paymentInfo.card.validity)
       ) {
-        setValidation({ ...validation, paymentValidation: true });
+        setValidation((prevValidation) => ({ ...prevValidation, paymentValidation: true }));
       }
     } else if (paymentOption === "klarna") {
       if (error.klarnaError.length === 0 && paymentInfo.klarna) {
-        setValidation({ ...validation, paymentValidation: true });
+        setValidation((prevValidation) => ({ ...prevValidation, paymentValidation: true }));
       }
     }
-  }, [paymentInfo, error]);
+  }, [paymentInfo, error, setValidation, paymentOption]);
 
   function handleRadioChange(radio: string) {
     setPaymentOption(radio);

@@ -14,17 +14,22 @@ interface ProductList {
 }
 
 export default function AdminPage() {
-  const list = useContext(ProductContext);
+  const context = useContext(ProductContext);
   const modal = useContext(ModalContext);
 
   const [productList, setProductList] = useState<ProductList>({
     component: ProductCardAdmin,
-    productProps: list.productList,
+    productProps: context.productList,
   });
 
   useEffect(() => {
-    setProductList({ ...productList, productProps: list.productList });
-  }, [list.productList]);
+    setProductList((prevList) => ({ ...prevList, productProps: context.productList }));
+  }, [context.productList, setProductList]);
+
+  const handleAddProductClick = () => {
+    modal.setModalIsOpen(true);
+    modal.setModalType("add");
+  }
 
   return (
     <>
@@ -32,9 +37,7 @@ export default function AdminPage() {
       <div className="paddingContainer" style={adminContainer}>
         {modal.modalIsOpen && <AdminModal />}
         <Button
-          onClick={() => (
-            modal.setModalIsOpen(true), modal.setModalType("add")
-          )}
+          onClick={handleAddProductClick}
           style={addButton}
           variant="contained"
           color="primary"
