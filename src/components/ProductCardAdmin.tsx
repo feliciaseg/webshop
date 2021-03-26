@@ -29,7 +29,7 @@ export default function ProductCardAdmin(props: Product) {
           ...iconColor,
           delete: "#ffff",
         });
-  }, [iconColor, iconHover.delete]);
+  }, [iconHover.delete]);
 
   useEffect(() => {
     iconHover.edit
