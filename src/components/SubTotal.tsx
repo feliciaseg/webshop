@@ -1,6 +1,6 @@
 import { CSSProperties } from "@material-ui/styles";
 import {  CartItem } from "../contexts/CartContext";
-import DeliveryForm, { DeliveryInfo } from "./DeliveryForm";
+import  { DeliveryInfo } from "./DeliveryForm";
 
 
 export interface Props {

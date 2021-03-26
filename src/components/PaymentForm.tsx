@@ -14,7 +14,7 @@ import {
   validateKlarna,
   validateSwish,
   validateValidity,
-} from "../routes/validation";
+} from "../../src/validation";
 import { theme } from "../styling/colorTheme";
 import "../styling/style.css";
 

@@ -1,10 +1,8 @@
-import Cancel from "@material-ui/icons/Cancel";
 import { CSSProperties } from "@material-ui/styles";
 import { theme } from "../styling/colorTheme";
 import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import { CartContext, CartItem } from "../contexts/CartContext";
-import { useContext } from "react";
+import { CartItem } from "../contexts/CartContext";
 import { generateOrderID } from "../helper";
 
 interface Props {
@@ -15,7 +13,6 @@ interface Props {
 }
 
 export default function OrderConfirmationModal(props: Props) {
-  const context = useContext(CartContext);
   if (props.display === true) {
     return (
       <div style={darkUnderlay}>

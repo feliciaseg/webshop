@@ -10,7 +10,7 @@ import {
   validatePostalcode,
   validatePhone,
   validateEmail,
-} from "../routes/validation";
+} from "../../src/validation";
 
 export interface UserInfo {
   name?: string;

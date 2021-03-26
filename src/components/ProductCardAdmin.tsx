@@ -29,7 +29,7 @@ export default function ProductCardAdmin(props: Product) {
           ...iconColor,
           delete: "#ffff",
         });
-  }, [iconHover.delete]);
+  }, [iconColor, iconHover.delete]);
 
   useEffect(() => {
     iconHover.edit
@@ -66,11 +66,11 @@ export default function ProductCardAdmin(props: Product) {
             onMouseOut={() =>
               setIconHover({ ...iconHover, edit: !iconHover.edit })
             }
-            onClick={() => (
+            onClick={() => ((
               modal.setModalIsOpen(true),
               modal.setModalType("edit"),
               modal.setEditProduct(props)
-            )}
+              ))}
           />
         </div>
         <div style={productDescription}>
