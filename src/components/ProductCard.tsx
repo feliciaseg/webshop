@@ -42,15 +42,14 @@ export default function ProductCard(props: Product) {
               src={props.imageUrl}
               alt={props.name}
             ></img>
-            <div
-              onMouseOver={() => setIconHover(!iconHover)}
-              onMouseOut={() => setIconHover(!iconHover)}
-              style={iconContainer}
-            >
-              <AddCircle
-                style={{ ...addIcon, color: iconColor }}
+            <div style={iconContainer}>
+              <AddCircle style={{ ...addIcon, color: iconColor }} />
+              <div
                 onClick={(e) => handleClick(e)}
-              />
+                onMouseOver={() => setIconHover(!iconHover)}
+                onMouseOut={() => setIconHover(!iconHover)}
+                style={iconTrigger}
+              ></div>
             </div>
           </div>
           <div style={productDescription}>
@@ -82,21 +81,28 @@ const productImage: CSSProperties = {
 };
 
 const addIcon: CSSProperties = {
-  position: "relative",
+  position: "absolute",
   fontSize: "2rem",
   filter: "drop-shadow(0px 0px 3px rgba(0,0,0,0.4))",
   cursor: "pointer",
-  zIndex: 100,
+  zIndex: 10,
 };
 
-const iconContainer: CSSProperties = {
-  position: "absolute",
-  right: "1rem",
-  bottom: "1rem",
+const iconTrigger: CSSProperties = {
+  position: "relative",
   height: "2rem",
   width: "2rem",
   borderRadius: 50,
-  zIndex: 150,
+  zIndex: 20,
+};
+
+const iconContainer: CSSProperties = {
+  zIndex: 1,
+  position: "absolute",
+  width: "2rem",
+  height: "2rem",
+  right: "1rem",
+  bottom: "1rem",
 };
 
 const productDescription: CSSProperties = {
