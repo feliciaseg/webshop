@@ -5,19 +5,30 @@ import SmallModal from "./SmallModal";
 import { Link } from "react-router-dom";
 import { CartContext } from "../contexts/CartContext";
 import { Product } from "../products";
-import { theme } from "../styling/colorTheme";
+import { makeStyles, createStyles, Theme } from "@material-ui/core";
+
+const useStyles = makeStyles((theme: Theme) =>
+createStyles({
+  icon: {
+    zIndex: 1,
+    position: "absolute",
+    fontSize: "2rem",
+    filter: "drop-shadow(0px 0px 3px rgba(0,0,0,0.4))",
+    cursor: "pointer",
+    right: "1rem",
+    bottom: "1rem",
+    color: "#ffff",
+    '&:hover': {
+      color: theme.palette.secondary.dark
+    },
+  }
+}),
+);
 
 export default function ProductCard(props: Product) {
   const cart = useContext(CartContext);
   const [modal, showModal] = useState(false);
-  const [iconHover, setIconHover] = useState(false);
-  const [iconColor, setIconColor] = useState("#ffff");
-
-  useEffect(() => {
-    iconHover
-      ? setIconColor(theme.palette.secondary.dark)
-      : setIconColor("#ffff");
-  }, [iconHover]);
+  const classes = useStyles();
 
   const handleClick = (e: any) => {
     e.preventDefault();
@@ -27,6 +38,12 @@ export default function ProductCard(props: Product) {
       showModal(false);
     }, 1000);
   };
+
+  useEffect(() => {
+        return () => {
+            showModal(false)
+        }
+    }, [])
 
   return (
     <>
@@ -42,15 +59,9 @@ export default function ProductCard(props: Product) {
               src={props.imageUrl}
               alt={props.name}
             ></img>
-            <div style={iconContainer}>
-              <AddCircle style={{ ...addIcon, color: iconColor }} />
-              <div
-                onClick={(e) => handleClick(e)}
-                onMouseOver={() => setIconHover(!iconHover)}
-                onMouseOut={() => setIconHover(!iconHover)}
-                style={iconTrigger}
-              ></div>
-            </div>
+              <AddCircle className={classes.icon}
+              onClick={(e) => handleClick(e)}
+            />
           </div>
           <div style={productDescription}>
             <h2 style={productName}>{props.name}</h2>
@@ -78,31 +89,6 @@ const productImage: CSSProperties = {
   height: "100%",
   objectFit: "cover",
   objectPosition: "center",
-};
-
-const addIcon: CSSProperties = {
-  position: "absolute",
-  fontSize: "2rem",
-  filter: "drop-shadow(0px 0px 3px rgba(0,0,0,0.4))",
-  cursor: "pointer",
-  zIndex: 10,
-};
-
-const iconTrigger: CSSProperties = {
-  position: "relative",
-  height: "2rem",
-  width: "2rem",
-  borderRadius: 50,
-  zIndex: 20,
-};
-
-const iconContainer: CSSProperties = {
-  zIndex: 1,
-  position: "absolute",
-  width: "2rem",
-  height: "2rem",
-  right: "1rem",
-  bottom: "1rem",
 };
 
 const productDescription: CSSProperties = {

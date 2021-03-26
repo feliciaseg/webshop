@@ -25,7 +25,7 @@ interface Props {
   user: UserInfo;
   setUser: (user: UserInfo) => void;
   validation: Validation;
-  setValidation: (validation: Validation) => void;
+  setValidation: (validation: React.SetStateAction<Validation>) => void;
 }
 
 export default function UserForm({
@@ -59,9 +59,9 @@ export default function UserForm({
       user.email,
       user.phone)
     ) {
-      setValidation({ ...validation, userValidation: true });
+      setValidation((prevValidation) => ({ ...prevValidation, userValidation: true }));
     }
-  }, [user, error]);
+  }, [user, error, setValidation]);
 
   const handleChange = (field: keyof UserInfo, fieldValue: string) => {
     setUser({ ...user, [field]: fieldValue });

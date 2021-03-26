@@ -15,15 +15,15 @@ interface ProductList {
 }
 
 export default function StartPage() {
-  const list = useContext(ProductContext);
+  const context = useContext(ProductContext);
   const [productList, setProductList] = useState<ProductList>({
     component: ProductCard,
-    productProps: list.productList,
+    productProps: context.productList,
   });
 
   useEffect(() => {
-    setProductList({ ...productList, productProps: list.productList });
-  }, [list.productList]);
+    setProductList((prevList) => ({ ...prevList, productProps: context.productList }));
+  }, [context.productList, setProductList]);
 
   return (
     <>

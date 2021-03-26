@@ -82,11 +82,11 @@ export default function CheckoutPage() {
   };
 
   useEffect(() => {
-    setValidation({
-      ...validation,
+    setValidation((prevValidation) => ({
+      ...prevValidation,
       cartValidation: Boolean(cartContext.cart.length),
-    });
-  }, [cartContext]);
+    }));
+  }, [cartContext, setValidation]);
 
   useEffect(() => {
     if (
