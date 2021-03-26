@@ -1,19 +1,18 @@
-
 import { DeliveryInfo } from "./components/DeliveryForm";
-import { PaymentInfo } from "./components/PaymentForm";
-import { UserInfo } from "./components/UserForm"
+import { UserInfo } from "./components/UserForm";
 import { CartItem } from "./contexts/CartContext";
+import { Card } from "./components/PaymentForm";
 
 export interface Order {
-    cart: CartItem[],
-    user: UserInfo,
-    payment: PaymentInfo,
-    delivery: DeliveryInfo,
+  cart: CartItem[];
+  user: UserInfo;
+  payment: { paymentOption: string; paymentInfo: Card | string };
+  delivery: DeliveryInfo;
 }
 
 export async function sendOrderToApi(order: Order) {
-    return new Promise((resolve) => {
-        console.log(( order) )
-        setTimeout(resolve, 1000)
-    })
+  return new Promise((resolve) => {
+    console.log(order);
+    setTimeout(resolve, 1000);
+  });
 }
