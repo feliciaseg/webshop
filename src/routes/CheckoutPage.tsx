@@ -23,7 +23,14 @@ export default function CheckoutPage() {
   const cartContext = useContext(CartContext);
   const [cart] = useState([...cartContext.cart]);
   const [totalPriceOfCart] = useState(cartContext.getTotalPriceOfCart);
-  const [user, setUser] = useState<UserInfo>({});
+  const [user, setUser] = useState<UserInfo>({
+    name: "",
+    adress: "",
+    postal: "",
+    city: "",
+    email: "",
+    phone: "",
+  });
   const [payment, setPayment] = useState<PaymentInfo>({});
   const [delivery, setDelivery] = useState<DeliveryInfo>({});
   const [disabled, setDisabled] = useState(true);

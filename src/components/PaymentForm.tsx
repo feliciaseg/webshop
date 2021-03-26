@@ -47,6 +47,8 @@ export default function PaymentForm({
 }: Props) {
   const [checkedOption, setCheckedOption] = useState<string>();
 
+  
+
   const [error, setError] = useState({
     swishError: "",
     cardError: "",
@@ -151,10 +153,10 @@ export default function PaymentForm({
               style={radioButton}
               className="radioButton"
               value="swish"
-              onChange={() => (
-                handleRadioChange("swish"),
+              onChange={() => {
+                handleRadioChange("swish");
                 handleInputChange("swish", userPhone ? userPhone : "")
-              )}
+              }}
               control={<Radio style={{ color: theme.palette.primary.main }} />}
               label={
                 <TextField
