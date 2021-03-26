@@ -9,8 +9,8 @@ import CartView from "../components/CartView";
 import OrderConfirmationModal from "../components/OrderConfirmationModal";
 import { CartContext } from "../contexts/CartContext";
 import SubTotal from "../components/SubTotal";
+import { Card } from "../components/PaymentForm";
 import { Order, sendOrderToApi } from "../mockedAPI";
-
 
 export interface Validation {
   cartValidation: boolean;
@@ -31,7 +31,16 @@ export default function CheckoutPage() {
     email: "",
     phone: "",
   });
-  const [payment, setPayment] = useState<PaymentInfo>({});
+  const [paymentOption, setPaymentOption] = useState("");
+  const [paymentInfo, setPaymentInfo] = useState<PaymentInfo>({
+    swish: "",
+    card: {
+      cardNumber: "",
+      cvv: "",
+      validity: "",
+    },
+    klarna: "",
+  });
   const [delivery, setDelivery] = useState<DeliveryInfo>({});
   const [disabled, setDisabled] = useState(true);
   const [showModal, setShowModal] = useState(false);
@@ -44,15 +53,29 @@ export default function CheckoutPage() {
   });
 
   const handleClick = async () => {
+    let payment: string | Card;
+    switch (paymentOption) {
+      case "swish":
+        payment = paymentInfo.swish;
+        break;
+      case "card":
+        payment = paymentInfo.card;
+        break;
+      case "klarna":
+        payment = paymentInfo.klarna;
+        break;
+      default:
+        payment = "";
+    }
     const order: Order = {
       cart: cartContext.cart,
       user: user,
-      payment: payment,
+      payment: { paymentOption: paymentOption, paymentInfo: payment },
       delivery: delivery,
-    }
-    
+    };
+
     setDisabled(true);
-    await sendOrderToApi(order)
+    await sendOrderToApi(order);
     setDisabled(false);
     setShowModal(true);
     cartContext.emptyCart();
@@ -70,14 +93,12 @@ export default function CheckoutPage() {
       validation.cartValidation === true &&
       validation.paymentValidation === true &&
       validation.userValidation === true &&
-      validation.deliveryValidation === true 
+      validation.deliveryValidation === true
     ) {
       setDisabled(false);
       setShowSubTotal(true);
     }
   }, [validation]);
-
- 
 
   return (
     <>
@@ -104,8 +125,10 @@ export default function CheckoutPage() {
             <p style={heading}>Betalsätt</p>
             <PaymentForm
               userPhone={user.phone}
-              payment={payment}
-              setPayment={setPayment}
+              paymentInfo={paymentInfo}
+              setPaymentInfo={setPaymentInfo}
+              paymentOption={paymentOption}
+              setPaymentOption={setPaymentOption}
               validation={validation}
               setValidation={setValidation}
             />
@@ -123,9 +146,8 @@ export default function CheckoutPage() {
             products={cartContext.cart}
             display={showSubTotal}
             totalCost={delivery.price! + cartContext.getTotalPriceOfCart()}
-            momsResoult ={cartContext.getTotalPriceOfCart() * 0.25}
-            deliveryPrice = {delivery.price}
-            
+            momsResoult={cartContext.getTotalPriceOfCart() * 0.25}
+            deliveryPrice={delivery.price}
           />
           <Button
             variant="contained"
