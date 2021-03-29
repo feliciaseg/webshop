@@ -1,10 +1,23 @@
-# webshop
+# Webbshop HEMMA
 ------------------
+I kursen Javascript Fördjupning fick vi uppgiften att skapa en webbshop med hjälp av create-react-app och Typescript. Vi har även använt oss av designsystemet [Material UI](https://material-ui.com/). 
+
+Webbshopen HEMMA säljer inredningsprodukter. Applikationen har en startsida, produktsida, utcheckningssida och en adminstratörssida. 
+Alla produkter kan läggas till i varukorgen från både start- och produktsidan. Efter att kunden genomfört sitt köp görs ett anrop till ett mockat API och en orderbekräftelse visas.
+På adminstratörssidan kan användaren lägga till, ändra och ta bort produkter från webbshopen.
+
+[Demo](https://hemma-shop.netlify.app/)
+
+
+-----------
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
 In the project directory, you can run:
+
+### `npm install`
+Installs all the required dependencies for the project. Run this command when opening the project for the first time.
 
 ### `npm start`
 
