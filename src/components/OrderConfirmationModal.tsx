@@ -33,7 +33,7 @@ export default function OrderConfirmationModal(props: Props) {
                 >
                   <p style={{ ...section, width: "10rem" }}>{item.name}</p>
                   <p style={section}>{item.quantity}st</p>
-                  <p style={section}>{item.price}kr</p>
+                  <p style={section}>{item.price * item.quantity}kr</p>
                 </div>
               ) : (
                 <div
@@ -42,7 +42,7 @@ export default function OrderConfirmationModal(props: Props) {
                 >
                   <p style={{ ...section, width: "10rem" }}>{item.name}</p>
                   <p style={section}>{item.quantity}st</p>
-                  <p style={section}>{item.price}kr</p>
+                  <p style={section}>{item.price * item.quantity}kr</p>
                 </div>
               )
             )}

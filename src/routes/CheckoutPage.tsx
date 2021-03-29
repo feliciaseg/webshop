@@ -24,7 +24,9 @@ export default function CheckoutPage() {
   const cartContext = useContext(CartContext);
   const [orderId] = useState(generateOrderID());
   const [cart, setCart] = useState([...cartContext.cart]);
-  const [totalPriceOfCart] = useState(cartContext.getTotalPriceOfCart);
+  const [totalPriceOfCart, setTotalPriceOfCart] = useState(
+    cartContext.getTotalPriceOfCart
+  );
   const [user, setUser] = useState<UserInfo>({
     name: "",
     adress: "",
@@ -79,6 +81,7 @@ export default function CheckoutPage() {
     setDisabled(true);
     setCart([...cartContext.cart]);
     sendOrderToApi(order).then(() => {
+      setTotalPriceOfCart(cartContext.getTotalPriceOfCart);
       setShowModal(true);
       cartContext.emptyCart();
     });
