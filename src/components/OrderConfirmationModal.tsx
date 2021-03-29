@@ -3,13 +3,13 @@ import { theme } from "../styling/colorTheme";
 import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { CartItem } from "../contexts/CartContext";
-import { generateOrderID } from "../helper";
 
 interface Props {
   products: CartItem[];
   totalCost?: number;
   name?: string;
   display: boolean;
+  orderId: string;
 }
 
 export default function OrderConfirmationModal(props: Props) {
@@ -19,7 +19,7 @@ export default function OrderConfirmationModal(props: Props) {
         <div className="modalContainer" style={modalContainer}>
           <p style={confirmationGreeting}>Tack för ditt köp, {props.name}!</p>
           <p style={ordernumber}>
-            Ordernummer: <b>{generateOrderID()}</b>
+            Ordernummer: <b>{props.orderId}</b>
           </p>
           <div style={productList}>
             {props.products.map((item: CartItem, index: number) =>

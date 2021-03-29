@@ -11,6 +11,7 @@ import { CartContext } from "../contexts/CartContext";
 import SubTotal from "../components/SubTotal";
 import { Card } from "../components/PaymentForm";
 import { Order, sendOrderToApi } from "../mockedAPI";
+import { generateOrderID } from "../helper";
 
 export interface Validation {
   cartValidation: boolean;
@@ -21,7 +22,8 @@ export interface Validation {
 
 export default function CheckoutPage() {
   const cartContext = useContext(CartContext);
-  const [cart] = useState([...cartContext.cart]);
+  const [orderId] = useState(generateOrderID());
+  const [cart, setCart] = useState([...cartContext.cart]);
   const [totalPriceOfCart] = useState(cartContext.getTotalPriceOfCart);
   const [user, setUser] = useState<UserInfo>({
     name: "",
@@ -75,10 +77,11 @@ export default function CheckoutPage() {
     };
 
     setDisabled(true);
-    await sendOrderToApi(order);
-    setDisabled(false);
-    setShowModal(true);
-    cartContext.emptyCart();
+    setCart([...cartContext.cart]);
+    sendOrderToApi(order).then(() => {
+      setShowModal(true);
+      cartContext.emptyCart();
+    });
   };
 
   useEffect(() => {
@@ -107,6 +110,7 @@ export default function CheckoutPage() {
     <>
       <OrderConfirmationModal
         display={showModal}
+        orderId={orderId}
         products={cart}
         name={user.name}
         totalCost={delivery.price! + totalPriceOfCart}
