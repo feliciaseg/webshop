@@ -89,7 +89,6 @@ export default function CheckoutPage() {
   }, [cartContext, setValidation]);
 
   useEffect(() => {
-    console.log(validation);
     if (
       validation.cartValidation === true &&
       validation.paymentValidation === true &&
