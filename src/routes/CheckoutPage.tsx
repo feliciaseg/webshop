@@ -89,6 +89,7 @@ export default function CheckoutPage() {
   }, [cartContext, setValidation]);
 
   useEffect(() => {
+    console.log(validation);
     if (
       validation.cartValidation === true &&
       validation.paymentValidation === true &&
@@ -97,6 +98,9 @@ export default function CheckoutPage() {
     ) {
       setDisabled(false);
       setShowSubTotal(true);
+    } else {
+      setDisabled(true);
+      setShowSubTotal(false);
     }
   }, [validation]);
 
