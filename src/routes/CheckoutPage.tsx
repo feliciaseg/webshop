@@ -97,6 +97,9 @@ export default function CheckoutPage() {
     ) {
       setDisabled(false);
       setShowSubTotal(true);
+    } else {
+      setDisabled(true);
+      setShowSubTotal(false);
     }
   }, [validation]);
 

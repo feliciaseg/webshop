@@ -71,7 +71,15 @@ export default function PaymentForm({
   useEffect(() => {
     if (paymentOption === "swish") {
       if (error.swishError.length === 0 && paymentInfo?.swish) {
-        setValidation((prevValidation) => ({ ...prevValidation, paymentValidation: true }));
+        setValidation((prevValidation) => ({
+          ...prevValidation,
+          paymentValidation: true,
+        }));
+      } else {
+        setValidation((prevValidation) => ({
+          ...prevValidation,
+          paymentValidation: false,
+        }));
       }
     } else if (paymentOption === "card") {
       if (
@@ -83,11 +91,27 @@ export default function PaymentForm({
         paymentInfo.card.cvv,
         paymentInfo.card.validity)
       ) {
-        setValidation((prevValidation) => ({ ...prevValidation, paymentValidation: true }));
+        setValidation((prevValidation) => ({
+          ...prevValidation,
+          paymentValidation: true,
+        }));
+      } else {
+        setValidation((prevValidation) => ({
+          ...prevValidation,
+          paymentValidation: false,
+        }));
       }
     } else if (paymentOption === "klarna") {
       if (error.klarnaError.length === 0 && paymentInfo.klarna) {
-        setValidation((prevValidation) => ({ ...prevValidation, paymentValidation: true }));
+        setValidation((prevValidation) => ({
+          ...prevValidation,
+          paymentValidation: true,
+        }));
+      } else {
+        setValidation((prevValidation) => ({
+          ...prevValidation,
+          paymentValidation: false,
+        }));
       }
     }
   }, [paymentInfo, error, setValidation, paymentOption]);

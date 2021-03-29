@@ -52,14 +52,17 @@ export default function UserForm({
         error.emailError.length +
         error.phoneError.length ===
         0 &&
-      (user.name,
-      user.adress,
-      user.postal,
-      user.city,
-      user.email,
-      user.phone)
+      (user.name, user.adress, user.postal, user.city, user.email, user.phone)
     ) {
-      setValidation((prevValidation) => ({ ...prevValidation, userValidation: true }));
+      setValidation((prevValidation) => ({
+        ...prevValidation,
+        userValidation: true,
+      }));
+    } else {
+      setValidation((prevValidation) => ({
+        ...prevValidation,
+        userValidation: false,
+      }));
     }
   }, [user, error, setValidation]);
 
